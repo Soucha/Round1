@@ -307,6 +307,7 @@
             var fsm = {};
             var DEFAULT_OUTPUT = -1;
             var DEFAULT_OUTPUT_SYMBOL = '-';
+            var LEVEL_SEPARATION = 150;
             var network = new vis.Network(document.getElementById('mynetwork'), fsm, options);
 
             function clearFSMdata() {
@@ -1306,6 +1307,16 @@
                 });
             }
 
+            function setNodesPosition(nodes, val, allNodes) {
+                nodes.forEach(function (node) {
+                    node.y = val;
+                    var result = $.grep(allNodes, function (e) { return e.id == node.id; });
+                    if (result.length == 1) {
+                        result[0].y = val;
+                    }
+                });
+            }
+
             /**
             * Convert a string containing a graph in DOT language into a map containing
             * with nodes and edges in the format of graph.
@@ -1336,10 +1347,20 @@
                     });
                 }
 
+                sameRanks = [];
+                sources = [];
+
                 if (dotData.subgraphs) {
                     dotData.subgraphs.forEach(function (subgraph) {
                         if (subgraph.edges) {
                             processEdges(subgraph.edges, graphData)
+                        } else if (subgraph.rank && subgraph.nodes) {
+                            if (subgraph.rank === 'min') {
+                                setNodesPosition(subgraph.nodes, 0, graphData.nodes);
+                                sources.push(subgraph.nodes);
+                            } else {
+                                sameRanks.push(subgraph.nodes);
+                            }
                         }
                     });
                 }
@@ -1352,6 +1373,22 @@
                 // copy the options
                 if (dotData.attr) {
                     graphData.options = dotData.attr;
+                }
+
+                if (sameRanks.length > 0 && sources.length > 0) {
+                    for (var i = 0; i < sources.length; i++) {
+                        sources[i].forEach(function (node) {
+                            var results = $.grep(graphData.edges, function (e) { return e.from == node.id; });
+                            results.forEach(function (edge) {
+                                for (var j = 0; j < sameRanks.length; j++) {
+                                    if (sameRanks[j].some(function (e) { return e.id == edge.to;})) {
+                                        setNodesPosition(sameRanks[j], node.y + LEVEL_SEPARATION, graphData.nodes);
+                                        sources = sources.concat(sameRanks.splice(j, 1));
+                                    }
+                                }
+                            });
+                        });
+                    }
                 }
 
                 return graphData;
@@ -1367,10 +1404,10 @@
                         var textDot = $('#data').val().replace(/\\n/, "\n");
                         //data = vis.network.convertDot(textDot);
                         //console.log(data)
-                        graph = vis.network.dotparser.parseDOT(textDot);
-                        console.log(graph)
+                        //graph = vis.network.dotparser.parseDOT(textDot);
+                        //console.log(graph)
                         data = DOTToGraph(textDot);
-                        console.log(data)
+                        //console.log(data)
                         //data = parseDotData(data);
                     } else if (document.getElementById('fileType').value === 'fsm') {
                         data = parseFsmData($('#data').val());
@@ -1594,7 +1631,7 @@
                 } else {
                     document.getElementById('fileType').value = 'unknown';
                 }
-                console.log(suffix);
+                //console.log(suffix);
             }
 
             function loadFile(f) {

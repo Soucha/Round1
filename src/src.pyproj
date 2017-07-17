@@ -6,7 +6,7 @@
     <ProjectGuid>{c2e20595-381c-4070-9b95-edb82ac9c432}</ProjectGuid>
     <ProjectHome />
     <StartupFile>run.py</StartupFile>
-    <SearchPath />
+    <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
@@ -1071,6 +1071,12 @@
     <Compile Include="fsa\tests\test_fsa.py" />
     <Compile Include="fsa\__init__.py" />
     <Compile Include="learners\base.py" />
+    <Compile Include="learners\efsm.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="learners\efsm_hierarchy.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="learners\grammar_learner.py" />
     <Compile Include="learners\human_learner.py" />
     <Compile Include="learners\sample_learners.py" />
