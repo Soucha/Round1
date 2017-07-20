@@ -1,4 +1,4 @@
-# Copyright (c) Michal Soucha
+﻿# Copyright (c) Michal Soucha
 
 from __future__ import absolute_import
 from __future__ import division
@@ -8,16 +8,16 @@ import logging
 from learners.efsm import *
 
 class EFSMhierarchyNode:
-    def __init__(self, parent, fsm, id):
+    def __init__(self, parent, fsm, id, estimated=True):
         self.parent = parent
         self.children = []
         self.id = id
-        self.scoreUse = 1
+        self.estimated = estimated
+        self.scoreUse = 0
         self.efsm = fsm
         self.currState = 0
         self.possibleStates = set()
-        #self.possibleStates.add(self.currState)
-        self.addedTransitions = []
+        #self.addedTransitions = []
         self.logger = logging.getLogger(__name__)
 
     def __str__(self):
@@ -32,18 +32,191 @@ class EFSMhierarchyNode:
     
     def writeDOT(self, dotFile):
         print(' subgraph g{0} {{'.format(self.id), file=dotFile)
+        if (self.estimated):
+            print('  node [color=green,fillcolor=lightgreen];', file=dotFile)
         self.efsm.writeDOT(dotFile, self.id)
         print(' }', file=dotFile)
         if self.children:
             rank = '{ rank=same;'
             for child in self.children:
                 child.writeDOT(dotFile)
-                print(' g{0}s0 -> g{1}s0 [color=lightgray,label="{2}",style=dashed];'.format(self.id, child.id, self.scoreUse), file=dotFile)
+                print(' g{0}s0 -> g{1}s0 [color=lightgray,label="{2}",style=dashed];'.format(self.id, child.id, child.scoreUse), file=dotFile)
                 rank += ' g{0}s0'.format(child.id)
             rank += '}'
             print(rank, file=dotFile)
 
-## simulation functions
+## output estimation
+
+    def getMostRelevantTransition(self, x):
+        ## returns the most specified transition for x according to the followed grammar
+        tran = self.efsm.getTransition(self.currState, x, None, REWARD_NONNEGATIVE)
+        if not tran and self.parent:
+            tran = self.parent.getMostRelevantTransition(x)
+        return tran
+
+    def getMostProbableOutputs(self, x, trace, counts):
+        ## returns the most probable output for the given input x
+        estimated = False
+        if len(self.possibleStates) > 0:
+            for child in self.children:
+                estimated = child.getMostProbableOutputs(x, trace, counts) or estimated
+            if not estimated:
+                for state in self.possibleStates:
+                    output = self.efsm.getNonnegativeRewardOutput(state, x)
+                    if output and len(output) == 1:
+                        counts[output] += self.scoreUse
+                        estimated = True;
+                    else:
+                        outputs = self.efsm.getOutputs(state, REWARD_NONNEGATIVE)
+                        if outputs:
+                            negOuts = self.efsm.getOutputs(state, REWARD_NEGATIVE, x)
+                            for o in outputs.difference(negOuts):
+                                counts[o] += 1 # self.scoreUse
+                                estimated = True;
+        return estimated
+    
+## update
+
+    def initPossibleStates(self, trace):
+        self.possibleStates.clear()
+        self.possibleStates.add(0)
+        # TODO
+        for tran in trace:
+            t = self.efsm.getTransition(0, tran.input, tran.output)
+            if t and t.reward != tran.reward and tran.output == t.output:
+                self.possibleStates.discard(0)
+                break
+        if self.possibleStates:
+            for child in self.children:
+                child.initPossibleStates(trace)
+
+    def updatePossibleStates(self, trace):
+        tran = trace[-1]
+        consistentEFSMs = []
+        if self.possibleStates:
+            for child in self.children:
+                consistentEFSMs.extend(child.updatePossibleStates(trace))
+                
+            statesToRemove = []
+            statesToAdd = []
+            for state in self.possibleStates:
+                nextState = self.efsm.getNextState(state, tran)
+                #glog("upp {0}-{1}->{2} ".format(state, tran, nextState))
+                if nextState is not None: # comparison with None as nextState could be 0 -> False
+                    #if state != 0:
+                    statesToRemove.append(state)
+                    statesToAdd.append(nextState)
+                    if tran.reward != -1:
+                        self.scoreUse += 1
+                else:
+                    t = self.efsm.getTransition(state, tran.input)
+                    if t and t.reward:
+                        if t.reward != -1:
+                            if t.output != LABEL_EXISTS and ((t.reward != tran.reward and tran.output in t.output) \
+                                or (tran.reward != -1 and not tran.output in t.output)):
+                                statesToRemove.append(state)
+                                if tran.output in t.output:
+                                    self.scoreUse -= 1
+                                continue
+                            elif t.output == LABEL_EXISTS and not consistentEFSMs:
+                                statesToRemove.append(state)
+                                self.scoreUse -= len(self.children)
+                                continue
+                        if tran.reward != -1:
+                            t = self.efsm.getTransition(state, tran.input, tran.output, -1)
+                            if t:
+                                statesToRemove.append(state)
+                                self.scoreUse -= 1
+            for state in statesToRemove:
+                self.possibleStates.discard(state)
+            for state in statesToAdd:
+                self.possibleStates.add(state)
+            #if statesToAdd and tran.reward != -1:
+            #    self.scoreUse += 1 
+            if not self.possibleStates:
+                consistentEFSMs = []
+            elif not consistentEFSMs:
+                consistentEFSMs.append(self)
+        return consistentEFSMs
+
+    def updateCurrentState(self, tran):
+        t = self.efsm.getTransition(self.currState, tran.input, tran.output)
+        if t:
+            if not t.reward or t.reward == tran.reward:
+                self.currState = self.efsm.getNextState(self.currState, t)
+        # TODO else?
+            if tran.reward != -1:
+                self.scoreUse += 1
+            #else:
+             #   self.scoreUse -= 1
+        if self.parent:
+            self.parent.updateCurrentState(tran)
+
+    def updateIdByEstimated(self, id):
+        if self.estimated:
+            self.id = id
+            return self.parent.updateIdByEstimated(id + 1)
+        return id - 1
+
+    def updateNodePosition(self, H, X):
+        if not self.efsm.isFSM and H.efsm.isSpecializationOf(self.efsm, X):
+            self.children.append(H)
+            H.parent = self
+            maxId = self.updateIdByEstimated(H.id + 1)
+            return H.tryGeneralize(maxId)
+        else:
+            if self.estimated:
+                self.parent.children.remove(self)
+                self.parent.children.extend(self.children)
+            return self.parent.updateNodePosition(H, X)
+
+    def makePermanent(self):
+        if self.estimated:
+            self.estimated = False
+            return max(self.id, self.parent.makePermanent())
+        return self.id
+
+## design of generalized nodes
+
+    def tryGeneralize(self, maxId):
+        genEFSMs = self.efsm.tryGeneralize(self.parent.efsm)
+        if genEFSMs:
+            maxId = self.parent.updateWithGeneralizedEFSMs(genEFSMs, self, maxId)
+        else:
+            maxId = self.parent.tryGeneralizeChildren(self, maxId)
+        return maxId
+
+    def tryGeneralizeChildren(self, relatedChild, maxId):
+        for child in reversed(self.children):
+            if relatedChild != child:
+                genEFSMs = relatedChild.efsm.tryGeneralizeWith(child.efsm, self.efsm)
+                if genEFSMs:
+                    maxId = self.updateWithGeneralizedEFSMs(genEFSMs, relatedChild, maxId)
+                    return self.tryGeneralizeChildren(self.children[-1], maxId)
+        return maxId
+
+    def updateWithGeneralizedEFSMs(self, genEFSMs, relatedChild, maxId):
+        generalizedEFSM = genEFSMs.pop()
+        maxId += 1
+        hierNode = EFSMhierarchyNode(self, generalizedEFSM, maxId)
+        updatedChildren = []
+        for child in self.children:
+            if child.efsm.isSpecializationOf(generalizedEFSM):
+                hierNode.children.append(child)
+                child.parent = hierNode
+                hierNode.scoreUse += child.scoreUse
+            else:
+                updatedChildren.append(child)
+        updatedChildren.append(hierNode)
+        self.children[:] = updatedChildren
+        if genEFSMs:
+            maxId = hierNode.updateWithGeneralizedEFSMs(genEFSMs, relatedChild, maxId)
+        else:
+            maxId = hierNode.tryGeneralizeChildren(relatedChild, maxId)
+        return self.tryGeneralizeChildren(hierNode, maxId)
+
+
+## not in use
 
     def getOutput(self, FSMid, x):
         ## returns (guessed) output according to the followed grammar
@@ -53,7 +226,8 @@ class EFSMhierarchyNode:
                 output = self.children[-1].getOutput(FSMid, x)
         return output
 
-    def updateCurrentPosition(self, FSMid, tran, parentTran=None):
+    
+    def updateCurrentPositionDown(self, FSMid, tran, parentTran=None):
         ## updates the current state and returns False if there is the given transition from the current state
         ##  and if the initial state is reached, returns the second True
         ## otherwise, (True, True) is returned so the learning starts
@@ -98,12 +272,63 @@ class EFSMhierarchyNode:
         if not self.efsm.isFSM:
             self.children[-1].removeLastAddedTransitions(FSMid)
 
-## learning functions
+    
+    def getEstimatedOutputs(self, x, trace, counts):
+        ## 
+        estimated = False
+        if self.possibleStates:
+            if self.efsm.isFSM or not self.children[-1].getEstimatedOutputs(x, FSMid, trace, counts):
+                for state in self.possibleStates:
+                    output = self.efsm.getNonnegativeRewardOutput(state, x)
+                    if output:
+                        if len(output) == 1:
+                            counts[output] += 1 # self.scoreUse
+                        elif output == LABEL_EXISTS:
+                            t = self.efsm.getTransition(state, x, output)
+                            accessSeq = self.efsm.getAccessSequence(state)
+                            if t.input == LABEL_EXISTS:
+                                for child in self.children:
+                                    if child.id >= FSMid:
+                                        chState = child.efsm.getEndPathState(0, accessSeq)
+                                        if chState:
+                                            chTran = child.efsm.getTransition(chState, x, None, t.reward)
+                                            if chTran and len(chTran.input) == len(chTran.output) == 1: # not a mapping
+                                                if chTran.input == x:
+                                                    counts[chTran.output] += 1
+                                                else:
+                                                    counts[chTran.output] -= 1
+                                            for chOut in child.efsm.getOutputs(chState, x, REWARD_NEGATIVE):
+                                                counts[chOut] -= 1
+                                for tran in trace:
+                                    if tran.input == x:
+                                        if tran.reward != -1:
+                                            counts[tran.output] += 1
+                                        else:
+                                            counts[tran.output] -= 1
+                            elif t.input == LABEL_FORALL or t.input == LABEL_SUBSETS:
+                                for child in self.children:
+                                    if child.id >= FSMid:
+                                        chState = child.efsm.getEndPathState(0, accessSeq)
+                                        if chState:
+                                            chTran = child.efsm.getTransition(chState, x, None, t.reward)
+                                            if chTran:
+                                                counts[chTran.output] += 1
+                                            for chOut in child.efsm.getOutputs(chState, x, REWARD_NEGATIVE):
+                                                counts[chOut] -= 1
+                                for tran in trace:
+                                    if tran.reward != -1:
+                                        counts[tran.output] += 1
+                                    else:
+                                        counts[tran.output] -= 1
+                            else:
+                                output #TODO is it possible?
+            estimated = (len(counts) > 0)
+        return estimated
 
     def getEstimatedOutputs(self, x, FSMid, trace, counts):
         ## 
         estimated = False
-        if len(self.possibleStates) > 0:
+        if self.possibleStates:
             if self.efsm.isFSM or not self.children[-1].getEstimatedOutputs(x, FSMid, trace, counts):
                 for state in self.possibleStates:
                     output = self.efsm.getNonnegativeRewardOutput(state, x)
@@ -152,72 +377,16 @@ class EFSMhierarchyNode:
             estimated = (len(counts) > 0)
         return estimated
 
-    def getMostProbableOutputs(self, x, trace, counts):
-        ## returns the most probable output for the given input x
-        estimated = False
-        if len(self.possibleStates) > 0:
-            for child in self.children:
-                estimated = child.getMostProbableOutputs(x, trace, counts) or estimated
-            if not estimated:
-                for state in self.possibleStates:
-                    output = self.efsm.getNonnegativeRewardOutput(state, x)
-                    if output and len(output) == 1:
-                        counts[output] += self.scoreUse
-                        estimated = True;
-                    else:
-                        output = self.efsm.getNonnegativeRewardOutput(state)
-                        if output and output != LABEL_EXISTS:
-                            for o in output:
-                                counts[o] += 1 # self.scoreUse
-                            estimated = True;
-        return estimated
         
     def getNegativeOutputs(self, x):
         negOuts = set()
         for state in self.possibleStates:
-            negOuts |= self.efsm.getNegativeRewardOutputs(state, x)
+            negOuts |= self.efsm.getOutputs(state, x, REWARD_NEGATIVE)
         for child in self.children:
             negOuts |= child.getNegativeOutputs(x)
         return negOuts
     
-    def tryGeneralizeChildren(self):
-        #maxScore = 0
-        node = self.children[-1]
-        for child in reversed(self.children):
-            if node != child:
-                #if maxScore < child.scoreUse:
-                #    maxScore = child.scoreUse
-                genEFSMs = node.efsm.tryGeneralizeWith(child.efsm, self.efsm)
-                if genEFSMs:
-                    self.updateWithGeneralizedEFSMs(genEFSMs)
-                    return self.tryGeneralizeChildren()
-        #node.scoreUse = maxScore + 1
-
-    def updateWithGeneralizedEFSMs(self, genEFSMs):
-        generalizedEFSM = genEFSMs.pop()
-        hierNode = EFSMhierarchyNode(self, generalizedEFSM, 0)
-        updatedChildren = []
-        for child in self.children:
-            if child.efsm.isSpecializationOf(generalizedEFSM):
-                hierNode.children.append(child)
-                child.parent = hierNode
-                if hierNode.id < child.id:
-                    hierNode.id = child.id    
-            else:
-                updatedChildren.append(child)
-        updatedChildren.append(hierNode)
-        if self.id >= hierNode.id:
-            hierNode.id = self.id
-            self.id = hierNode.id + 1
-        else:
-            hierNode.id += 1
-        self.children[:] = updatedChildren
-        if genEFSMs:
-            hierNode.updateWithGeneralizedEFSMs(genEFSMs)
-        else:
-            hierNode.tryGeneralizeChildren()
-        self.tryGeneralizeChildren()
-
+    
     def updateWithNewEFSM(self, hypothesis, newId):
         if self.efsm.isFSM: # leaf
             if not self.efsm.hasConflictingTransition(hypothesis):
@@ -246,21 +415,8 @@ class EFSMhierarchyNode:
             else:
                 self.tryGeneralizeChildren()
             return self
-        return None
-            
-    def initPossiblePossitions(self, trace):
-        self.possibleStates.clear()
-        self.possibleStates.add(0)
-        # TODO
-        for tran in trace:
-            t = self.efsm.getTransition(0, tran.input, tran.output)
-            if t and t.reward != tran.reward and tran.output == t.output:
-                self.possibleStates.discard(0)
-                break
-        if self.possibleStates:
-            for child in self.children:
-                child.initPossiblePossitions(trace)
-
+        return None      
+    
     def updatePossiblePositions(self, trace, possibleFSMs):
         ##
         tran = trace[-1]

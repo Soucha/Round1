@@ -1,39 +1,275 @@
-digraph { { rank=min; g0s0}
+digraph { { rank=min; g0s0 }
  subgraph g0 {
   g0s0 -> g0s0 [label="forall/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.!;?- None"];
+ }
+ subgraph g13 {
+  node [color=green,fillcolor=lightgreen];
+  g13s0 -> g13s0 [label="subsets/!!1 1"];
  }
  subgraph g5 {
   g5s0 -> g5s0 [label="forall/!!1 1"];
  }
  subgraph g2 {
-  g2s0 -> g2s0 [label="forall/s 1"];
+  g2s0 -> g2s0 [label="forall/7 1"];
  }
  subgraph g1 {
-  g1s0 -> g1s0 [label="s/s 1"];
-  g1s0 -> g1s0 [label=",/s 1"];
-  g1s0 -> g1s0 [label="O/s 1"];
-  g1s0 -> g1s0 [label=";/s 1"];
-  g1s0 -> g1s0 [label="C/s 1"];
-  g1s0 -> g1s0 [label="j/s 1"];
-  g1s0 -> g1s0 [label="?/s 1"];
+  g1s0 -> g1s0 [label="6/7 1"];
+  g1s0 -> g1s0 [label="g/7 1"];
+  g1s0 -> g1s0 [label="?/7 1"];
+  g1s0 -> g1s0 [label="t/7 1"];
+  g1s0 -> g1s0 [label="H/7 1"];
+  g1s0 -> g1s0 [label="y/7 1"];
+  g1s0 -> g1s0 [label="s/7 1"];
  }
-{ rank=same;}
- g2s0 -> g1s0 [color=lightgray,label="1",style=dashed];
+ g2s0 -> g1s0 [color=lightgray,label="10",style=dashed];
 { rank=same; g1s0}
- g5s0 -> g2s0 [color=lightgray,label="1",style=dashed];
+ g5s0 -> g2s0 [color=lightgray,label="5",style=dashed];
  subgraph g4 {
-  g4s0 -> g4s0 [label="forall/X 1"];
+  g4s0 -> g4s0 [label="forall/L 1"];
  }
  subgraph g3 {
-  g3s0 -> g3s0 [label="9/X 1"];
-  g3s0 -> g3s0 [label="S/X 1"];
-  g3s0 -> g3s0 [label="P/X 1"];
+  g3s0 -> g3s0 [label="8/L 1"];
+  g3s0 -> g3s0 [label="a/L 1"];
+  g3s0 -> g3s0 [label="f/L 1"];
+  g3s0 -> g3s0 [label=" /L 1"];
+  g3s0 -> g3s0 [label="3/L 1"];
+  g3s0 -> g3s0 [label="q/L 1"];
  }
-{ rank=same;}
- g4s0 -> g3s0 [color=lightgray,label="1",style=dashed];
+ g4s0 -> g3s0 [color=lightgray,label="10",style=dashed];
 { rank=same; g3s0}
- g5s0 -> g4s0 [color=lightgray,label="1",style=dashed];
-{ rank=same; g2s0 g4s0}
- g0s0 -> g5s0 [color=lightgray,label="9",style=dashed];
-{ rank=same; g5s0}
+ g5s0 -> g4s0 [color=lightgray,label="6",style=dashed];
+ subgraph g7 {
+  g7s0 -> g7s0 [label="forall/x 1"];
+ }
+ subgraph g6 {
+  g6s0 -> g6s0 [label="7/x 1"];
+  g6s0 -> g6s0 [label="u/x 1"];
+  g6s0 -> g6s0 [label=";/x 1"];
+  g6s0 -> g6s0 [label="f/x 1"];
+  g6s0 -> g6s0 [label="G/x 1"];
+  g6s0 -> g6s0 [label="g/x 1"];
+ }
+ g7s0 -> g6s0 [color=lightgray,label="10",style=dashed];
+{ rank=same; g6s0}
+ g5s0 -> g7s0 [color=lightgray,label="7",style=dashed];
+ subgraph g9 {
+  g9s0 -> g9s0 [label="forall/c 1"];
+ }
+ subgraph g8 {
+  g8s0 -> g8s0 [label="5/c 1"];
+  g8s0 -> g8s0 [label="y/c 1"];
+  g8s0 -> g8s0 [label="K/c 1"];
+  g8s0 -> g8s0 [label="b/c 1"];
+  g8s0 -> g8s0 [label="Y/c 1"];
+  g8s0 -> g8s0 [label="p/c 1"];
+  g8s0 -> g8s0 [label="o/c 1"];
+ }
+ g9s0 -> g8s0 [color=lightgray,label="9",style=dashed];
+{ rank=same; g8s0}
+ g5s0 -> g9s0 [color=lightgray,label="8",style=dashed];
+ subgraph g11 {
+  g11s0 -> g11s0 [label="forall/R 1"];
+ }
+ subgraph g10 {
+  g10s0 -> g10s0 [label="6/R 1"];
+  g10s0 -> g10s0 [label="u/R 1"];
+  g10s0 -> g10s0 [label="P/R 1"];
+  g10s0 -> g10s0 [label="R/R 1"];
+  g10s0 -> g10s0 [label="Z/R 1"];
+  g10s0 -> g10s0 [label="0/R 1"];
+ }
+ g11s0 -> g10s0 [color=lightgray,label="10",style=dashed];
+{ rank=same; g10s0}
+ g5s0 -> g11s0 [color=lightgray,label="9",style=dashed];
+{ rank=same; g2s0 g4s0 g7s0 g9s0 g11s0}
+ g13s0 -> g5s0 [color=lightgray,label="46",style=dashed];
+ subgraph g12 {
+  node [color=green,fillcolor=lightgreen];
+  g12s0 -> g12s0 [label="s/u 1"];
+  g12s0 -> g12s0 [label="u/u 1"];
+  g12s0 -> g12s0 [label="./. 1"];
+  g12s0 -> g12s0 [label="e/u 1"];
+  g12s0 -> g12s0 [label="p/u 1"];
+  g12s0 -> g12s0 [label=",/, 1"];
+ }
+ g13s0 -> g12s0 [color=lightgray,label="57",style=dashed];
+ subgraph g14 {
+  node [color=green,fillcolor=lightgreen];
+  g14s0 -> g14s0 [label="suep/u 1"];
+  g14s0 -> g14s0 [label="./. 1"];
+ }
+ g13s0 -> g14s0 [color=lightgray,label="0",style=dashed];
+ subgraph g15 {
+  node [color=green,fillcolor=lightgreen];
+  g15s0 -> g15s0 [label="suep/u 1"];
+  g15s0 -> g15s0 [label="./. 1"];
+ }
+ g13s0 -> g15s0 [color=lightgray,label="0",style=dashed];
+ subgraph g16 {
+  node [color=green,fillcolor=lightgreen];
+  g16s0 -> g16s0 [label="suep/u 1"];
+  g16s0 -> g16s0 [label="./. 1"];
+ }
+ g13s0 -> g16s0 [color=lightgray,label="0",style=dashed];
+ subgraph g17 {
+  node [color=green,fillcolor=lightgreen];
+  g17s0 -> g17s0 [label="suep/u 1"];
+  g17s0 -> g17s0 [label="./. 1"];
+ }
+ g13s0 -> g17s0 [color=lightgray,label="0",style=dashed];
+ subgraph g18 {
+  node [color=green,fillcolor=lightgreen];
+  g18s0 -> g18s0 [label="suep/u 1"];
+  g18s0 -> g18s0 [label="./. 1"];
+ }
+ g13s0 -> g18s0 [color=lightgray,label="0",style=dashed];
+ subgraph g19 {
+  node [color=green,fillcolor=lightgreen];
+  g19s0 -> g19s0 [label="suep/u 1"];
+  g19s0 -> g19s0 [label="./. 1"];
+ }
+ g13s0 -> g19s0 [color=lightgray,label="0",style=dashed];
+ subgraph g20 {
+  node [color=green,fillcolor=lightgreen];
+  g20s0 -> g20s0 [label="suep/u 1"];
+  g20s0 -> g20s0 [label="./. 1"];
+  g20s0 -> g20s0 [label=",/, 1"];
+ }
+ g13s0 -> g20s0 [color=lightgray,label="0",style=dashed];
+ subgraph g21 {
+  node [color=green,fillcolor=lightgreen];
+  g21s0 -> g21s0 [label="suep/u 1"];
+  g21s0 -> g21s0 [label="./. 1"];
+  g21s0 -> g21s0 [label=",/, 1"];
+ }
+ g13s0 -> g21s0 [color=lightgray,label="0",style=dashed];
+ subgraph g22 {
+  node [color=green,fillcolor=lightgreen];
+  g22s0 -> g22s0 [label="suep/u 1"];
+  g22s0 -> g22s0 [label="./. 1"];
+  g22s0 -> g22s0 [label=",/, 1"];
+ }
+ g13s0 -> g22s0 [color=lightgray,label="0",style=dashed];
+ subgraph g23 {
+  node [color=green,fillcolor=lightgreen];
+  g23s0 -> g23s0 [label="suep/u 1"];
+  g23s0 -> g23s0 [label="./. 1"];
+  g23s0 -> g23s0 [label=",/, 1"];
+ }
+ g13s0 -> g23s0 [color=lightgray,label="0",style=dashed];
+ subgraph g24 {
+  node [color=green,fillcolor=lightgreen];
+  g24s0 -> g24s0 [label="suep/u 1"];
+  g24s0 -> g24s0 [label="./. 1"];
+  g24s0 -> g24s0 [label=",/, 1"];
+ }
+ g13s0 -> g24s0 [color=lightgray,label="0",style=dashed];
+ subgraph g25 {
+  node [color=green,fillcolor=lightgreen];
+  g25s0 -> g25s0 [label="suep/u 1"];
+  g25s0 -> g25s0 [label="./. 1"];
+  g25s0 -> g25s0 [label=",/, 1"];
+ }
+ g13s0 -> g25s0 [color=lightgray,label="0",style=dashed];
+ subgraph g26 {
+  node [color=green,fillcolor=lightgreen];
+  g26s0 -> g26s0 [label="suep/u 1"];
+  g26s0 -> g26s0 [label="./. 1"];
+  g26s0 -> g26s0 [label=",/, 1"];
+ }
+ g13s0 -> g26s0 [color=lightgray,label="0",style=dashed];
+ subgraph g27 {
+  node [color=green,fillcolor=lightgreen];
+  g27s0 -> g27s0 [label="suep/u 1"];
+  g27s0 -> g27s0 [label="./. 1"];
+  g27s0 -> g27s0 [label=",/, 1"];
+ }
+ g13s0 -> g27s0 [color=lightgray,label="0",style=dashed];
+ subgraph g28 {
+  node [color=green,fillcolor=lightgreen];
+  g28s0 -> g28s0 [label="suep/u 1"];
+  g28s0 -> g28s0 [label="./. 1"];
+  g28s0 -> g28s0 [label=",/, 1"];
+ }
+ g13s0 -> g28s0 [color=lightgray,label="0",style=dashed];
+ subgraph g29 {
+  node [color=green,fillcolor=lightgreen];
+  g29s0 -> g29s0 [label="suep/u 1"];
+  g29s0 -> g29s0 [label="./. 1"];
+  g29s0 -> g29s0 [label=",/, 1"];
+ }
+ g13s0 -> g29s0 [color=lightgray,label="0",style=dashed];
+ subgraph g30 {
+  node [color=green,fillcolor=lightgreen];
+  g30s0 -> g30s0 [label="suep/u 1"];
+  g30s0 -> g30s0 [label="./. 1"];
+  g30s0 -> g30s0 [label=",/, 1"];
+ }
+ g13s0 -> g30s0 [color=lightgray,label="0",style=dashed];
+ subgraph g31 {
+  node [color=green,fillcolor=lightgreen];
+  g31s0 -> g31s0 [label="suep/u 1"];
+  g31s0 -> g31s0 [label="./. 1"];
+  g31s0 -> g31s0 [label=",/, 1"];
+ }
+ g13s0 -> g31s0 [color=lightgray,label="0",style=dashed];
+ subgraph g32 {
+  node [color=green,fillcolor=lightgreen];
+  g32s0 -> g32s0 [label="suep/u 1"];
+  g32s0 -> g32s0 [label="./. 1"];
+  g32s0 -> g32s0 [label=",/, 1"];
+ }
+ g13s0 -> g32s0 [color=lightgray,label="0",style=dashed];
+ subgraph g33 {
+  node [color=green,fillcolor=lightgreen];
+  g33s0 -> g33s0 [label="suep/u 1"];
+  g33s0 -> g33s0 [label="./. 1"];
+  g33s0 -> g33s0 [label=",/, 1"];
+ }
+ g13s0 -> g33s0 [color=lightgray,label="0",style=dashed];
+ subgraph g34 {
+  node [color=green,fillcolor=lightgreen];
+  g34s0 -> g34s0 [label="suep/u 1"];
+  g34s0 -> g34s0 [label="./. 1"];
+  g34s0 -> g34s0 [label=",/, 1"];
+ }
+ g13s0 -> g34s0 [color=lightgray,label="0",style=dashed];
+ subgraph g35 {
+  node [color=green,fillcolor=lightgreen];
+  g35s0 -> g35s0 [label="suep/u 1"];
+  g35s0 -> g35s0 [label="./. 1"];
+  g35s0 -> g35s0 [label=",/, 1"];
+ }
+ g13s0 -> g35s0 [color=lightgray,label="0",style=dashed];
+ subgraph g36 {
+  node [color=green,fillcolor=lightgreen];
+  g36s0 -> g36s0 [label="suep/u 1"];
+  g36s0 -> g36s0 [label="./. 1"];
+  g36s0 -> g36s0 [label=",/, 1"];
+ }
+ g13s0 -> g36s0 [color=lightgray,label="0",style=dashed];
+ subgraph g37 {
+  node [color=green,fillcolor=lightgreen];
+  g37s0 -> g37s0 [label="suep/u 1"];
+  g37s0 -> g37s0 [label="./. 1"];
+  g37s0 -> g37s0 [label=",/, 1"];
+ }
+ g13s0 -> g37s0 [color=lightgray,label="0",style=dashed];
+ subgraph g38 {
+  node [color=green,fillcolor=lightgreen];
+  g38s0 -> g38s0 [label="suep/u 1"];
+  g38s0 -> g38s0 [label="./. 1"];
+  g38s0 -> g38s0 [label=",/, 1"];
+ }
+ g13s0 -> g38s0 [color=lightgray,label="0",style=dashed];
+ subgraph g39 {
+  node [color=green,fillcolor=lightgreen];
+  g39s0 -> g39s0 [label="suep/u 1"];
+  g39s0 -> g39s0 [label="./. 1"];
+  g39s0 -> g39s0 [label=",/, 1"];
+ }
+ g13s0 -> g39s0 [color=lightgray,label="0",style=dashed];
+{ rank=same; g5s0 g12s0 g14s0 g15s0 g16s0 g17s0 g18s0 g19s0 g20s0 g21s0 g22s0 g23s0 g24s0 g25s0 g26s0 g27s0 g28s0 g29s0 g30s0 g31s0 g32s0 g33s0 g34s0 g35s0 g36s0 g37s0 g38s0 g39s0}
+ g0s0 -> g13s0 [color=lightgray,label="103",style=dashed];
+{ rank=same; g13s0}
 }
