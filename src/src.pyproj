@@ -14,7 +14,7 @@
     <InterpreterId />
     <InterpreterVersion />
     <IsWindowsApplication>False</IsWindowsApplication>
-    <CommandLineArguments>tasks_config.challenge.json -l learners.grammar_learner.GrammarLearner -d 0.01</CommandLineArguments>
+    <CommandLineArguments>tasks_config.challenge.json -l learners.efsm_learner.GrammarLearner</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
@@ -1077,10 +1077,14 @@
     <Compile Include="learners\efsm_hierarchy.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="learners\efsm_learner.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="learners\grammar_learner.py" />
     <Compile Include="learners\human_learner.py" />
     <Compile Include="learners\sample_learners.py" />
     <Compile Include="learners\__init__.py" />
+    <Compile Include="remote_receiver.py" />
     <Compile Include="run.py" />
     <Compile Include="tasks\challenge\round1\challenge_micro.py" />
     <Compile Include="tasks\challenge\round1\challenge_mini.py" />

@@ -1,275 +1,594 @@
 digraph { { rank=min; g0s0 }
- subgraph g0 {
-  g0s0 -> g0s0 [label="forall/abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ,.!;?- None"];
+ subgraph {
+  g0 [color=gray,fillcolor=lightgray,label="G0",shape=box];
+  g0 -> g0s0 [color=gray];
+  g0s0 -> g0s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g0s0 -> g0s1 [label="./ 3
+self.output = list('§'); self.y = self.output.pop(0)"];
+  g0s0 -> g0s0 [label="else/  3
+self.words[-1] += x"];
+  g0s1 -> g0s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g0s1 -> g0s2 [label=" /. 3 not self.output
+if self.words[-1]: self.words.append('')"];
+  g0s2 -> g0s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g0s2 -> g0s0 [label=";/  3
+self.words = ['']"];
+  g0s2 -> g0s2 [label="else/  3
+self.words[-1] += x"];
  }
- subgraph g13 {
-  node [color=green,fillcolor=lightgreen];
-  g13s0 -> g13s0 [label="subsets/!!1 1"];
+ subgraph {
+  g2 [color=gray,fillcolor=lightgray,label="G2
+2 -> 9
+7 -> 4
+8 -> 2
+9 -> 4",shape=box];
+  g2 -> g2s0 [color=gray];
+  g2s0 -> g2s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g2s0 -> g2s0 [label="else/  0
+self.words[-1] += x"];
+  g2s0 -> g2s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g2s1 -> g2s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g2s1 -> g2s2 [label=" /. 3 not self.output
+if self.words[-1]: self.words.append('')"];
+  g2s3 -> g2s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g2s3 -> g2s3 [label="else/  3
+self.words[-1] += x"];
+  g2s3 -> g2s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g2s2 -> g2s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g2s2 -> g2s3 [label="./  0"];
+  g2s2 -> g2s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- subgraph g5 {
-  g5s0 -> g5s0 [label="forall/!!1 1"];
+ subgraph {
+  g1 [color=gray,fillcolor=lightgray,label="G1
+0 -> 4
+1 -> 3
+2 -> 1
+4 -> 5
+5 -> 2
+6 -> 7
+7 -> 3
+8 -> 9
+9 -> 9",shape=box];
+  g1 -> g1s0 [color=gray];
+  g1s0 -> g1s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g1s0 -> g1s0 [label="else/  0
+self.words[-1] += x"];
+  g1s0 -> g1s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g1s1 -> g1s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g1s1 -> g1s2 [label=" /. 3 not self.output
+if self.words[-1]: self.words.append('')"];
+  g1s3 -> g1s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g1s3 -> g1s3 [label="else/  3
+self.words[-1] += x"];
+  g1s3 -> g1s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g1s2 -> g1s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g1s2 -> g1s3 [label="./  0"];
+  g1s2 -> g1s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- subgraph g2 {
-  g2s0 -> g2s0 [label="forall/7 1"];
+ g2 -> g1 [color=lightgray,label="-9",style=dashed];
+ subgraph {
+  g4 [color=gray,fillcolor=lightgray,label="G4
+2 -> 9
+7 -> 4
+8 -> 2
+9 -> 4",shape=box];
+  g4 -> g4s0 [color=gray];
+  g4s0 -> g4s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g4s0 -> g4s0 [label="else/  0
+self.words[-1] += x"];
+  g4s0 -> g4s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g4s1 -> g4s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g4s1 -> g4s4 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g4s1 -> g4s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g4s3 -> g4s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g4s3 -> g4s3 [label="else/  3
+self.words[-1] += x"];
+  g4s3 -> g4s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g4s2 -> g4s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g4s2 -> g4s3 [label="./  0"];
+  g4s2 -> g4s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g4s4 -> g4s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g4s4 -> g4s5 [label="./  0"];
+  g4s4 -> g4s4 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g4s5 -> g4s5 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g4s5 -> g4s5 [label="else/  3
+self.words[-1] += x"];
+  g4s5 -> g4s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- subgraph g1 {
-  g1s0 -> g1s0 [label="6/7 1"];
-  g1s0 -> g1s0 [label="g/7 1"];
-  g1s0 -> g1s0 [label="?/7 1"];
-  g1s0 -> g1s0 [label="t/7 1"];
-  g1s0 -> g1s0 [label="H/7 1"];
-  g1s0 -> g1s0 [label="y/7 1"];
-  g1s0 -> g1s0 [label="s/7 1"];
+ subgraph {
+  g3 [color=gray,fillcolor=lightgray,label="G3
+0 -> 8
+1 -> 6
+2 -> 1
+3 -> 1
+4 -> 1
+5 -> 9
+6 -> 9
+7 -> 0
+8 -> 5
+9 -> 4",shape=box];
+  g3 -> g3s0 [color=gray];
+  g3s0 -> g3s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g3s0 -> g3s0 [label="else/  0
+self.words[-1] += x"];
+  g3s0 -> g3s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g3s1 -> g3s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g3s1 -> g3s4 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g3s1 -> g3s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g3s3 -> g3s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g3s3 -> g3s3 [label="else/  3
+self.words[-1] += x"];
+  g3s3 -> g3s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g3s2 -> g3s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g3s2 -> g3s3 [label="./  0"];
+  g3s2 -> g3s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g3s4 -> g3s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g3s4 -> g3s5 [label="./  0"];
+  g3s4 -> g3s4 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g3s5 -> g3s5 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g3s5 -> g3s5 [label="else/  3
+self.words[-1] += x"];
+  g3s5 -> g3s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2s0 -> g1s0 [color=lightgray,label="10",style=dashed];
-{ rank=same; g1s0}
- g5s0 -> g2s0 [color=lightgray,label="5",style=dashed];
- subgraph g4 {
-  g4s0 -> g4s0 [label="forall/L 1"];
+ g4 -> g3 [color=lightgray,label="-8",style=dashed];
+ subgraph {
+  g5 [color=gray,fillcolor=lightgray,label="G5
+0 -> 7
+1 -> 6
+2 -> 9
+3 -> 6
+4 -> 9
+5 -> 1
+6 -> 9
+7 -> 6
+8 -> 2
+9 -> 6",shape=box];
+  g5 -> g5s0 [color=gray];
+  g5s0 -> g5s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g5s0 -> g5s0 [label="else/  0
+self.words[-1] += x"];
+  g5s0 -> g5s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g5s1 -> g5s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g5s1 -> g5s4 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g5s1 -> g5s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g5s3 -> g5s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g5s3 -> g5s3 [label="else/  3
+self.words[-1] += x"];
+  g5s3 -> g5s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g5s2 -> g5s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g5s2 -> g5s3 [label="./  0"];
+  g5s2 -> g5s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g5s4 -> g5s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g5s4 -> g5s5 [label="./  0"];
+  g5s4 -> g5s4 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g5s5 -> g5s5 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g5s5 -> g5s5 [label="else/  3
+self.words[-1] += x"];
+  g5s5 -> g5s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- subgraph g3 {
-  g3s0 -> g3s0 [label="8/L 1"];
-  g3s0 -> g3s0 [label="a/L 1"];
-  g3s0 -> g3s0 [label="f/L 1"];
-  g3s0 -> g3s0 [label=" /L 1"];
-  g3s0 -> g3s0 [label="3/L 1"];
-  g3s0 -> g3s0 [label="q/L 1"];
+ g4 -> g5 [color=lightgray,label="-9",style=dashed];
+ subgraph {
+  g6 [color=gray,fillcolor=lightgray,label="G6
+0 -> 0
+1 -> 1
+2 -> 1
+3 -> 2
+4 -> 0
+5 -> 4
+6 -> 3
+7 -> 7
+8 -> 5
+9 -> 5",shape=box];
+  g6 -> g6s0 [color=gray];
+  g6s0 -> g6s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g6s0 -> g6s0 [label="else/  0
+self.words[-1] += x"];
+  g6s0 -> g6s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g6s1 -> g6s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g6s1 -> g6s4 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g6s1 -> g6s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g6s3 -> g6s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g6s3 -> g6s3 [label="else/  3
+self.words[-1] += x"];
+  g6s3 -> g6s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g6s2 -> g6s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g6s2 -> g6s3 [label="./  0"];
+  g6s2 -> g6s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g6s4 -> g6s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g6s4 -> g6s5 [label="./  0"];
+  g6s4 -> g6s4 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g6s5 -> g6s5 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g6s5 -> g6s5 [label="else/  3
+self.words[-1] += x"];
+  g6s5 -> g6s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g4s0 -> g3s0 [color=lightgray,label="10",style=dashed];
-{ rank=same; g3s0}
- g5s0 -> g4s0 [color=lightgray,label="6",style=dashed];
- subgraph g7 {
-  g7s0 -> g7s0 [label="forall/x 1"];
+ g4 -> g6 [color=lightgray,label="-6",style=dashed];
+ subgraph {
+  g7 [color=gray,fillcolor=lightgray,label="G7
+0 -> 1
+1 -> 2
+2 -> 3
+3 -> 7
+4 -> 3
+5 -> 4
+6 -> 4
+7 -> 6
+8 -> 1
+9 -> 8",shape=box];
+  g7 -> g7s0 [color=gray];
+  g7s0 -> g7s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g7s0 -> g7s0 [label="else/  0
+self.words[-1] += x"];
+  g7s0 -> g7s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g7s1 -> g7s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g7s1 -> g7s4 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g7s1 -> g7s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g7s3 -> g7s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g7s3 -> g7s3 [label="else/  3
+self.words[-1] += x"];
+  g7s3 -> g7s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g7s2 -> g7s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g7s2 -> g7s3 [label="./  0"];
+  g7s2 -> g7s2 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g7s4 -> g7s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g7s4 -> g7s5 [label="./  0"];
+  g7s4 -> g7s4 [label="else/  0 x not in ';'
+self.words[-1] += x"];
+  g7s5 -> g7s5 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g7s5 -> g7s5 [label="else/  3
+self.words[-1] += x"];
+  g7s5 -> g7s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- subgraph g6 {
-  g6s0 -> g6s0 [label="7/x 1"];
-  g6s0 -> g6s0 [label="u/x 1"];
-  g6s0 -> g6s0 [label=";/x 1"];
-  g6s0 -> g6s0 [label="f/x 1"];
-  g6s0 -> g6s0 [label="G/x 1"];
-  g6s0 -> g6s0 [label="g/x 1"];
+ g4 -> g7 [color=lightgray,label="-5",style=dashed];
+{ rank=same; g3 g5 g6 g7}
+ g2 -> g4 [color=lightgray,label="30",style=dashed];
+{ rank=same; g1 g4}
+ g0 -> g2 [color=lightgray,label="41",style=dashed];
+ subgraph {
+  g9 [color=gray,fillcolor=lightgray,label="G9
+0 -> 7
+1 -> 5
+2 -> 9
+3 -> 8
+4 -> 4
+5 -> 8
+6 -> 5
+7 -> 4
+8 -> 2
+9 -> 4",shape=box];
+  g9 -> g9s0 [color=gray];
+  g9s0 -> g9s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g9s0 -> g9s0 [label="else/  0
+self.words[-1] += x"];
+  g9s0 -> g9s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g9s1 -> g9s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g9s1 -> g9s3 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g9s1 -> g9s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g9s2 -> g9s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g9s2 -> g9s2 [label="else/  3
+self.words[-1] += x"];
+  g9s2 -> g9s0 [label=";/  3 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g9s4 -> g9s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g9s4 -> g9s4 [label="else/  3
+self.words[-1] += x"];
+  g9s4 -> g9s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g9s3 -> g9s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g9s3 -> g9s4 [label="./  0"];
+  g9s3 -> g9s3 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- g7s0 -> g6s0 [color=lightgray,label="10",style=dashed];
-{ rank=same; g6s0}
- g5s0 -> g7s0 [color=lightgray,label="7",style=dashed];
- subgraph g9 {
-  g9s0 -> g9s0 [label="forall/c 1"];
+ subgraph {
+  g8 [color=gray,fillcolor=lightgray,label="G8
+0 -> 5
+1 -> 9
+2 -> 2
+3 -> 6
+4 -> 7
+5 -> 9
+6 -> 4
+7 -> 7
+8 -> 2
+9 -> 4",shape=box];
+  g8 -> g8s0 [color=gray];
+  g8s0 -> g8s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g8s0 -> g8s0 [label="else/  0
+self.words[-1] += x"];
+  g8s0 -> g8s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g8s1 -> g8s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g8s1 -> g8s3 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g8s1 -> g8s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g8s2 -> g8s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g8s2 -> g8s2 [label="else/  3
+self.words[-1] += x"];
+  g8s2 -> g8s0 [label=";/  3 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g8s4 -> g8s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g8s4 -> g8s4 [label="else/  3
+self.words[-1] += x"];
+  g8s4 -> g8s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g8s3 -> g8s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g8s3 -> g8s4 [label="./  0"];
+  g8s3 -> g8s3 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- subgraph g8 {
-  g8s0 -> g8s0 [label="5/c 1"];
-  g8s0 -> g8s0 [label="y/c 1"];
-  g8s0 -> g8s0 [label="K/c 1"];
-  g8s0 -> g8s0 [label="b/c 1"];
-  g8s0 -> g8s0 [label="Y/c 1"];
-  g8s0 -> g8s0 [label="p/c 1"];
-  g8s0 -> g8s0 [label="o/c 1"];
+ g9 -> g8 [color=lightgray,label="-4",style=dashed];
+ subgraph {
+  g10 [color=gray,fillcolor=lightgray,label="G10
+0 -> 9
+1 -> 1
+2 -> 0
+3 -> 7
+4 -> 7
+5 -> 4
+6 -> 5
+7 -> 6
+8 -> 0
+9 -> 8",shape=box];
+  g10 -> g10s0 [color=gray];
+  g10s0 -> g10s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g10s0 -> g10s0 [label="else/  0
+self.words[-1] += x"];
+  g10s0 -> g10s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g10s1 -> g10s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g10s1 -> g10s3 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g10s1 -> g10s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g10s2 -> g10s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g10s2 -> g10s2 [label="else/  3
+self.words[-1] += x"];
+  g10s2 -> g10s0 [label=";/  3 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g10s4 -> g10s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g10s4 -> g10s4 [label="else/  3
+self.words[-1] += x"];
+  g10s4 -> g10s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g10s3 -> g10s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g10s3 -> g10s4 [label="./  0"];
+  g10s3 -> g10s3 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- g9s0 -> g8s0 [color=lightgray,label="9",style=dashed];
-{ rank=same; g8s0}
- g5s0 -> g9s0 [color=lightgray,label="8",style=dashed];
- subgraph g11 {
-  g11s0 -> g11s0 [label="forall/R 1"];
+ g9 -> g10 [color=lightgray,label="-3",style=dashed];
+ subgraph {
+  g11 [color=gray,fillcolor=lightgray,label="G11
+0 -> 4
+1 -> 3
+2 -> 1
+3 -> 4
+4 -> 6
+5 -> 0
+6 -> 4
+7 -> 0
+8 -> 1
+9 -> 9",shape=box];
+  g11 -> g11s0 [color=gray];
+  g11s0 -> g11s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g11s0 -> g11s0 [label="else/  0
+self.words[-1] += x"];
+  g11s0 -> g11s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g11s1 -> g11s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g11s1 -> g11s3 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g11s1 -> g11s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g11s2 -> g11s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g11s2 -> g11s2 [label="else/  3
+self.words[-1] += x"];
+  g11s2 -> g11s0 [label=";/  3 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g11s4 -> g11s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g11s4 -> g11s4 [label="else/  3
+self.words[-1] += x"];
+  g11s4 -> g11s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g11s3 -> g11s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g11s3 -> g11s4 [label="./  0"];
+  g11s3 -> g11s3 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- subgraph g10 {
-  g10s0 -> g10s0 [label="6/R 1"];
-  g10s0 -> g10s0 [label="u/R 1"];
-  g10s0 -> g10s0 [label="P/R 1"];
-  g10s0 -> g10s0 [label="R/R 1"];
-  g10s0 -> g10s0 [label="Z/R 1"];
-  g10s0 -> g10s0 [label="0/R 1"];
+ g9 -> g11 [color=lightgray,label="-2",style=dashed];
+ subgraph {
+  g12 [color=gray,fillcolor=lightgray,label="G12
+0 -> 6
+1 -> 4
+2 -> 2
+3 -> 6
+4 -> 9
+5 -> 1
+6 -> 9
+7 -> 9
+8 -> 5
+9 -> 0",shape=box];
+  g12 -> g12s0 [color=gray];
+  g12s0 -> g12s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g12s0 -> g12s0 [label="else/  0
+self.words[-1] += x"];
+  g12s0 -> g12s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g12s1 -> g12s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g12s1 -> g12s3 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g12s1 -> g12s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g12s2 -> g12s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g12s2 -> g12s2 [label="else/  3
+self.words[-1] += x"];
+  g12s2 -> g12s0 [label=";/  3 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g12s4 -> g12s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g12s4 -> g12s4 [label="else/  3
+self.words[-1] += x"];
+  g12s4 -> g12s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g12s3 -> g12s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g12s3 -> g12s4 [label="./  0"];
+  g12s3 -> g12s3 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- g11s0 -> g10s0 [color=lightgray,label="10",style=dashed];
-{ rank=same; g10s0}
- g5s0 -> g11s0 [color=lightgray,label="9",style=dashed];
-{ rank=same; g2s0 g4s0 g7s0 g9s0 g11s0}
- g13s0 -> g5s0 [color=lightgray,label="46",style=dashed];
- subgraph g12 {
-  node [color=green,fillcolor=lightgreen];
-  g12s0 -> g12s0 [label="s/u 1"];
-  g12s0 -> g12s0 [label="u/u 1"];
-  g12s0 -> g12s0 [label="./. 1"];
-  g12s0 -> g12s0 [label="e/u 1"];
-  g12s0 -> g12s0 [label="p/u 1"];
-  g12s0 -> g12s0 [label=",/, 1"];
+ g9 -> g12 [color=lightgray,label="-1",style=dashed];
+ subgraph {
+  g13 [color=gray,fillcolor=lightgray,label="G13
+0 -> 7
+1 -> 5
+2 -> 9
+3 -> 8
+4 -> 4
+5 -> 8
+6 -> 5
+7 -> 4
+8 -> 2
+9 -> 4",shape=box];
+  g13 -> g13s0 [color=gray];
+  g13s0 -> g13s0 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g13s0 -> g13s0 [label="else/  0
+self.words[-1] += x"];
+  g13s0 -> g13s1 [label="./ 0
+self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0)"];
+  g13s1 -> g13s1 [label=" / 3 self.output
+self.y = self.output.pop(0)"];
+  g13s1 -> g13s3 [label=" /. -1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g13s1 -> g13s2 [label=" /. 1 not self.output
+if self.words[-1]: self.words.append('')"];
+  g13s2 -> g13s2 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g13s2 -> g13s2 [label="else/  3
+self.words[-1] += x"];
+  g13s2 -> g13s0 [label=";/  3 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g13s4 -> g13s4 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g13s4 -> g13s4 [label="else/  3
+self.words[-1] += x"];
+  g13s4 -> g13s0 [label=";/  0 self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1]
+self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
+  g13s3 -> g13s3 [label=" /  3
+if self.words[-1]: self.words.append('')"];
+  g13s3 -> g13s4 [label="./  0"];
+  g13s3 -> g13s3 [label="else/  0 x not in ';'
+self.words[-1] += x"];
  }
- g13s0 -> g12s0 [color=lightgray,label="57",style=dashed];
- subgraph g14 {
-  node [color=green,fillcolor=lightgreen];
-  g14s0 -> g14s0 [label="suep/u 1"];
-  g14s0 -> g14s0 [label="./. 1"];
- }
- g13s0 -> g14s0 [color=lightgray,label="0",style=dashed];
- subgraph g15 {
-  node [color=green,fillcolor=lightgreen];
-  g15s0 -> g15s0 [label="suep/u 1"];
-  g15s0 -> g15s0 [label="./. 1"];
- }
- g13s0 -> g15s0 [color=lightgray,label="0",style=dashed];
- subgraph g16 {
-  node [color=green,fillcolor=lightgreen];
-  g16s0 -> g16s0 [label="suep/u 1"];
-  g16s0 -> g16s0 [label="./. 1"];
- }
- g13s0 -> g16s0 [color=lightgray,label="0",style=dashed];
- subgraph g17 {
-  node [color=green,fillcolor=lightgreen];
-  g17s0 -> g17s0 [label="suep/u 1"];
-  g17s0 -> g17s0 [label="./. 1"];
- }
- g13s0 -> g17s0 [color=lightgray,label="0",style=dashed];
- subgraph g18 {
-  node [color=green,fillcolor=lightgreen];
-  g18s0 -> g18s0 [label="suep/u 1"];
-  g18s0 -> g18s0 [label="./. 1"];
- }
- g13s0 -> g18s0 [color=lightgray,label="0",style=dashed];
- subgraph g19 {
-  node [color=green,fillcolor=lightgreen];
-  g19s0 -> g19s0 [label="suep/u 1"];
-  g19s0 -> g19s0 [label="./. 1"];
- }
- g13s0 -> g19s0 [color=lightgray,label="0",style=dashed];
- subgraph g20 {
-  node [color=green,fillcolor=lightgreen];
-  g20s0 -> g20s0 [label="suep/u 1"];
-  g20s0 -> g20s0 [label="./. 1"];
-  g20s0 -> g20s0 [label=",/, 1"];
- }
- g13s0 -> g20s0 [color=lightgray,label="0",style=dashed];
- subgraph g21 {
-  node [color=green,fillcolor=lightgreen];
-  g21s0 -> g21s0 [label="suep/u 1"];
-  g21s0 -> g21s0 [label="./. 1"];
-  g21s0 -> g21s0 [label=",/, 1"];
- }
- g13s0 -> g21s0 [color=lightgray,label="0",style=dashed];
- subgraph g22 {
-  node [color=green,fillcolor=lightgreen];
-  g22s0 -> g22s0 [label="suep/u 1"];
-  g22s0 -> g22s0 [label="./. 1"];
-  g22s0 -> g22s0 [label=",/, 1"];
- }
- g13s0 -> g22s0 [color=lightgray,label="0",style=dashed];
- subgraph g23 {
-  node [color=green,fillcolor=lightgreen];
-  g23s0 -> g23s0 [label="suep/u 1"];
-  g23s0 -> g23s0 [label="./. 1"];
-  g23s0 -> g23s0 [label=",/, 1"];
- }
- g13s0 -> g23s0 [color=lightgray,label="0",style=dashed];
- subgraph g24 {
-  node [color=green,fillcolor=lightgreen];
-  g24s0 -> g24s0 [label="suep/u 1"];
-  g24s0 -> g24s0 [label="./. 1"];
-  g24s0 -> g24s0 [label=",/, 1"];
- }
- g13s0 -> g24s0 [color=lightgray,label="0",style=dashed];
- subgraph g25 {
-  node [color=green,fillcolor=lightgreen];
-  g25s0 -> g25s0 [label="suep/u 1"];
-  g25s0 -> g25s0 [label="./. 1"];
-  g25s0 -> g25s0 [label=",/, 1"];
- }
- g13s0 -> g25s0 [color=lightgray,label="0",style=dashed];
- subgraph g26 {
-  node [color=green,fillcolor=lightgreen];
-  g26s0 -> g26s0 [label="suep/u 1"];
-  g26s0 -> g26s0 [label="./. 1"];
-  g26s0 -> g26s0 [label=",/, 1"];
- }
- g13s0 -> g26s0 [color=lightgray,label="0",style=dashed];
- subgraph g27 {
-  node [color=green,fillcolor=lightgreen];
-  g27s0 -> g27s0 [label="suep/u 1"];
-  g27s0 -> g27s0 [label="./. 1"];
-  g27s0 -> g27s0 [label=",/, 1"];
- }
- g13s0 -> g27s0 [color=lightgray,label="0",style=dashed];
- subgraph g28 {
-  node [color=green,fillcolor=lightgreen];
-  g28s0 -> g28s0 [label="suep/u 1"];
-  g28s0 -> g28s0 [label="./. 1"];
-  g28s0 -> g28s0 [label=",/, 1"];
- }
- g13s0 -> g28s0 [color=lightgray,label="0",style=dashed];
- subgraph g29 {
-  node [color=green,fillcolor=lightgreen];
-  g29s0 -> g29s0 [label="suep/u 1"];
-  g29s0 -> g29s0 [label="./. 1"];
-  g29s0 -> g29s0 [label=",/, 1"];
- }
- g13s0 -> g29s0 [color=lightgray,label="0",style=dashed];
- subgraph g30 {
-  node [color=green,fillcolor=lightgreen];
-  g30s0 -> g30s0 [label="suep/u 1"];
-  g30s0 -> g30s0 [label="./. 1"];
-  g30s0 -> g30s0 [label=",/, 1"];
- }
- g13s0 -> g30s0 [color=lightgray,label="0",style=dashed];
- subgraph g31 {
-  node [color=green,fillcolor=lightgreen];
-  g31s0 -> g31s0 [label="suep/u 1"];
-  g31s0 -> g31s0 [label="./. 1"];
-  g31s0 -> g31s0 [label=",/, 1"];
- }
- g13s0 -> g31s0 [color=lightgray,label="0",style=dashed];
- subgraph g32 {
-  node [color=green,fillcolor=lightgreen];
-  g32s0 -> g32s0 [label="suep/u 1"];
-  g32s0 -> g32s0 [label="./. 1"];
-  g32s0 -> g32s0 [label=",/, 1"];
- }
- g13s0 -> g32s0 [color=lightgray,label="0",style=dashed];
- subgraph g33 {
-  node [color=green,fillcolor=lightgreen];
-  g33s0 -> g33s0 [label="suep/u 1"];
-  g33s0 -> g33s0 [label="./. 1"];
-  g33s0 -> g33s0 [label=",/, 1"];
- }
- g13s0 -> g33s0 [color=lightgray,label="0",style=dashed];
- subgraph g34 {
-  node [color=green,fillcolor=lightgreen];
-  g34s0 -> g34s0 [label="suep/u 1"];
-  g34s0 -> g34s0 [label="./. 1"];
-  g34s0 -> g34s0 [label=",/, 1"];
- }
- g13s0 -> g34s0 [color=lightgray,label="0",style=dashed];
- subgraph g35 {
-  node [color=green,fillcolor=lightgreen];
-  g35s0 -> g35s0 [label="suep/u 1"];
-  g35s0 -> g35s0 [label="./. 1"];
-  g35s0 -> g35s0 [label=",/, 1"];
- }
- g13s0 -> g35s0 [color=lightgray,label="0",style=dashed];
- subgraph g36 {
-  node [color=green,fillcolor=lightgreen];
-  g36s0 -> g36s0 [label="suep/u 1"];
-  g36s0 -> g36s0 [label="./. 1"];
-  g36s0 -> g36s0 [label=",/, 1"];
- }
- g13s0 -> g36s0 [color=lightgray,label="0",style=dashed];
- subgraph g37 {
-  node [color=green,fillcolor=lightgreen];
-  g37s0 -> g37s0 [label="suep/u 1"];
-  g37s0 -> g37s0 [label="./. 1"];
-  g37s0 -> g37s0 [label=",/, 1"];
- }
- g13s0 -> g37s0 [color=lightgray,label="0",style=dashed];
- subgraph g38 {
-  node [color=green,fillcolor=lightgreen];
-  g38s0 -> g38s0 [label="suep/u 1"];
-  g38s0 -> g38s0 [label="./. 1"];
-  g38s0 -> g38s0 [label=",/, 1"];
- }
- g13s0 -> g38s0 [color=lightgray,label="0",style=dashed];
- subgraph g39 {
-  node [color=green,fillcolor=lightgreen];
-  g39s0 -> g39s0 [label="suep/u 1"];
-  g39s0 -> g39s0 [label="./. 1"];
-  g39s0 -> g39s0 [label=",/, 1"];
- }
- g13s0 -> g39s0 [color=lightgray,label="0",style=dashed];
-{ rank=same; g5s0 g12s0 g14s0 g15s0 g16s0 g17s0 g18s0 g19s0 g20s0 g21s0 g22s0 g23s0 g24s0 g25s0 g26s0 g27s0 g28s0 g29s0 g30s0 g31s0 g32s0 g33s0 g34s0 g35s0 g36s0 g37s0 g38s0 g39s0}
- g0s0 -> g13s0 [color=lightgray,label="103",style=dashed];
-{ rank=same; g13s0}
+ g9 -> g13 [color=lightgray,label="0",style=dashed];
+{ rank=same; g8 g10 g11 g12 g13}
+ g0 -> g9 [color=lightgray,label="45",style=dashed];
+{ rank=same; g2 g9}
 }
