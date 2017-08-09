@@ -156,7 +156,6 @@
       "type": "core.scheduler.ConsecutiveTaskScheduler",
       "args": {
           "tasks": [
-            "micro5.5","micro5.6","micro5.7","micro5.8","micro5.9",
             "micro5.10", "micro5.11", "micro5.12","micro5.13","micro5.14","micro5.15","micro5.16","micro5.17",
             "micro5.18",
             "micro6",

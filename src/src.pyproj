@@ -14,7 +14,7 @@
     <InterpreterId />
     <InterpreterVersion />
     <IsWindowsApplication>False</IsWindowsApplication>
-    <CommandLineArguments>tasks_config.challenge.json -l learners.efsm_learner.GrammarLearner</CommandLineArguments>
+    <CommandLineArguments>tasks_config.challenge.5_3_up.json -l learners.efsm_learner.GrammarLearner</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
