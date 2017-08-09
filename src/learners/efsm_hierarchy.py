@@ -167,7 +167,7 @@ class EFSMhierarchyNode:
                 if self.currState == 0:
                     self.expectedReward = REWARD_ANY
                 if t.action:
-                    output = self.efsm.processAction(t, tran.input)
+                    output, processed = self.efsm.processAction(t, tran.input)
                     if output and output != SYMBOL_UNKNOWN:
                         if output == tran.output:
                             self.expectedReward = REWARD_NONNEGATIVE
@@ -204,7 +204,7 @@ class EFSMhierarchyNode:
                 else:
                     return output
             elif t.action:
-                output = self.efsm.processAction(t, x)
+                output, processed = self.efsm.processAction(t, x)
             tran = t
         self.currState = self.efsm.getNextState(self.currState, tran)
         return output    
