@@ -22,7 +22,11 @@ self.words[-1] += x"];
  }
  subgraph {
   g2 [color=gray,fillcolor=lightgray,label="G2
-random_map: -> still",shape=box];
+0 -> 106.
+2 -> 175.
+3 -> 29013.
+6 -> 1739.
+9 -> 04020.",shape=box];
   g2 -> g2s0 [color=gray];
   g2s0 -> g2s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
@@ -44,36 +48,22 @@ self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
  subgraph {
   g1 [color=gray,fillcolor=lightgray,label="G1
-0 -> 2
-01435 -> 9.
-1 -> 9
-10 -> 4.
-2 -> 4
-24 -> 7.
-27 -> 1.
+0 -> 4
+1 -> 8
+2 -> 6
 3 -> 7
-38 -> 5.
-389 -> 1510.
-4 -> 8
-49 -> 4.
-5 -> 6
-55 -> 5.
-6 -> 1
-613 -> 7.
-62 -> 6.
-7 -> 0
-8 -> 5
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 3
-random_map: -> still",shape=box];
+4 -> 0
+5 -> 5
+6 -> 9
+7 -> 3
+8 -> 2
+9 -> 1",shape=box];
   g1 -> g1s0 [color=gray];
   g1s0 -> g1s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g1s0 -> g1s0 [label="else/  0
 self.words[-1] += x"];
-  g1s0 -> g1s1 [label="./ 3 len(self.words) >= 1
+  g1s0 -> g1s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g1s1 -> g1s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -87,39 +77,25 @@ self.words[-1] += x"];
   g1s2 -> g1s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g1 [color=lightgray,label="-72",style=dashed];
+ g2 -> g1 [color=lightgray,label="-40",style=dashed];
  subgraph {
   g3 [color=gray,fillcolor=lightgray,label="G3
-0 -> 5
-01435 -> 9.
-1 -> 4
-10 -> 4.
+0 -> 3
+1 -> 9
 2 -> 8
-24 -> 7.
-27 -> 1.
-3 -> 2
-38 -> 5.
-389 -> 1510.
-4 -> 7
-49 -> 4.
-5 -> 0
-55 -> 5.
-6 -> 1
-613 -> 7.
-62 -> 6.
-7 -> 0
-8 -> 6
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 9
-random_map: -> still",shape=box];
+3 -> 7
+4 -> 5
+5 -> 4
+6 -> 2
+7 -> 6
+8 -> 0
+9 -> 1",shape=box];
   g3 -> g3s0 [color=gray];
   g3s0 -> g3s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g3s0 -> g3s0 [label="else/  0
 self.words[-1] += x"];
-  g3s0 -> g3s1 [label="./ 3 len(self.words) >= 1
+  g3s0 -> g3s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g3s1 -> g3s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -133,39 +109,25 @@ self.words[-1] += x"];
   g3s2 -> g3s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g3 [color=lightgray,label="-71",style=dashed];
+ g2 -> g3 [color=lightgray,label="-39",style=dashed];
  subgraph {
   g4 [color=gray,fillcolor=lightgray,label="G4
-0 -> 0
-01435 -> 9.
-1 -> 4
-10 -> 4.
-2 -> 7
-24 -> 7.
-27 -> 1.
-3 -> 5
-38 -> 5.
-389 -> 1510.
-4 -> 1
-49 -> 4.
-5 -> 9
-55 -> 5.
-6 -> 8
-613 -> 7.
-62 -> 6.
-7 -> 2
-8 -> 3
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 6
-random_map: -> still",shape=box];
+0 -> 8
+1 -> 3
+2 -> 4
+3 -> 2
+4 -> 7
+5 -> 1
+6 -> 9
+7 -> 0
+8 -> 6
+9 -> 5",shape=box];
   g4 -> g4s0 [color=gray];
   g4s0 -> g4s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g4s0 -> g4s0 [label="else/  0
 self.words[-1] += x"];
-  g4s0 -> g4s1 [label="./ 3 len(self.words) >= 1
+  g4s0 -> g4s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g4s1 -> g4s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -179,39 +141,25 @@ self.words[-1] += x"];
   g4s2 -> g4s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g4 [color=lightgray,label="-69",style=dashed];
+ g2 -> g4 [color=lightgray,label="-38",style=dashed];
  subgraph {
   g5 [color=gray,fillcolor=lightgray,label="G5
-0 -> 8
-01435 -> 9.
-1 -> 6
-10 -> 4.
-2 -> 9
-24 -> 7.
-27 -> 1.
-3 -> 7
-38 -> 5.
-389 -> 1510.
-4 -> 2
-49 -> 4.
-5 -> 0
-55 -> 5.
-6 -> 1
-613 -> 7.
-62 -> 6.
-7 -> 5
+0 -> 6
+1 -> 7
+2 -> 8
+3 -> 1
+4 -> 5
+5 -> 9
+6 -> 2
+7 -> 0
 8 -> 3
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 4
-random_map: -> still",shape=box];
+9 -> 4",shape=box];
   g5 -> g5s0 [color=gray];
   g5s0 -> g5s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g5s0 -> g5s0 [label="else/  0
 self.words[-1] += x"];
-  g5s0 -> g5s1 [label="./ 3 len(self.words) >= 1
+  g5s0 -> g5s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g5s1 -> g5s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -225,39 +173,25 @@ self.words[-1] += x"];
   g5s2 -> g5s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g5 [color=lightgray,label="-68",style=dashed];
+ g2 -> g5 [color=lightgray,label="-37",style=dashed];
  subgraph {
   g6 [color=gray,fillcolor=lightgray,label="G6
-0 -> 51
-01435 -> 9.
-1 -> 6
-10 -> 4.
-2 -> 7
-24 -> 7.
-27 -> 1.
-3 -> 3
-38 -> 5.
-389 -> 1510.
-4 -> 4
-49 -> 4.
-5 -> 5
-55 -> 5.
-6 -> 2
-613 -> 7.
-62 -> 6.
-7 -> 0
-8 -> 8
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 9
-random_map: -> still",shape=box];
+0 -> 8
+1 -> 0
+2 -> 2
+3 -> 5
+4 -> 1
+5 -> 7
+6 -> 6
+7 -> 9
+8 -> 3
+9 -> 4",shape=box];
   g6 -> g6s0 [color=gray];
   g6s0 -> g6s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g6s0 -> g6s0 [label="else/  0
 self.words[-1] += x"];
-  g6s0 -> g6s1 [label="./ 3 len(self.words) >= 1
+  g6s0 -> g6s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g6s1 -> g6s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -271,39 +205,25 @@ self.words[-1] += x"];
   g6s2 -> g6s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g6 [color=lightgray,label="-67",style=dashed];
+ g2 -> g6 [color=lightgray,label="-36",style=dashed];
  subgraph {
   g7 [color=gray,fillcolor=lightgray,label="G7
-0 -> 30
-01435 -> 9.
-1 -> 01
-10 -> 4.
-2 -> 54
-24 -> 7.
-27 -> 1.
-3 -> 29
-38 -> 5.
-389 -> 1510.
-4 -> 33
-49 -> 4.
-5 -> 60
-55 -> 5.
-6 -> 56
-613 -> 7.
-62 -> 6.
-7 -> 5.
-8 -> 68
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 35
-random_map: -> still",shape=box];
+0 -> 09
+1 -> 42
+2 -> 33
+3 -> 51
+4 -> 83
+5 -> 74
+6 -> 39
+7 -> 45
+8 -> 44
+9 -> 40",shape=box];
   g7 -> g7s0 [color=gray];
   g7s0 -> g7s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g7s0 -> g7s0 [label="else/  0
 self.words[-1] += x"];
-  g7s0 -> g7s1 [label="./ 3 len(self.words) >= 1
+  g7s0 -> g7s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g7s1 -> g7s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -317,39 +237,24 @@ self.words[-1] += x"];
   g7s2 -> g7s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g7 [color=lightgray,label="-62",style=dashed];
+ g2 -> g7 [color=lightgray,label="-32",style=dashed];
  subgraph {
   g8 [color=gray,fillcolor=lightgray,label="G8
-0 -> 51
-01435 -> 9.
-1 -> 38
-10 -> 4.
-2 -> 11
-24 -> 7.
-27 -> 1.
-3 -> 91
-38 -> 5.
-389 -> 1510.
-4 -> 23
-49 -> 4.
-5 -> 03
-55 -> 5.
-6 -> 62
-613 -> 7.
-62 -> 6.
-7 -> 65
-8 -> 22
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 0.
-random_map: -> still",shape=box];
+0 -> 85
+1 -> 75
+2 -> 16
+3 -> 20
+4 -> 09
+5 -> 90
+6 -> 41
+7 -> 55
+8 -> 86",shape=box];
   g8 -> g8s0 [color=gray];
   g8s0 -> g8s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g8s0 -> g8s0 [label="else/  0
 self.words[-1] += x"];
-  g8s0 -> g8s1 [label="./ 3 len(self.words) >= 1
+  g8s0 -> g8s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g8s1 -> g8s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -363,39 +268,24 @@ self.words[-1] += x"];
   g8s2 -> g8s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g8 [color=lightgray,label="-61",style=dashed];
+ g2 -> g8 [color=lightgray,label="-25",style=dashed];
  subgraph {
   g9 [color=gray,fillcolor=lightgray,label="G9
-0 -> 38
-01435 -> 9.
-1 -> 24
-10 -> 4.
-2 -> 27
-24 -> 7.
-27 -> 1.
-3 -> 37
-38 -> 5.
-389 -> 1510.
-4 -> 86
-49 -> 4.
-5 -> 67
-55 -> 5.
-6 -> 35
-613 -> 7.
-62 -> 6.
-7 -> 95
-8 -> 52
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 03
-random_map: -> still",shape=box];
+0 -> 54
+1 -> 39
+3 -> 77
+4 -> 80
+5 -> 56
+6 -> 51
+7 -> 36
+8 -> 24
+9 -> 40",shape=box];
   g9 -> g9s0 [color=gray];
   g9s0 -> g9s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g9s0 -> g9s0 [label="else/  0
 self.words[-1] += x"];
-  g9s0 -> g9s1 [label="./ 3 len(self.words) >= 1
+  g9s0 -> g9s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g9s1 -> g9s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -409,39 +299,25 @@ self.words[-1] += x"];
   g9s2 -> g9s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g9 [color=lightgray,label="-59",style=dashed];
+ g2 -> g9 [color=lightgray,label="-25",style=dashed];
  subgraph {
   g10 [color=gray,fillcolor=lightgray,label="G10
-0 -> 39
-01435 -> 9.
-1 -> 40
-10 -> 4.
-2 -> 75
-24 -> 7.
-27 -> 1.
-3 -> 42
-38 -> 5.
-389 -> 1510.
-4 -> 88
-49 -> 4.
-5 -> 49
-55 -> 5.
-6 -> 32
-613 -> 7.
-62 -> 6.
-7 -> 56
-8 -> 1.
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 98
-random_map: -> still",shape=box];
+0 -> 86
+1 -> 41
+2 -> 55
+3 -> 88
+4 -> 20
+5 -> 56
+6 -> 63
+7 -> 98
+8 -> 90
+9 -> 05",shape=box];
   g10 -> g10s0 [color=gray];
   g10s0 -> g10s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g10s0 -> g10s0 [label="else/  0
 self.words[-1] += x"];
-  g10s0 -> g10s1 [label="./ 3 len(self.words) >= 1
+  g10s0 -> g10s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g10s1 -> g10s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -455,39 +331,24 @@ self.words[-1] += x"];
   g10s2 -> g10s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g10 [color=lightgray,label="-59",style=dashed];
+ g2 -> g10 [color=lightgray,label="-29",style=dashed];
  subgraph {
   g11 [color=gray,fillcolor=lightgray,label="G11
-0 -> 85
-01435 -> 9.
-1 -> 83
-10 -> 4.
-2 -> 29
-24 -> 7.
-27 -> 1.
-3 -> 31
-38 -> 5.
-389 -> 1510.
-4 -> 55
-49 -> 4.
-5 -> 99
-55 -> 5.
-6 -> 25
-613 -> 7.
-62 -> 6.
-7 -> 79
-8 -> 64
-82 -> 7.
-83 -> 3.
-87 -> 9.
-9 -> 34
-random_map: -> still",shape=box];
+0 -> 15
+1 -> 34
+2 -> 17
+4 -> 92
+5 -> 71
+6 -> 46
+7 -> 20
+8 -> 39
+9 -> 03",shape=box];
   g11 -> g11s0 [color=gray];
   g11s0 -> g11s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g11s0 -> g11s0 [label="else/  0
 self.words[-1] += x"];
-  g11s0 -> g11s1 [label="./ 3 len(self.words) >= 1
+  g11s0 -> g11s1 [label="./ 3 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g11s1 -> g11s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -501,12 +362,20 @@ self.words[-1] += x"];
   g11s2 -> g11s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
  }
- g2 -> g11 [color=lightgray,label="-57",style=dashed];
+ g2 -> g11 [color=lightgray,label="-26",style=dashed];
 { rank=same; g1 g3 g4 g5 g6 g7 g8 g9 g10 g11}
- g0 -> g2 [color=lightgray,label="-75",style=dashed];
+ g0 -> g2 [color=lightgray,label="-11",style=dashed];
  subgraph {
   g13 [color=gray,fillcolor=lightgray,label="G13
-random_map: -> still",shape=box];
+0 -> 106
+2 -> 175
+3 -> 29013
+4 -> 78053
+5 -> 786
+6 -> 1739
+7 -> 57165
+8 -> 42078
+9 -> 04020",shape=box];
   g13 -> g13s0 [color=gray];
   g13s0 -> g13s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
@@ -516,12 +385,12 @@ self.words[-1] += x"];
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g13s1 -> g13s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g13s1 -> g13s2 [label="else/  0
+self.words[-1] += x"];
   g13s1 -> g13s3 [label=" /. -1 not self.output"];
   g13s1 -> g13s3 [label="else/  -1
 self.words[-1] += x"];
   g13s1 -> g13s2 [label=" /. 1 not self.output"];
-  g13s1 -> g13s2 [label="else/  0
-self.words[-1] += x"];
   g13s4 -> g13s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g13s4 -> g13s4 [label="else/  3
@@ -535,117 +404,43 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g13s5 -> g13s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g13s5 -> g13s5 [label="else/  0
+  g13s5 -> g13s5 [label="else/  3
 self.words[-1] += x"];
   g13s5 -> g13s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g13s3 -> g13s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g13s3 -> g13s5 [label="./  0"];
   g13s3 -> g13s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g13s3 -> g13s5 [label="./  0"];
  }
  subgraph {
   g12 [color=gray,fillcolor=lightgray,label="G12
-0 -> 5
-00 -> 6
-01435 -> 9
-02350 -> 6
-08 -> 0
-0835763979 -> 693505
-08389 -> 9
-1 -> 1
-10 -> 764059605
-13849 -> 5
-16 -> 7
-1679 -> 2
-17 -> 2
-19 -> 8
-1956 -> 3
-2 -> 4
-2040 -> 1
-23 -> 3
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-2981 -> 7
+0 -> 0
+1 -> 5
+2 -> 1
 3 -> 9
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37 -> 8
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 8
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-4805 -> 0
-48995234 -> 22012554
-49 -> 4
-49704 -> 3
-5 -> 7
-50 -> 8
-5079 -> 17333075
-51 -> 9
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 3
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-6845 -> 2
-695 -> 2
-7 -> 5
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7412 -> 2
-7677 -> 6
-768 -> 8
-8 -> 3
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 0
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+4 -> 5
+5 -> 1
+6 -> 4
+7 -> 8
+8 -> 7
+9 -> 8",shape=box];
   g12 -> g12s0 [color=gray];
   g12s0 -> g12s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g12s0 -> g12s0 [label="else/  0
 self.words[-1] += x"];
-  g12s0 -> g12s1 [label="./ 0 len(self.words) >= 1
+  g12s0 -> g12s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g12s1 -> g12s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g12s1 -> g12s2 [label="else/  0
+self.words[-1] += x"];
   g12s1 -> g12s3 [label=" /. -1 not self.output"];
   g12s1 -> g12s3 [label="else/  -1
 self.words[-1] += x"];
   g12s1 -> g12s2 [label=" /. 1 not self.output"];
-  g12s1 -> g12s2 [label="else/  0
-self.words[-1] += x"];
   g12s4 -> g12s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g12s4 -> g12s4 [label="else/  3
@@ -659,119 +454,42 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g12s5 -> g12s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g12s5 -> g12s5 [label="else/  0
+  g12s5 -> g12s5 [label="else/  3
 self.words[-1] += x"];
   g12s5 -> g12s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g12s3 -> g12s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g12s3 -> g12s5 [label="./  0"];
   g12s3 -> g12s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g12s3 -> g12s5 [label="./  0"];
  }
- g13 -> g12 [color=lightgray,label="0",style=dashed];
+ g13 -> g12 [color=lightgray,label="-30",style=dashed];
  subgraph {
   g14 [color=gray,fillcolor=lightgray,label="G14
 0 -> 1
-00 -> 6
-01435 -> 9
-02350 -> 6
-08 -> 0
-0835763979 -> 693505
-08389 -> 9
-1 -> 7
-10 -> 764059605
-13849 -> 5
-16 -> 7
-1679 -> 2
-17 -> 2
-19 -> 8
-1956 -> 3
-2 -> 1
-2040 -> 1
-23 -> 3
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-2981 -> 7
-3 -> 5
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37 -> 8
-37015 -> 4
-38 -> 5
-389 -> 1510
-392 -> 7
-4 -> 8
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-4805 -> 0
-48995234 -> 22012554
-49 -> 4
-49704 -> 3
-5 -> 2
-50 -> 8
-5079 -> 17333075
-51 -> 9
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 3
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-6845 -> 2
-695 -> 2
-7 -> 1
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7412 -> 2
-7677 -> 6
-768 -> 8
-8 -> 2
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 0
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+2 -> 6
+3 -> 0
+4 -> 1
+5 -> 6
+6 -> 9
+8 -> 7
+9 -> 0",shape=box];
   g14 -> g14s0 [color=gray];
   g14s0 -> g14s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g14s0 -> g14s0 [label="else/  0
 self.words[-1] += x"];
-  g14s0 -> g14s1 [label="./ 0 len(self.words) >= 1
+  g14s0 -> g14s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g14s1 -> g14s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g14s1 -> g14s2 [label="else/  0
+self.words[-1] += x"];
   g14s1 -> g14s3 [label=" /. -1 not self.output"];
   g14s1 -> g14s3 [label="else/  -1
 self.words[-1] += x"];
   g14s1 -> g14s2 [label=" /. 1 not self.output"];
-  g14s1 -> g14s2 [label="else/  0
-self.words[-1] += x"];
   g14s4 -> g14s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g14s4 -> g14s4 [label="else/  3
@@ -785,107 +503,43 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g14s5 -> g14s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g14s5 -> g14s5 [label="else/  0
+  g14s5 -> g14s5 [label="else/  3
 self.words[-1] += x"];
   g14s5 -> g14s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g14s3 -> g14s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g14s3 -> g14s5 [label="./  0"];
   g14s3 -> g14s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g14s3 -> g14s5 [label="./  0"];
  }
- g13 -> g14 [color=lightgray,label="1",style=dashed];
+ g13 -> g14 [color=lightgray,label="-23",style=dashed];
  subgraph {
   g15 [color=gray,fillcolor=lightgray,label="G15
-0 -> 0
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 2
-10 -> 764059605
-16 -> 7
-1679 -> 2
-19 -> 8
-1956 -> 3
-2 -> 1
-2040 -> 1
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 7
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 7
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
+0 -> 6
+1 -> 1
+2 -> 0
+3 -> 2
 5 -> 5
-50 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 9
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 4
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 2
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 1
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+6 -> 7
+7 -> 1
+8 -> 1
+9 -> 7",shape=box];
   g15 -> g15s0 [color=gray];
   g15s0 -> g15s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g15s0 -> g15s0 [label="else/  0
 self.words[-1] += x"];
-  g15s0 -> g15s1 [label="./ 0 len(self.words) >= 1
+  g15s0 -> g15s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g15s1 -> g15s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g15s1 -> g15s2 [label="else/  0
+self.words[-1] += x"];
   g15s1 -> g15s3 [label=" /. -1 not self.output"];
   g15s1 -> g15s3 [label="else/  -1
 self.words[-1] += x"];
   g15s1 -> g15s2 [label=" /. 1 not self.output"];
-  g15s1 -> g15s2 [label="else/  0
-self.words[-1] += x"];
   g15s4 -> g15s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g15s4 -> g15s4 [label="else/  3
@@ -899,107 +553,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g15s5 -> g15s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g15s5 -> g15s5 [label="else/  0
+  g15s5 -> g15s5 [label="else/  3
 self.words[-1] += x"];
   g15s5 -> g15s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g15s3 -> g15s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g15s3 -> g15s5 [label="./  0"];
   g15s3 -> g15s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g15s3 -> g15s5 [label="./  0"];
  }
- g13 -> g15 [color=lightgray,label="-3",style=dashed];
+ g13 -> g15 [color=lightgray,label="-28",style=dashed];
  subgraph {
   g16 [color=gray,fillcolor=lightgray,label="G16
 0 -> 1
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 8
-10 -> 764059605
-16 -> 7
-1679 -> 2
-19 -> 8
-1956 -> 3
-2 -> 1
-2040 -> 1
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 9
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 0
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
-5 -> 4
-50 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 9
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 6
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 5
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 1
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+1 -> 2
+2 -> 6
+3 -> 6
+4 -> 7
+5 -> 1
+6 -> 8
+7 -> 5
+8 -> 0
+9 -> 1",shape=box];
   g16 -> g16s0 [color=gray];
   g16s0 -> g16s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g16s0 -> g16s0 [label="else/  0
 self.words[-1] += x"];
-  g16s0 -> g16s1 [label="./ 0 len(self.words) >= 1
+  g16s0 -> g16s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g16s1 -> g16s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g16s1 -> g16s2 [label="else/  0
+self.words[-1] += x"];
   g16s1 -> g16s3 [label=" /. -1 not self.output"];
   g16s1 -> g16s3 [label="else/  -1
 self.words[-1] += x"];
   g16s1 -> g16s2 [label=" /. 1 not self.output"];
-  g16s1 -> g16s2 [label="else/  0
-self.words[-1] += x"];
   g16s4 -> g16s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g16s4 -> g16s4 [label="else/  3
@@ -1013,108 +604,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g16s5 -> g16s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g16s5 -> g16s5 [label="else/  0
+  g16s5 -> g16s5 [label="else/  3
 self.words[-1] += x"];
   g16s5 -> g16s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g16s3 -> g16s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g16s3 -> g16s5 [label="./  0"];
   g16s3 -> g16s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g16s3 -> g16s5 [label="./  0"];
  }
- g13 -> g16 [color=lightgray,label="-2",style=dashed];
+ g13 -> g16 [color=lightgray,label="-27",style=dashed];
  subgraph {
   g17 [color=gray,fillcolor=lightgray,label="G17
 0 -> 2
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 3
-10 -> 764059605
-16 -> 7
-1679 -> 2
-19 -> 8
-1956 -> 3
-2 -> 3
-2040 -> 1
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 4
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 1
-401 -> 0
-42 -> 1
-45 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
-5 -> 1
-50 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 1
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 5
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 9
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 5
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+1 -> 9
+2 -> 5
+3 -> 1
+4 -> 3
+5 -> 9
+6 -> 0
+7 -> 3
+8 -> 1
+9 -> 7",shape=box];
   g17 -> g17s0 [color=gray];
   g17s0 -> g17s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g17s0 -> g17s0 [label="else/  0
 self.words[-1] += x"];
-  g17s0 -> g17s1 [label="./ 0 len(self.words) >= 1
+  g17s0 -> g17s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g17s1 -> g17s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g17s1 -> g17s2 [label="else/  0
+self.words[-1] += x"];
   g17s1 -> g17s3 [label=" /. -1 not self.output"];
   g17s1 -> g17s3 [label="else/  -1
 self.words[-1] += x"];
   g17s1 -> g17s2 [label=" /. 1 not self.output"];
-  g17s1 -> g17s2 [label="else/  0
-self.words[-1] += x"];
   g17s4 -> g17s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g17s4 -> g17s4 [label="else/  3
@@ -1128,106 +655,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g17s5 -> g17s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g17s5 -> g17s5 [label="else/  0
+  g17s5 -> g17s5 [label="else/  3
 self.words[-1] += x"];
   g17s5 -> g17s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g17s3 -> g17s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g17s3 -> g17s5 [label="./  0"];
   g17s3 -> g17s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g17s3 -> g17s5 [label="./  0"];
  }
- g13 -> g17 [color=lightgray,label="-2",style=dashed];
+ g13 -> g17 [color=lightgray,label="-28",style=dashed];
  subgraph {
   g24 [color=gray,fillcolor=lightgray,label="G24
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 47
-10 -> 764059605
-16 -> 7
-1679 -> 2
-19 -> 8
-1956 -> 3
-2 -> 67
-2040 -> 1
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 17
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 9
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
-5 -> 6
-50 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 8
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 4
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 89
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 0
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 76
+1 -> 1
+2 -> 3
+3 -> 76
+4 -> 7
+5 -> 78
+6 -> 4
+7 -> 1
+8 -> 97
+9 -> 31",shape=box];
   g24 -> g24s0 [color=gray];
   g24s0 -> g24s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g24s0 -> g24s0 [label="else/  0
 self.words[-1] += x"];
-  g24s0 -> g24s1 [label="./ 0 len(self.words) >= 1
+  g24s0 -> g24s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g24s1 -> g24s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g24s1 -> g24s2 [label="else/  0
+self.words[-1] += x"];
   g24s1 -> g24s3 [label=" /. -1 not self.output"];
   g24s1 -> g24s3 [label="else/  -1
 self.words[-1] += x"];
   g24s1 -> g24s2 [label=" /. 1 not self.output"];
-  g24s1 -> g24s2 [label="else/  0
-self.words[-1] += x"];
   g24s4 -> g24s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g24s4 -> g24s4 [label="else/  3
@@ -1241,118 +706,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g24s5 -> g24s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g24s5 -> g24s5 [label="else/  0
+  g24s5 -> g24s5 [label="else/  3
 self.words[-1] += x"];
   g24s5 -> g24s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g24s3 -> g24s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g24s3 -> g24s5 [label="./  0"];
   g24s3 -> g24s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g24s3 -> g24s5 [label="./  0"];
  }
- g13 -> g24 [color=lightgray,label="6",style=dashed];
+ g13 -> g24 [color=lightgray,label="-22",style=dashed];
  subgraph {
   g25 [color=gray,fillcolor=lightgray,label="G25
-0 -> 55
-00 -> 6
-01435 -> 9
-02350 -> 6
-08 -> 0
-0835763979 -> 693505
-08389 -> 9
-1 -> 7
-10 -> 764059605
-13849 -> 5
-16 -> 7
-1679 -> 2
-17 -> 2
-19 -> 8
-1956 -> 3
-2 -> 13
-2040 -> 1
-23 -> 3
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-2981 -> 7
-3 -> 8
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37 -> 8
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 8
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-4805 -> 0
-48995234 -> 22012554
-49 -> 4
-49704 -> 3
-5 -> 5
-50 -> 8
-5079 -> 17333075
-51 -> 9
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 3
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-6845 -> 2
-695 -> 2
-7 -> 4
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7412 -> 2
-7677 -> 6
-768 -> 8
-8 -> 5
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 13
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 5
+1 -> 2
+2 -> 83
+3 -> 62
+4 -> 27
+5 -> 92
+6 -> 5
+7 -> 56
+8 -> 2
+9 -> 93",shape=box];
   g25 -> g25s0 [color=gray];
   g25s0 -> g25s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g25s0 -> g25s0 [label="else/  0
 self.words[-1] += x"];
-  g25s0 -> g25s1 [label="./ 0 len(self.words) >= 1
+  g25s0 -> g25s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g25s1 -> g25s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g25s1 -> g25s2 [label="else/  0
+self.words[-1] += x"];
   g25s1 -> g25s3 [label=" /. -1 not self.output"];
   g25s1 -> g25s3 [label="else/  -1
 self.words[-1] += x"];
   g25s1 -> g25s2 [label=" /. 1 not self.output"];
-  g25s1 -> g25s2 [label="else/  0
-self.words[-1] += x"];
   g25s4 -> g25s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g25s4 -> g25s4 [label="else/  3
@@ -1366,107 +757,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g25s5 -> g25s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g25s5 -> g25s5 [label="else/  0
+  g25s5 -> g25s5 [label="else/  3
 self.words[-1] += x"];
   g25s5 -> g25s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g25s3 -> g25s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g25s3 -> g25s5 [label="./  0"];
   g25s3 -> g25s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g25s3 -> g25s5 [label="./  0"];
  }
- g13 -> g25 [color=lightgray,label="14",style=dashed];
+ g13 -> g25 [color=lightgray,label="-21",style=dashed];
  subgraph {
   g26 [color=gray,fillcolor=lightgray,label="G26
-0 -> 3
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 8
-10 -> 764059605
-16 -> 7
-1679 -> 2
-19 -> 8
-1956 -> 3
-2 -> 2
-2040 -> 1
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 2
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 7
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
-5 -> 04
-50 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 95
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 2
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 30
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 80
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 6
+1 -> 06
+2 -> 99
+3 -> 4
+4 -> 6
+5 -> 16
+6 -> 9
+7 -> 62
+8 -> 76
+9 -> 8",shape=box];
   g26 -> g26s0 [color=gray];
   g26s0 -> g26s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g26s0 -> g26s0 [label="else/  0
 self.words[-1] += x"];
-  g26s0 -> g26s1 [label="./ 0 len(self.words) >= 1
+  g26s0 -> g26s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g26s1 -> g26s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g26s1 -> g26s2 [label="else/  0
+self.words[-1] += x"];
   g26s1 -> g26s3 [label=" /. -1 not self.output"];
   g26s1 -> g26s3 [label="else/  -1
 self.words[-1] += x"];
   g26s1 -> g26s2 [label=" /. 1 not self.output"];
-  g26s1 -> g26s2 [label="else/  0
-self.words[-1] += x"];
   g26s4 -> g26s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g26s4 -> g26s4 [label="else/  3
@@ -1480,107 +808,43 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g26s5 -> g26s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g26s5 -> g26s5 [label="else/  0
+  g26s5 -> g26s5 [label="else/  3
 self.words[-1] += x"];
   g26s5 -> g26s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g26s3 -> g26s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g26s3 -> g26s5 [label="./  0"];
   g26s3 -> g26s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g26s3 -> g26s5 [label="./  0"];
  }
- g13 -> g26 [color=lightgray,label="8",style=dashed];
+ g13 -> g26 [color=lightgray,label="-20",style=dashed];
  subgraph {
   g27 [color=gray,fillcolor=lightgray,label="G27
-0 -> 2
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 96
-10 -> 764059605
-16 -> 7
-1679 -> 2
-19 -> 8
-1956 -> 3
-2 -> 1
-2040 -> 1
-24 -> 7
-260 -> 7
-27 -> 1
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 3
-32 -> 5
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-38 -> 5
-389 -> 1510
-4 -> 6
-401 -> 0
-42 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
-5 -> 5
-50 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-55 -> 5
-59065 -> 5
-6 -> 5
-613 -> 7
-62 -> 8
-63 -> 3
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 39
-71 -> 7
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 8
-80 -> 3
-82 -> 7
-83 -> 3
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 4
-9 -> 71
-91 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-96 -> 6
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 28
+1 -> 89
+3 -> 35
+4 -> 77
+5 -> 34
+6 -> 38
+7 -> 22
+8 -> 86
+9 -> 4",shape=box];
   g27 -> g27s0 [color=gray];
   g27s0 -> g27s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g27s0 -> g27s0 [label="else/  0
 self.words[-1] += x"];
-  g27s0 -> g27s1 [label="./ 0 len(self.words) >= 1
+  g27s0 -> g27s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g27s1 -> g27s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g27s1 -> g27s2 [label="else/  0
+self.words[-1] += x"];
   g27s1 -> g27s3 [label=" /. -1 not self.output"];
   g27s1 -> g27s3 [label="else/  -1
 self.words[-1] += x"];
   g27s1 -> g27s2 [label=" /. 1 not self.output"];
-  g27s1 -> g27s2 [label="else/  0
-self.words[-1] += x"];
   g27s4 -> g27s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g27s4 -> g27s4 [label="else/  3
@@ -1594,101 +858,59 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g27s5 -> g27s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g27s5 -> g27s5 [label="else/  0
+  g27s5 -> g27s5 [label="else/  3
 self.words[-1] += x"];
   g27s5 -> g27s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g27s3 -> g27s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g27s3 -> g27s5 [label="./  0"];
   g27s3 -> g27s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g27s3 -> g27s5 [label="./  0"];
  }
- g13 -> g27 [color=lightgray,label="9",style=dashed];
+ g13 -> g27 [color=lightgray,label="-17",style=dashed];
  subgraph {
   g28 [color=gray,fillcolor=lightgray,label="G28
-0 -> 2
-00 -> 6
-01435 -> 9
-02350 -> 6
-06 -> 0
-08389 -> 9
-09 -> 6
-1 -> 74
-10 -> 4
-13 -> 6
-1679 -> 2
-18 -> 3
-1956 -> 3
-2 -> 75
-2040 -> 1
-23 -> 8
-24 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 9
-338 -> 3
-36 -> 6
-37 -> 0
-37015 -> 4
-38 -> 4
-389 -> 1510
-4 -> 3
-401 -> 0
-45186 -> 5
-48 -> 2
-49 -> 4
-5 -> 8
-5304 -> 3
-5389 -> 6
-55 -> 5
-57 -> 2
-59065 -> 5
-6 -> 32
-613 -> 7
-62 -> 6
-6358 -> 7
-68 -> 0
-695 -> 2
-7 -> 08
-71 -> 7
-72111 -> 6
-73751 -> 58513
-76 -> 1
-7677 -> 6
-768 -> 8
-79 -> 8
-8 -> 41
-82 -> 8
-84992 -> 1
-85513 -> 29
-87 -> 9
-9 -> 0
-91 -> 8
-912 -> 4
-9512 -> 2
-97 -> 0
-98 -> 089
-9812 -> 8
-99 -> 8
-random_map: -> still",shape=box];
+0 -> 43
+00 -> 7
+1 -> 76
+2 -> 6
+20 -> 3
+21 -> 6
+23 -> 3
+3 -> 76
+4 -> 13
+43 -> 0
+47 -> 0
+5 -> 9
+55 -> 9
+58 -> 2
+6 -> 01
+61 -> 9
+7 -> 16
+8 -> 9
+80 -> 9
+81 -> 4
+84 -> 3
+87 -> 8
+9 -> 1
+96 -> 2
+98 -> 3",shape=box];
   g28 -> g28s0 [color=gray];
   g28s0 -> g28s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g28s0 -> g28s0 [label="else/  0
 self.words[-1] += x"];
-  g28s0 -> g28s1 [label="./ 0 len(self.words) >= 1
+  g28s0 -> g28s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g28s1 -> g28s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g28s1 -> g28s2 [label="else/  0
+self.words[-1] += x"];
   g28s1 -> g28s3 [label=" /. -1 not self.output"];
   g28s1 -> g28s3 [label="else/  -1
 self.words[-1] += x"];
   g28s1 -> g28s2 [label=" /. 1 not self.output"];
-  g28s1 -> g28s2 [label="else/  0
-self.words[-1] += x"];
   g28s4 -> g28s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g28s4 -> g28s4 [label="else/  3
@@ -1702,96 +924,51 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g28s5 -> g28s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g28s5 -> g28s5 [label="else/  0
+  g28s5 -> g28s5 [label="else/  3
 self.words[-1] += x"];
   g28s5 -> g28s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g28s3 -> g28s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g28s3 -> g28s5 [label="./  0"];
   g28s3 -> g28s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g28s3 -> g28s5 [label="./  0"];
  }
- g13 -> g28 [color=lightgray,label="-16",style=dashed];
+ g13 -> g28 [color=lightgray,label="-20",style=dashed];
  subgraph {
   g29 [color=gray,fillcolor=lightgray,label="G29
-0 -> 78
-00 -> 6
-01435 -> 9
-02 -> 3
-02350 -> 6
-08389 -> 9
-1 -> 3
-10 -> 4
-1679 -> 2
-1956 -> 3
-2 -> 58
-2040 -> 1
-24 -> 6
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 7
-32 -> 5
-338 -> 3
-37 -> 8
-37015 -> 4
-38 -> 4
-389 -> 1510
-4 -> 5
-401 -> 0
-42 -> 6
-45 -> 1
-45186 -> 5
-49 -> 4
-5 -> 7
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 32
-613 -> 7
-62 -> 6
-6358 -> 7
-67 -> 7
-695 -> 2
-7 -> 0
-72111 -> 6
-73 -> 5
-73751 -> 58513
-7677 -> 6
-768 -> 8
-79 -> 8
-8 -> 1
-83 -> 3
-84992 -> 1
-85513 -> 29
-87 -> 9
-89 -> 4
-9 -> 89
-912 -> 4
-95 -> 6
-9512 -> 2
-96 -> 6
-97 -> 9
-98 -> 4
-9812 -> 8
-random_map: -> still",shape=box];
+00 -> 7
+17 -> 3
+19 -> 9
+21 -> 7
+36 -> 6
+40 -> 4
+41 -> 8
+47 -> 0
+55 -> 9
+58 -> 2
+77 -> 2
+81 -> 4
+83 -> 6
+84 -> 0
+89 -> 5
+92 -> 2
+99 -> 4",shape=box];
   g29 -> g29s0 [color=gray];
   g29s0 -> g29s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g29s0 -> g29s0 [label="else/  0
 self.words[-1] += x"];
-  g29s0 -> g29s1 [label="./ 0 len(self.words) >= 1
+  g29s0 -> g29s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g29s1 -> g29s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g29s1 -> g29s2 [label="else/  0
+self.words[-1] += x"];
   g29s1 -> g29s3 [label=" /. -1 not self.output"];
   g29s1 -> g29s3 [label="else/  -1
 self.words[-1] += x"];
   g29s1 -> g29s2 [label=" /. 1 not self.output"];
-  g29s1 -> g29s2 [label="else/  0
-self.words[-1] += x"];
   g29s4 -> g29s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g29s4 -> g29s4 [label="else/  3
@@ -1805,97 +982,62 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g29s5 -> g29s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g29s5 -> g29s5 [label="else/  0
+  g29s5 -> g29s5 [label="else/  3
 self.words[-1] += x"];
   g29s5 -> g29s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g29s3 -> g29s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g29s3 -> g29s5 [label="./  0"];
   g29s3 -> g29s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g29s3 -> g29s5 [label="./  0"];
  }
- g13 -> g29 [color=lightgray,label="-14",style=dashed];
+ g13 -> g29 [color=lightgray,label="-1",style=dashed];
  subgraph {
   g30 [color=gray,fillcolor=lightgray,label="G30
-0 -> 7
-00 -> 6
-01435 -> 9
-02 -> 3
-02350 -> 6
-06 -> 0
-0835763979 -> 693505
-08389 -> 9
-1 -> 9
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 58
-2040 -> 1
-23 -> 3
-24 -> 7
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 0
-338 -> 3
-347134726 -> 323778437
-37 -> 8
-37015 -> 4
-389 -> 1510
-4 -> 5
-401 -> 0
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
+0 -> 0
+00 -> 3
+05 -> 4
+06 -> 9
+07 -> 7
+13 -> 1
+19 -> 2
+2 -> 2
+25 -> 4
+3 -> 3
+35 -> 1
+40 -> 5
+43 -> 7
+44 -> 5
 5 -> 7
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 32
-613 -> 7
-62 -> 9
-6358 -> 7
-695 -> 2
-7 -> 0
-72 -> 9
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-78 -> 9
-8 -> 1
-84992 -> 1
-85 -> 4
-85513 -> 29
-8698879 -> 9402392
-87 -> 9
-9 -> 89
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 4
-9812 -> 8
-random_map: -> still",shape=box];
+56 -> 1
+6 -> 1
+60 -> 7
+64 -> 0
+66 -> 9
+7 -> 3
+70 -> 6
+73 -> 2
+74 -> 8
+75 -> 3
+83 -> 6
+96 -> 0
+98 -> 3",shape=box];
   g30 -> g30s0 [color=gray];
   g30s0 -> g30s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g30s0 -> g30s0 [label="else/  0
 self.words[-1] += x"];
-  g30s0 -> g30s1 [label="./ 0 len(self.words) >= 1
+  g30s0 -> g30s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g30s1 -> g30s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g30s1 -> g30s2 [label="else/  0
+self.words[-1] += x"];
   g30s1 -> g30s3 [label=" /. -1 not self.output"];
   g30s1 -> g30s3 [label="else/  -1
 self.words[-1] += x"];
   g30s1 -> g30s2 [label=" /. 1 not self.output"];
-  g30s1 -> g30s2 [label="else/  0
-self.words[-1] += x"];
   g30s4 -> g30s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g30s4 -> g30s4 [label="else/  3
@@ -1909,102 +1051,49 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g30s5 -> g30s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g30s5 -> g30s5 [label="else/  0
+  g30s5 -> g30s5 [label="else/  3
 self.words[-1] += x"];
   g30s5 -> g30s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g30s3 -> g30s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g30s3 -> g30s5 [label="./  0"];
   g30s3 -> g30s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g30s3 -> g30s5 [label="./  0"];
  }
- g13 -> g30 [color=lightgray,label="-7",style=dashed];
+ g13 -> g30 [color=lightgray,label="-8",style=dashed];
  subgraph {
   g31 [color=gray,fillcolor=lightgray,label="G31
-0 -> 8
-00 -> 6
-01435 -> 9
-02350 -> 6
-07 -> 6
-08 -> 0
-0835763979 -> 693505
-08389 -> 9
-1 -> 9
-10 -> 764059605
-13849 -> 5
-1679 -> 2
-17 -> 2
-1956 -> 3
+0 -> 1
+07 -> 7
+08 -> 9
+1 -> 8
+14 -> 9
 2 -> 2
-2040 -> 1
-23 -> 3
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-2981 -> 7
-3 -> 7
-338 -> 3
-347134726 -> 323778437
-37 -> 8
-37015 -> 4
-389 -> 1510
-4 -> 8
-401 -> 0
-45 -> 1
-45186 -> 5
-456681742 -> 3986
-4805 -> 0
-48995234 -> 22012554
-49 -> 3
-49704 -> 3
-5 -> 5
-5079 -> 17333075
-51 -> 9
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 1
-613 -> 7
-6358 -> 7
-6845 -> 2
-695 -> 2
-7 -> 1081
-72 -> 9
-72111 -> 6
-73751 -> 58513
-7412 -> 2
-7677 -> 6
-768 -> 8
-8 -> 1
-84992 -> 1
-85 -> 4
-85513 -> 29
-8698879 -> 9402392
-9 -> 07
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+25 -> 4
+4 -> 2
+40 -> 7
+41 -> 8
+47 -> 7
+5 -> 9
+6 -> 6
+7 -> 3
+76 -> 5",shape=box];
   g31 -> g31s0 [color=gray];
   g31s0 -> g31s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g31s0 -> g31s0 [label="else/  0
 self.words[-1] += x"];
-  g31s0 -> g31s1 [label="./ 0 len(self.words) >= 1
+  g31s0 -> g31s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g31s1 -> g31s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g31s1 -> g31s2 [label="else/  0
+self.words[-1] += x"];
   g31s1 -> g31s3 [label=" /. -1 not self.output"];
   g31s1 -> g31s3 [label="else/  -1
 self.words[-1] += x"];
   g31s1 -> g31s2 [label=" /. 1 not self.output"];
-  g31s1 -> g31s2 [label="else/  0
-self.words[-1] += x"];
   g31s4 -> g31s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g31s4 -> g31s4 [label="else/  3
@@ -2018,94 +1107,48 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g31s5 -> g31s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g31s5 -> g31s5 [label="else/  0
+  g31s5 -> g31s5 [label="else/  3
 self.words[-1] += x"];
   g31s5 -> g31s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g31s3 -> g31s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g31s3 -> g31s5 [label="./  0"];
   g31s3 -> g31s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g31s3 -> g31s5 [label="./  0"];
  }
- g13 -> g31 [color=lightgray,label="4",style=dashed];
+ g13 -> g31 [color=lightgray,label="-10",style=dashed];
  subgraph {
   g32 [color=gray,fillcolor=lightgray,label="G32
-0 -> 28
-00 -> 6
-01435 -> 9
-02350 -> 6
-07 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 3
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 58
-2040 -> 1
-21 -> 9
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 7
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-389 -> 1510
-392 -> 7
-4 -> 5025
-401 -> 0
-45 -> 1
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 3
-5 -> 2
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 32
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 45
-70 -> 6
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 1
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 0
-9 -> 89
-912 -> 4
-9214 -> 3
-95 -> 4
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 1
+08 -> 9
+1 -> 8
+2 -> 8
+3 -> 6
+30 -> 7
+4 -> 1
+40 -> 7
+41 -> 8
+5 -> 7
+58 -> 3
+69 -> 5
+7 -> 8
+8 -> 1",shape=box];
   g32 -> g32s0 [color=gray];
   g32s0 -> g32s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g32s0 -> g32s0 [label="else/  0
 self.words[-1] += x"];
-  g32s0 -> g32s1 [label="./ 0 len(self.words) >= 1
+  g32s0 -> g32s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g32s1 -> g32s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g32s1 -> g32s2 [label="else/  0
+self.words[-1] += x"];
   g32s1 -> g32s3 [label=" /. -1 not self.output"];
   g32s1 -> g32s3 [label="else/  -1
 self.words[-1] += x"];
   g32s1 -> g32s2 [label=" /. 1 not self.output"];
-  g32s1 -> g32s2 [label="else/  0
-self.words[-1] += x"];
   g32s4 -> g32s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g32s4 -> g32s4 [label="else/  3
@@ -2119,91 +1162,45 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g32s5 -> g32s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g32s5 -> g32s5 [label="else/  0
+  g32s5 -> g32s5 [label="else/  3
 self.words[-1] += x"];
   g32s5 -> g32s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g32s3 -> g32s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g32s3 -> g32s5 [label="./  0"];
   g32s3 -> g32s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g32s3 -> g32s5 [label="./  0"];
  }
- g13 -> g32 [color=lightgray,label="-11",style=dashed];
+ g13 -> g32 [color=lightgray,label="-12",style=dashed];
  subgraph {
   g33 [color=gray,fillcolor=lightgray,label="G33
-0 -> 7
-00 -> 6
-01435 -> 9
-02350 -> 6
-06 -> 0
-0835763979 -> 693505
-08389 -> 9
-1 -> 3
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 58
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 0
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-389 -> 1510
-4 -> 5025
-401 -> 0
-45 -> 8
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-49 -> 4
-5 -> 8
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-59 -> 0
-59065 -> 5
-6 -> 32
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 1081
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-78 -> 9
+0 -> 8
+02 -> 3
+2 -> 8
+3 -> 6
+30 -> 7
+4 -> 1
+47 -> 6
+58 -> 3
+7 -> 8
 8 -> 1
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-9 -> 8
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+9 -> 4",shape=box];
   g33 -> g33s0 [color=gray];
   g33s0 -> g33s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g33s0 -> g33s0 [label="else/  0
 self.words[-1] += x"];
-  g33s0 -> g33s1 [label="./ 0 len(self.words) >= 1
+  g33s0 -> g33s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g33s1 -> g33s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g33s1 -> g33s2 [label="else/  0
+self.words[-1] += x"];
   g33s1 -> g33s3 [label=" /. -1 not self.output"];
   g33s1 -> g33s3 [label="else/  -1
 self.words[-1] += x"];
   g33s1 -> g33s2 [label=" /. 1 not self.output"];
-  g33s1 -> g33s2 [label="else/  0
-self.words[-1] += x"];
   g33s4 -> g33s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g33s4 -> g33s4 [label="else/  3
@@ -2217,81 +1214,41 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g33s5 -> g33s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g33s5 -> g33s5 [label="else/  0
+  g33s5 -> g33s5 [label="else/  3
 self.words[-1] += x"];
   g33s5 -> g33s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g33s3 -> g33s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g33s3 -> g33s5 [label="./  0"];
   g33s3 -> g33s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g33s3 -> g33s5 [label="./  0"];
  }
- g13 -> g33 [color=lightgray,label="-6",style=dashed];
+ g13 -> g33 [color=lightgray,label="-11",style=dashed];
  subgraph {
   g34 [color=gray,fillcolor=lightgray,label="G34
-0 -> 2600
-00 -> 6
-01435 -> 9
-02350 -> 6
-04 -> 7
-08389 -> 9
-1 -> 4
-10 -> 6
-1679 -> 2
-1956 -> 3
-2 -> 1
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 24
-338 -> 3
-37015 -> 4
-389 -> 1510
-4 -> 67
-401 -> 0
-45186 -> 5
-5 -> 27
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 2
-613 -> 7
-6358 -> 7
-66 -> 6
-695 -> 2
-7 -> 1081
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 06
-82 -> 6
-84992 -> 1
-85513 -> 29
-9 -> 2
-912 -> 4
-9512 -> 2
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+1 -> 1
+2 -> 8
+23 -> 9
+3 -> 5
+35 -> 9
+4 -> 0
+9 -> 4",shape=box];
   g34 -> g34s0 [color=gray];
   g34s0 -> g34s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g34s0 -> g34s0 [label="else/  0
 self.words[-1] += x"];
-  g34s0 -> g34s1 [label="./ 0 len(self.words) >= 1
+  g34s0 -> g34s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g34s1 -> g34s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g34s1 -> g34s2 [label="else/  0
+self.words[-1] += x"];
   g34s1 -> g34s3 [label=" /. -1 not self.output"];
   g34s1 -> g34s3 [label="else/  -1
 self.words[-1] += x"];
   g34s1 -> g34s2 [label=" /. 1 not self.output"];
-  g34s1 -> g34s2 [label="else/  0
-self.words[-1] += x"];
   g34s4 -> g34s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g34s4 -> g34s4 [label="else/  3
@@ -2305,86 +1262,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g34s5 -> g34s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g34s5 -> g34s5 [label="else/  0
+  g34s5 -> g34s5 [label="else/  3
 self.words[-1] += x"];
   g34s5 -> g34s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g34s3 -> g34s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g34s3 -> g34s5 [label="./  0"];
   g34s3 -> g34s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g34s3 -> g34s5 [label="./  0"];
  }
- g13 -> g34 [color=lightgray,label="-11",style=dashed];
+ g13 -> g34 [color=lightgray,label="-9",style=dashed];
  subgraph {
   g46 [color=gray,fillcolor=lightgray,label="G46
-0 -> 29881
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 66148
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 452
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 523
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-389 -> 1510
-4 -> 086
-401 -> 0
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 69712
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 6155
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 04090
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 800
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-9 -> 91792
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 4919
+1 -> 798
+2 -> 67530
+3 -> 308
+4 -> 3010
+5 -> 78698
+6 -> 4345
+7 -> 7492
+8 -> 5696
+9 -> 3906",shape=box];
   g46 -> g46s0 [color=gray];
   g46s0 -> g46s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g46s0 -> g46s0 [label="else/  0
 self.words[-1] += x"];
-  g46s0 -> g46s1 [label="./ 0 len(self.words) >= 1
+  g46s0 -> g46s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g46s1 -> g46s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g46s1 -> g46s2 [label="else/  0
+self.words[-1] += x"];
   g46s1 -> g46s3 [label=" /. -1 not self.output"];
   g46s1 -> g46s3 [label="else/  -1
 self.words[-1] += x"];
   g46s1 -> g46s2 [label=" /. 1 not self.output"];
-  g46s1 -> g46s2 [label="else/  0
-self.words[-1] += x"];
   g46s4 -> g46s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g46s4 -> g46s4 [label="else/  3
@@ -2398,86 +1313,42 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g46s5 -> g46s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g46s5 -> g46s5 [label="else/  0
+  g46s5 -> g46s5 [label="else/  3
 self.words[-1] += x"];
   g46s5 -> g46s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g46s3 -> g46s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g46s3 -> g46s5 [label="./  0"];
   g46s3 -> g46s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g46s3 -> g46s5 [label="./  0"];
  }
- g13 -> g46 [color=lightgray,label="11",style=dashed];
+ g13 -> g46 [color=lightgray,label="-3",style=dashed];
  subgraph {
   g47 [color=gray,fillcolor=lightgray,label="G47
-0 -> 976
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 03331
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 64039
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 97289
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-389 -> 1510
-4 -> 02052
-401 -> 0
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 956
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 9759
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 62938
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 742
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-9 -> 7537
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 382
+1 -> 68304
+2 -> 4380
+3 -> 6917
+4 -> 3426
+5 -> 931
+7 -> 979
+8 -> 30330",shape=box];
   g47 -> g47s0 [color=gray];
   g47s0 -> g47s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g47s0 -> g47s0 [label="else/  0
 self.words[-1] += x"];
-  g47s0 -> g47s1 [label="./ 0 len(self.words) >= 1
+  g47s0 -> g47s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g47s1 -> g47s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g47s1 -> g47s2 [label="else/  0
+self.words[-1] += x"];
   g47s1 -> g47s3 [label=" /. -1 not self.output"];
   g47s1 -> g47s3 [label="else/  -1
 self.words[-1] += x"];
   g47s1 -> g47s2 [label=" /. 1 not self.output"];
-  g47s1 -> g47s2 [label="else/  0
-self.words[-1] += x"];
   g47s4 -> g47s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g47s4 -> g47s4 [label="else/  3
@@ -2491,93 +1362,44 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g47s5 -> g47s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g47s5 -> g47s5 [label="else/  0
+  g47s5 -> g47s5 [label="else/  3
 self.words[-1] += x"];
   g47s5 -> g47s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g47s3 -> g47s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g47s3 -> g47s5 [label="./  0"];
   g47s3 -> g47s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g47s3 -> g47s5 [label="./  0"];
  }
- g13 -> g47 [color=lightgray,label="12",style=dashed];
+ g13 -> g47 [color=lightgray,label="-1",style=dashed];
  subgraph {
   g48 [color=gray,fillcolor=lightgray,label="G48
-0 -> 0946
-00 -> 6
-01435 -> 9
-023 -> 2
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 714
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 9038
-2040 -> 1
-21 -> 2
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 8430
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-389 -> 1510
-39 -> 0
-392 -> 7
-4 -> 5025
-401 -> 0
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 2
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-56 -> 9
-59065 -> 5
-6 -> 33767
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 2145
-70 -> 6
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 6356
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-89 -> 0
-9 -> 35415
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 8055
+1 -> 058
+2 -> 2595
+3 -> 61165
+4 -> 4470
+5 -> 49117
+6 -> 3864
+7 -> 77087
+8 -> 969
+9 -> 663",shape=box];
   g48 -> g48s0 [color=gray];
   g48s0 -> g48s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g48s0 -> g48s0 [label="else/  0
 self.words[-1] += x"];
-  g48s0 -> g48s1 [label="./ 0 len(self.words) >= 1
+  g48s0 -> g48s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g48s1 -> g48s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g48s1 -> g48s2 [label="else/  0
+self.words[-1] += x"];
   g48s1 -> g48s3 [label=" /. -1 not self.output"];
   g48s1 -> g48s3 [label="else/  -1
 self.words[-1] += x"];
   g48s1 -> g48s2 [label=" /. 1 not self.output"];
-  g48s1 -> g48s2 [label="else/  0
-self.words[-1] += x"];
   g48s4 -> g48s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g48s4 -> g48s4 [label="else/  3
@@ -2591,86 +1413,43 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g48s5 -> g48s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g48s5 -> g48s5 [label="else/  0
+  g48s5 -> g48s5 [label="else/  3
 self.words[-1] += x"];
   g48s5 -> g48s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g48s3 -> g48s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g48s3 -> g48s5 [label="./  0"];
   g48s3 -> g48s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g48s3 -> g48s5 [label="./  0"];
  }
- g13 -> g48 [color=lightgray,label="21",style=dashed];
+ g13 -> g48 [color=lightgray,label="-1",style=dashed];
  subgraph {
   g49 [color=gray,fillcolor=lightgray,label="G49
-0 -> 8567
-00 -> 6
-01435 -> 9
-02350 -> 6
-0835763979 -> 693505
-08389 -> 9
-1 -> 49093
-10 -> 764059605
-1679 -> 2
-1956 -> 3
-2 -> 0853
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 737
-338 -> 3
-347134726 -> 323778437
-37015 -> 4
-389 -> 1510
-4 -> 330
-401 -> 0
-45186 -> 5
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 6939
-5079 -> 17333075
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 789
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 12316
-72111 -> 6
-73751 -> 58513
-7677 -> 6
-768 -> 8
-8 -> 58848
-84992 -> 1
-85513 -> 29
-8698879 -> 9402392
-9 -> 11194
-912 -> 4
-9214 -> 3
-9512 -> 2
-978588 -> 354418
-98 -> 089
-9812 -> 8
-random_map: -> still",shape=box];
+0 -> 106
+2 -> 175
+3 -> 29013
+4 -> 78053
+5 -> 786
+6 -> 1739
+7 -> 57165
+8 -> 42078
+9 -> 04020",shape=box];
   g49 -> g49s0 [color=gray];
   g49s0 -> g49s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g49s0 -> g49s0 [label="else/  0
 self.words[-1] += x"];
-  g49s0 -> g49s1 [label="./ 0 len(self.words) >= 1
+  g49s0 -> g49s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g49s1 -> g49s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
+  g49s1 -> g49s2 [label="else/  0
+self.words[-1] += x"];
   g49s1 -> g49s3 [label=" /. -1 not self.output"];
   g49s1 -> g49s3 [label="else/  -1
 self.words[-1] += x"];
   g49s1 -> g49s2 [label=" /. 1 not self.output"];
-  g49s1 -> g49s2 [label="else/  0
-self.words[-1] += x"];
   g49s4 -> g49s4 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g49s4 -> g49s4 [label="else/  3
@@ -2684,790 +1463,26 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
 self.words[-1] += x"];
   g49s5 -> g49s5 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g49s5 -> g49s5 [label="else/  0
+  g49s5 -> g49s5 [label="else/  3
 self.words[-1] += x"];
   g49s5 -> g49s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
 self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
   g49s3 -> g49s3 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
+  g49s3 -> g49s5 [label="./  0"];
   g49s3 -> g49s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
-  g49s3 -> g49s5 [label="./  0"];
  }
- g13 -> g49 [color=lightgray,label="14",style=dashed];
- subgraph {
-  g50 [color=gray,fillcolor=lightgray,label="G50
-0 -> 049
-00 -> 6
-00577 -> 1
-01435 -> 9
-0767 -> 5
-0835763979 -> 693505
-08389 -> 9
-1 -> 670
-10 -> 764059605
-2 -> 22203
-306 -> 5
-336 -> 7
-338 -> 3
-347134726 -> 323778437
-389 -> 1510
-4 -> 363
-401 -> 0
-456681742 -> 3986
-485 -> 4
-48995234 -> 22012554
-4978 -> 6
-5 -> 8550
-5079 -> 17333075
-5304 -> 3
-5575 -> 7
-58069 -> 2
-5853 -> 0
-598 -> 1
-6 -> 03351
-613 -> 8
-69667 -> 3
-7 -> 0628
-7118 -> 7
-73751 -> 58513
-768 -> 8
-8 -> 44776
-8110 -> 8
-84221 -> 9
-85513 -> 29
-8698879 -> 9402392
-873 -> 0
-9 -> 95192
-91976 -> 7
-9214 -> 3
-9236 -> 0
-9368 -> 2
-9606 -> 2
-978588 -> 354418
-98 -> 089
-992 -> 9
-random_map: -> still",shape=box];
-  g50 -> g50s0 [color=gray];
-  g50s0 -> g50s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g50s0 -> g50s0 [label="else/  0
-self.words[-1] += x"];
-  g50s0 -> g50s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g50s1 -> g50s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g50s1 -> g50s3 [label=" /. -1 not self.output"];
-  g50s1 -> g50s3 [label="else/  -1
-self.words[-1] += x"];
-  g50s1 -> g50s2 [label=" /. 1 not self.output"];
-  g50s1 -> g50s2 [label="else/  0
-self.words[-1] += x"];
-  g50s4 -> g50s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g50s4 -> g50s4 [label="else/  3
-self.words[-1] += x"];
-  g50s4 -> g50s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g50s2 -> g50s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g50s2 -> g50s4 [label="./  0"];
-  g50s2 -> g50s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g50s5 -> g50s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g50s5 -> g50s5 [label="else/  0
-self.words[-1] += x"];
-  g50s5 -> g50s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g50s3 -> g50s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g50s3 -> g50s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g50s3 -> g50s5 [label="./  0"];
- }
- g13 -> g50 [color=lightgray,label="-12",style=dashed];
- subgraph {
-  g56 [color=gray,fillcolor=lightgray,label="G56
-0 -> 9070
-00 -> 6
-0835763979 -> 693505
-1 -> 0419
-10 -> 764059605
-2 -> 09
-3 -> 1179
-347134726 -> 323778437
-389 -> 1510
-4 -> 32939
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 6904
-5079 -> 17333075
-6 -> 0
-7 -> 4641
-73751 -> 58513
-8 -> 059
-85513 -> 29
-8698879 -> 9402392
-9 -> 3
-9214 -> 3
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g56 -> g56s0 [color=gray];
-  g56s0 -> g56s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g56s0 -> g56s0 [label="else/  0
-self.words[-1] += x"];
-  g56s0 -> g56s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g56s1 -> g56s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g56s1 -> g56s3 [label=" /. -1 not self.output"];
-  g56s1 -> g56s3 [label="else/  -1
-self.words[-1] += x"];
-  g56s1 -> g56s2 [label=" /. 1 not self.output"];
-  g56s1 -> g56s2 [label="else/  0
-self.words[-1] += x"];
-  g56s4 -> g56s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g56s4 -> g56s4 [label="else/  3
-self.words[-1] += x"];
-  g56s4 -> g56s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g56s2 -> g56s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g56s2 -> g56s4 [label="./  0"];
-  g56s2 -> g56s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g56s5 -> g56s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g56s5 -> g56s5 [label="else/  0
-self.words[-1] += x"];
-  g56s5 -> g56s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g56s3 -> g56s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g56s3 -> g56s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g56s3 -> g56s5 [label="./  0"];
- }
- g13 -> g56 [color=lightgray,label="-6",style=dashed];
- subgraph {
-  g57 [color=gray,fillcolor=lightgray,label="G57
-0 -> 48
-00 -> 6
-0835763979 -> 693505
-1 -> 34
-10 -> 764059605
-2 -> 6
-3 -> 8
-347134726 -> 323778437
-389 -> 1510
-4 -> 1
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 415
-5079 -> 17333075
-6 -> 859
-7 -> 66976
-73751 -> 58513
-8 -> 170
-85513 -> 29
-8698879 -> 9402392
-9 -> 84511
-9214 -> 3
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g57 -> g57s0 [color=gray];
-  g57s0 -> g57s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g57s0 -> g57s0 [label="else/  0
-self.words[-1] += x"];
-  g57s0 -> g57s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g57s1 -> g57s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g57s1 -> g57s3 [label=" /. -1 not self.output"];
-  g57s1 -> g57s3 [label="else/  -1
-self.words[-1] += x"];
-  g57s1 -> g57s2 [label=" /. 1 not self.output"];
-  g57s1 -> g57s2 [label="else/  0
-self.words[-1] += x"];
-  g57s4 -> g57s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g57s4 -> g57s4 [label="else/  3
-self.words[-1] += x"];
-  g57s4 -> g57s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g57s2 -> g57s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g57s2 -> g57s4 [label="./  0"];
-  g57s2 -> g57s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g57s5 -> g57s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g57s5 -> g57s5 [label="else/  0
-self.words[-1] += x"];
-  g57s5 -> g57s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g57s3 -> g57s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g57s3 -> g57s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g57s3 -> g57s5 [label="./  0"];
- }
- g13 -> g57 [color=lightgray,label="-5",style=dashed];
- subgraph {
-  g58 [color=gray,fillcolor=lightgray,label="G58
-0 -> 2600
-00 -> 6
-0835763979 -> 693505
-1 -> 79748
-10 -> 764059605
-2 -> 85
-3 -> 8527
-32944 -> 59114
-347134726 -> 323778437
-389 -> 1510
-4 -> 57
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 415
-5079 -> 17333075
-6 -> 295
-7 -> 1081
-73751 -> 58513
-8 -> 05455
-85513 -> 29
-8698879 -> 9402392
-9 -> 0437
-9214 -> 3
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g58 -> g58s0 [color=gray];
-  g58s0 -> g58s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g58s0 -> g58s0 [label="else/  0
-self.words[-1] += x"];
-  g58s0 -> g58s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g58s1 -> g58s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g58s1 -> g58s3 [label=" /. -1 not self.output"];
-  g58s1 -> g58s3 [label="else/  -1
-self.words[-1] += x"];
-  g58s1 -> g58s2 [label=" /. 1 not self.output"];
-  g58s1 -> g58s2 [label="else/  0
-self.words[-1] += x"];
-  g58s4 -> g58s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g58s4 -> g58s4 [label="else/  3
-self.words[-1] += x"];
-  g58s4 -> g58s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g58s2 -> g58s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g58s2 -> g58s4 [label="./  0"];
-  g58s2 -> g58s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g58s5 -> g58s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g58s5 -> g58s5 [label="else/  0
-self.words[-1] += x"];
-  g58s5 -> g58s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g58s3 -> g58s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g58s3 -> g58s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g58s3 -> g58s5 [label="./  0"];
- }
- g13 -> g58 [color=lightgray,label="-8",style=dashed];
- subgraph {
-  g59 [color=gray,fillcolor=lightgray,label="G59
-0 -> 4
-00 -> 6
-0835763979 -> 693505
-1 -> 01
-10 -> 764059605
-2 -> 77
-3 -> 940
-347134726 -> 323778437
-389 -> 1510
-4 -> 99
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 08
-5079 -> 17333075
-6 -> 80
-7 -> 5
-73751 -> 58513
-8 -> 006
-85513 -> 29
-8698879 -> 9402392
-9 -> 0227
-9214 -> 3
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g59 -> g59s0 [color=gray];
-  g59s0 -> g59s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g59s0 -> g59s0 [label="else/  0
-self.words[-1] += x"];
-  g59s0 -> g59s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g59s1 -> g59s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g59s1 -> g59s3 [label=" /. -1 not self.output"];
-  g59s1 -> g59s3 [label="else/  -1
-self.words[-1] += x"];
-  g59s1 -> g59s2 [label=" /. 1 not self.output"];
-  g59s1 -> g59s2 [label="else/  0
-self.words[-1] += x"];
-  g59s4 -> g59s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g59s4 -> g59s4 [label="else/  3
-self.words[-1] += x"];
-  g59s4 -> g59s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g59s2 -> g59s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g59s2 -> g59s4 [label="./  0"];
-  g59s2 -> g59s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g59s5 -> g59s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g59s5 -> g59s5 [label="else/  0
-self.words[-1] += x"];
-  g59s5 -> g59s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g59s3 -> g59s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g59s3 -> g59s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g59s3 -> g59s5 [label="./  0"];
- }
- g13 -> g59 [color=lightgray,label="-3",style=dashed];
- subgraph {
-  g60 [color=gray,fillcolor=lightgray,label="G60
-0 -> 2600
-00 -> 6
-0207 -> 6
-055 -> 8
-0835763979 -> 693505
-1 -> 4
-10 -> 764059605
-2 -> 903
-3 -> 798
-347134726 -> 323778437
-389 -> 1510
-4 -> 26
-456681742 -> 3986
-48995234 -> 22012554
-5 -> 63744
-5079 -> 17333075
-6 -> 6813
-60991 -> 5
-7 -> 1081
-73751 -> 58513
-8 -> 63
-85513 -> 29
-8698879 -> 9402392
-9 -> 663
-9214 -> 3
-9600 -> 7
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g60 -> g60s0 [color=gray];
-  g60s0 -> g60s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g60s0 -> g60s0 [label="else/  0
-self.words[-1] += x"];
-  g60s0 -> g60s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g60s1 -> g60s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g60s1 -> g60s3 [label=" /. -1 not self.output"];
-  g60s1 -> g60s3 [label="else/  -1
-self.words[-1] += x"];
-  g60s1 -> g60s2 [label=" /. 1 not self.output"];
-  g60s1 -> g60s2 [label="else/  0
-self.words[-1] += x"];
-  g60s4 -> g60s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g60s4 -> g60s4 [label="else/  3
-self.words[-1] += x"];
-  g60s4 -> g60s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g60s2 -> g60s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g60s2 -> g60s4 [label="./  0"];
-  g60s2 -> g60s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g60s5 -> g60s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g60s5 -> g60s5 [label="else/  0
-self.words[-1] += x"];
-  g60s5 -> g60s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g60s3 -> g60s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g60s3 -> g60s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g60s3 -> g60s5 [label="./  0"];
- }
- g13 -> g60 [color=lightgray,label="-2",style=dashed];
- subgraph {
-  g61 [color=gray,fillcolor=lightgray,label="G61
-00 -> 6
-0207 -> 6
-023 -> 2
-053 -> 0
-055 -> 8
-070 -> 0
-08 -> 0
-0835763979 -> 693505
-1 -> 670
-10 -> 764059605
-13849 -> 5
-17 -> 2
-1714 -> 7
-188 -> 4
-19 -> 2
-1923 -> 99
-2 -> 85
-200 -> 1
-2017 -> 2
-21 -> 2
-22231 -> 4
-2650 -> 3
-27 -> 6
-293 -> 7
-2981 -> 7
-3 -> 8
-32944 -> 59114
-33494 -> 3
-3401 -> 6
-347134726 -> 323778437
-37 -> 8
-389 -> 1510
-39 -> 0
-392 -> 7
-4 -> 3
-40 -> 8
-456681742 -> 3986
-4805 -> 0
-48995234 -> 22012554
-49704 -> 3
-5 -> 2
-5079 -> 17333075
-552 -> 0
-56 -> 9
-6070 -> 8
-60991 -> 5
-66889 -> 9
-6845 -> 2
-70 -> 6
-719 -> 2
-73751 -> 58513
-7412 -> 2
-748 -> 7
-7526 -> 2
-8 -> 9
-85513 -> 29
-8698879 -> 9402392
-87 -> 8
-873 -> 0
-89 -> 0
-9 -> 4
-9214 -> 3
-9600 -> 7
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g61 -> g61s0 [color=gray];
-  g61s0 -> g61s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g61s0 -> g61s0 [label="else/  0
-self.words[-1] += x"];
-  g61s0 -> g61s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g61s1 -> g61s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g61s1 -> g61s3 [label=" /. -1 not self.output"];
-  g61s1 -> g61s3 [label="else/  -1
-self.words[-1] += x"];
-  g61s1 -> g61s2 [label=" /. 1 not self.output"];
-  g61s1 -> g61s2 [label="else/  0
-self.words[-1] += x"];
-  g61s4 -> g61s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g61s4 -> g61s4 [label="else/  3
-self.words[-1] += x"];
-  g61s4 -> g61s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g61s2 -> g61s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g61s2 -> g61s4 [label="./  0"];
-  g61s2 -> g61s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g61s5 -> g61s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g61s5 -> g61s5 [label="else/  0
-self.words[-1] += x"];
-  g61s5 -> g61s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g61s3 -> g61s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g61s3 -> g61s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g61s3 -> g61s5 [label="./  0"];
- }
- g13 -> g61 [color=lightgray,label="4",style=dashed];
- subgraph {
-  g63 [color=gray,fillcolor=lightgray,label="G63
-0 -> 2287
-00 -> 6
-0835763979 -> 693505
-1 -> 670
-10 -> 764059605
-167 -> 2
-1923 -> 99
-2 -> 85
-23 -> 8
-24670 -> 12191
-298 -> 2
-32944 -> 59114
-333 -> 5845
-347134726 -> 323778437
-389 -> 1510
-3950 -> 413
-42487 -> 06741
-456681742 -> 3986
-483 -> 4931
-48995234 -> 22012554
-4966 -> 75
-5 -> 846
-5079 -> 17333075
-53240 -> 67
-59 -> 4
-60039 -> 857
-6568 -> 4828
-6767 -> 3
-73751 -> 58513
-8 -> 5809
-8440 -> 739
-85513 -> 29
-8698879 -> 9402392
-873 -> 0
-9065 -> 3493
-9214 -> 3
-978588 -> 354418
-98 -> 089
-random_map: -> still",shape=box];
-  g63 -> g63s0 [color=gray];
-  g63s0 -> g63s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g63s0 -> g63s0 [label="else/  0
-self.words[-1] += x"];
-  g63s0 -> g63s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g63s1 -> g63s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g63s1 -> g63s3 [label=" /. -1 not self.output"];
-  g63s1 -> g63s3 [label="else/  -1
-self.words[-1] += x"];
-  g63s1 -> g63s2 [label=" /. 1 not self.output"];
-  g63s1 -> g63s2 [label="else/  0
-self.words[-1] += x"];
-  g63s4 -> g63s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g63s4 -> g63s4 [label="else/  3
-self.words[-1] += x"];
-  g63s4 -> g63s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g63s2 -> g63s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g63s2 -> g63s4 [label="./  0"];
-  g63s2 -> g63s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g63s5 -> g63s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g63s5 -> g63s5 [label="else/  0
-self.words[-1] += x"];
-  g63s5 -> g63s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g63s3 -> g63s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g63s3 -> g63s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g63s3 -> g63s5 [label="./  0"];
- }
- g13 -> g63 [color=lightgray,label="6",style=dashed];
- subgraph {
-  g64 [color=gray,fillcolor=lightgray,label="G64
-03 -> 1
-0835763979 -> 693505
-1 -> 0
-10 -> 764059605
-14522 -> 77
-2 -> 7
-23 -> 8
-347134726 -> 323778437
-39099 -> 1
-42487 -> 06741
-456681742 -> 3986
-48995234 -> 22012554
-5079 -> 17333075
-53240 -> 67
-6767 -> 3
-8 -> 0
-8440 -> 739
-8698879 -> 9402392
-898 -> 6
-9 -> 9
-9214 -> 3
-978588 -> 354418
-99315 -> 973
-random_map: -> still",shape=box];
-  g64 -> g64s0 [color=gray];
-  g64s0 -> g64s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g64s0 -> g64s0 [label="else/  0
-self.words[-1] += x"];
-  g64s0 -> g64s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g64s1 -> g64s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g64s1 -> g64s3 [label=" /. -1 not self.output"];
-  g64s1 -> g64s3 [label="else/  -1
-self.words[-1] += x"];
-  g64s1 -> g64s2 [label=" /. 1 not self.output"];
-  g64s1 -> g64s2 [label="else/  0
-self.words[-1] += x"];
-  g64s4 -> g64s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g64s4 -> g64s4 [label="else/  3
-self.words[-1] += x"];
-  g64s4 -> g64s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g64s2 -> g64s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g64s2 -> g64s4 [label="./  0"];
-  g64s2 -> g64s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g64s5 -> g64s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g64s5 -> g64s5 [label="else/  0
-self.words[-1] += x"];
-  g64s5 -> g64s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g64s3 -> g64s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g64s3 -> g64s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g64s3 -> g64s5 [label="./  0"];
- }
- g13 -> g64 [color=lightgray,label="0",style=dashed];
- subgraph {
-  g65 [color=gray,fillcolor=lightgray,label="G65
-0494 -> 7
-072702 -> 9076
-10 -> 01035
-1046 -> 246568965
-12996050 -> 93165658
-14038 -> 93457222
-2 -> 03009
-24 -> 201
-2771826757 -> 8046237410
-286 -> 7642912583
-2896200 -> 61104244
-298 -> 2
-313237 -> 133695400
-32462774 -> 5
-367607 -> 931965
-39983 -> 501
-4 -> 3096
-42 -> 1
-426 -> 586039
-4268 -> 97981263
-4288187663 -> 03634
-49241792 -> 18995
-50 -> 83
-57 -> 608
-585 -> 64
-59 -> 4
-63819 -> 92
-6404 -> 070
-65 -> 00
-66 -> 654307
-7750 -> 8429
-8 -> 908
-80 -> 924
-8088665 -> 1530832
-835223253 -> 339
-861943724 -> 39
-8790 -> 25
-88011 -> 42619
-88973 -> 8
-89934265 -> 1833353350
-9145024141 -> 1
-9166741 -> 41827406
-918 -> 945
-941112 -> 3819477
-9860 -> 88659
-990054726 -> 60
-99152336 -> 274
-random_map: -> still",shape=box];
-  g65 -> g65s0 [color=gray];
-  g65s0 -> g65s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g65s0 -> g65s0 [label="else/  0
-self.words[-1] += x"];
-  g65s0 -> g65s1 [label="./ 0 len(self.words) >= 1
-self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g65s1 -> g65s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g65s1 -> g65s3 [label=" /. -1 not self.output"];
-  g65s1 -> g65s3 [label="else/  -1
-self.words[-1] += x"];
-  g65s1 -> g65s2 [label=" /. 1 not self.output"];
-  g65s1 -> g65s2 [label="else/  0
-self.words[-1] += x"];
-  g65s4 -> g65s4 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g65s4 -> g65s4 [label="else/  3
-self.words[-1] += x"];
-  g65s4 -> g65s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g65s2 -> g65s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g65s2 -> g65s4 [label="./  0"];
-  g65s2 -> g65s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g65s5 -> g65s5 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g65s5 -> g65s5 [label="else/  0
-self.words[-1] += x"];
-  g65s5 -> g65s0 [label=";/  0 (len(self.words) >= 2) and (self.words[0] not in self.mapping or self.mapping[self.words[0]] == self.words[1])
-self.mapping[self.words[0]] = self.words[1]; self.words = ['']"];
-  g65s3 -> g65s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g65s3 -> g65s3 [label="else/  0 x not in ';'
-self.words[-1] += x"];
-  g65s3 -> g65s5 [label="./  0"];
- }
- g13 -> g65 [color=lightgray,label="-3",style=dashed];
-{ rank=same; g12 g14 g15 g16 g17 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g46 g47 g48 g49 g50 g56 g57 g58 g59 g60 g61 g63 g64 g65}
- g0 -> g13 [color=lightgray,label="378",style=dashed];
+ g13 -> g49 [color=lightgray,label="0",style=dashed];
+{ rank=same; g12 g14 g15 g16 g17 g24 g25 g26 g27 g28 g29 g30 g31 g32 g33 g34 g46 g47 g48 g49}
+ g0 -> g13 [color=lightgray,label="162",style=dashed];
  subgraph {
   g19 [color=gray,fillcolor=lightgray,label="G19
-random_map: -> still",shape=box];
+0 -> 106.
+2 -> 175.
+3 -> 29013.
+6 -> 1739.
+9 -> 04020.",shape=box];
   g19 -> g19s0 [color=gray];
   g19s0 -> g19s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
@@ -3503,36 +1518,21 @@ self.words[-1] += x"];
  }
  subgraph {
   g18 [color=gray,fillcolor=lightgray,label="G18
-0 -> 6
-01435 -> 9
-1 -> 8
-10 -> 4
-2 -> 6
-24 -> 7
-27 -> 1
-3 -> 5
-38 -> 5
-389 -> 1510.
+0 -> 5
+1 -> 5
+2 -> 1
+3 -> 4
 4 -> 7
-49 -> 4
-5 -> 9
-55 -> 5
-6 -> 7
-613 -> 7
-62 -> 6
-7 -> 4
-8 -> 2
-82 -> 7
-83 -> 3
-87 -> 9.
-9 -> 8
-random_map: -> still",shape=box];
+5 -> 6
+6 -> 6
+7 -> 0
+8 -> 9",shape=box];
   g18 -> g18s0 [color=gray];
   g18s0 -> g18s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g18s0 -> g18s0 [label="else/  0
 self.words[-1] += x"];
-  g18s0 -> g18s1 [label="./ 0 len(self.words) >= 1
+  g18s0 -> g18s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g18s1 -> g18s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3560,44 +1560,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g18s3 -> g18s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g19 -> g18 [color=lightgray,label="-56",style=dashed];
+ g19 -> g18 [color=lightgray,label="-21",style=dashed];
  subgraph {
   g20 [color=gray,fillcolor=lightgray,label="G20
-0 -> 5
-01435 -> 9
-08 -> 0
-1 -> 2
-10 -> 4
-2 -> 6
-23 -> 3
-24 -> 7
-27 -> 1
-3 -> 7
-38 -> 5
-389 -> 1510.
-4 -> 8
-49 -> 4
-49704 -> 3.
-5 -> 1
-51 -> 9
-55 -> 5
-6 -> 8
-613 -> 7
-62 -> 6
-7 -> 3
-7412 -> 2
-8 -> 4
-82 -> 7
-83 -> 3
-87 -> 9.
-9 -> 0
-random_map: -> still",shape=box];
+0 -> 9
+1 -> 4
+2 -> 5
+3 -> 0
+4 -> 9
+5 -> 5
+6 -> 1
+7 -> 9
+8 -> 2
+9 -> 7",shape=box];
   g20 -> g20s0 [color=gray];
   g20s0 -> g20s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g20s0 -> g20s0 [label="else/  0
 self.words[-1] += x"];
-  g20s0 -> g20s1 [label="./ 0 len(self.words) >= 1
+  g20s0 -> g20s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g20s1 -> g20s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3625,41 +1606,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g20s3 -> g20s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g19 -> g20 [color=lightgray,label="-58",style=dashed];
+ g19 -> g20 [color=lightgray,label="-24",style=dashed];
  subgraph {
   g21 [color=gray,fillcolor=lightgray,label="G21
 0 -> 8
-01435 -> 9
-06 -> 0
-1 -> 3
-10 -> 4
-2 -> 9
-24 -> 7
-27 -> 1
-3 -> 0
-38 -> 5
-389 -> 1510.
-4 -> 6
-45 -> 1
-49 -> 4
+1 -> 7
+2 -> 5
+3 -> 3
+4 -> 2
 5 -> 8
-55 -> 5
-6 -> 5
-613 -> 7
-62 -> 6
-7 -> 0
-8 -> 4
-82 -> 7
-83 -> 3
-87 -> 9.
-9 -> 9
-random_map: -> still",shape=box];
+6 -> 1
+7 -> 2
+8 -> 8
+9 -> 9",shape=box];
   g21 -> g21s0 [color=gray];
   g21s0 -> g21s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g21s0 -> g21s0 [label="else/  0
 self.words[-1] += x"];
-  g21s0 -> g21s1 [label="./ 0 len(self.words) >= 1
+  g21s0 -> g21s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g21s1 -> g21s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3687,39 +1652,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g21s3 -> g21s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g19 -> g21 [color=lightgray,label="-56",style=dashed];
+ g19 -> g21 [color=lightgray,label="-24",style=dashed];
  subgraph {
   g22 [color=gray,fillcolor=lightgray,label="G22
-0 -> 1
-01435 -> 9
-1 -> 7
-10 -> 4
-2 -> 3
-24 -> 7
-27 -> 1
+0 -> 5
+1 -> 9
+2 -> 1
 3 -> 8
-38 -> 5
-389 -> 1510.
 4 -> 0
-49 -> 4
-5 -> 9
-55 -> 5
-6 -> 1
-613 -> 7
-62 -> 6
-7 -> 2
-8 -> 7
-82 -> 7
-83 -> 3
-87 -> 9.
-9 -> 2
-random_map: -> still",shape=box];
+5 -> 4
+6 -> 0
+7 -> 4
+8 -> 2
+9 -> 1",shape=box];
   g22 -> g22s0 [color=gray];
   g22s0 -> g22s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g22s0 -> g22s0 [label="else/  0
 self.words[-1] += x"];
-  g22s0 -> g22s1 [label="./ 0 len(self.words) >= 1
+  g22s0 -> g22s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g22s1 -> g22s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3747,39 +1698,24 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g22s3 -> g22s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g19 -> g22 [color=lightgray,label="-53",style=dashed];
+ g19 -> g22 [color=lightgray,label="-23",style=dashed];
  subgraph {
   g23 [color=gray,fillcolor=lightgray,label="G23
-0 -> 7
-01435 -> 9
-1 -> 5
-10 -> 4
-2 -> 8
-24 -> 7
-27 -> 1
-3 -> 6
-38 -> 5
-389 -> 1510.
-4 -> 4
-49 -> 4
-5 -> 4
-55 -> 5
-6 -> 9
-613 -> 7
-62 -> 6
-7 -> 4
-8 -> 9
-82 -> 7
-83 -> 3
-87 -> 9.
-9 -> 7
-random_map: -> still",shape=box];
+0 -> 6
+2 -> 0
+3 -> 7
+4 -> 8
+5 -> 1
+6 -> 3
+7 -> 1
+8 -> 6
+9 -> 1",shape=box];
   g23 -> g23s0 [color=gray];
   g23s0 -> g23s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g23s0 -> g23s0 [label="else/  0
 self.words[-1] += x"];
-  g23s0 -> g23s1 [label="./ 0 len(self.words) >= 1
+  g23s0 -> g23s1 [label="./ 0 (len(self.words) >= 1) and (self.words[0] in self.mapping)
 self.output = list(self.mapping.get(self.words[0], '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g23s1 -> g23s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3807,18 +1743,26 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g23s3 -> g23s3 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g19 -> g23 [color=lightgray,label="-52",style=dashed];
+ g19 -> g23 [color=lightgray,label="-18",style=dashed];
 { rank=same; g18 g20 g21 g22 g23}
- g0 -> g19 [color=lightgray,label="-71",style=dashed];
+ g0 -> g19 [color=lightgray,label="-43",style=dashed];
  subgraph {
   g36 [color=gray,fillcolor=lightgray,label="G36
-random_map: -> l",shape=box];
+0 -> 6
+2 -> 5
+3 -> 3
+4 -> 3
+5 -> 6
+6 -> 9
+7 -> 5
+8 -> 8
+9 -> 0",shape=box];
   g36 -> g36s0 [color=gray];
   g36s0 -> g36s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g36s0 -> g36s0 [label="else/  0
 self.words[-1] += x"];
-  g36s0 -> g36s1 [label="./ 0
+  g36s0 -> g36s1 [label="./ 0 len(self.words) >= 1
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g36s1 -> g36s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3839,56 +1783,22 @@ self.words[-1] += x"];
  }
  subgraph {
   g35 [color=gray,fillcolor=lightgray,label="G35
-0 -> 2
-01435 -> 9
-02350 -> 6
-0835763979 -> 5
-08389 -> 9
-1 -> 9
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 1
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
+0 -> 9
+1 -> 5
+2 -> 0
 3 -> 6
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 2
-401 -> 0
-45186 -> 5
-5 -> 1
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 2
-613 -> 7
-6358 -> 7
-695 -> 2
+4 -> 1
+5 -> 3
+6 -> 0
 7 -> 8
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 5
-84992 -> 1
-8698879 -> 2
-9 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+8 -> 7
+9 -> 5",shape=box];
   g35 -> g35s0 [color=gray];
   g35s0 -> g35s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g35s0 -> g35s0 [label="else/  0
 self.words[-1] += x"];
-  g35s0 -> g35s1 [label="./ 0
+  g35s0 -> g35s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g35s1 -> g35s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3907,59 +1817,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g35s2 -> g35s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g35 [color=lightgray,label="-14",style=dashed];
+ g36 -> g35 [color=lightgray,label="-13",style=dashed];
  subgraph {
   g37 [color=gray,fillcolor=lightgray,label="G37
-0 -> 7
-01435 -> 9
-02350 -> 6
-0835763979 -> 5
-08389 -> 9
-1 -> 2
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 0
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 4
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 9
-401 -> 0
-45186 -> 5
-5 -> 6
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 8
-613 -> 7
-6358 -> 7
-695 -> 2
+0 -> 2
+1 -> 3
+2 -> 1
+3 -> 2
+4 -> 5
+5 -> 1
+6 -> 2
 7 -> 5
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 5
-84992 -> 1
-8698879 -> 2
-9 -> 7
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+8 -> 0
+9 -> 1",shape=box];
   g37 -> g37s0 [color=gray];
   g37s0 -> g37s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g37s0 -> g37s0 [label="else/  0
 self.words[-1] += x"];
-  g37s0 -> g37s1 [label="./ 0
+  g37s0 -> g37s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g37s1 -> g37s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -3978,59 +1854,22 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g37s2 -> g37s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g37 [color=lightgray,label="-9",style=dashed];
+ g36 -> g37 [color=lightgray,label="-12",style=dashed];
  subgraph {
   g38 [color=gray,fillcolor=lightgray,label="G38
-0 -> 0
-01435 -> 9
-02350 -> 6
-0835763979 -> 5
-08389 -> 9
-1 -> 6
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 0
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 4
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 7
-401 -> 0
-45186 -> 5
-5 -> 7
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 8
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 6
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 6
-84992 -> 1
-8698879 -> 2
-9 -> 7
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+1 -> 0
+3 -> 7
+4 -> 4
+5 -> 3
+7 -> 1
+8 -> 1
+9 -> 8",shape=box];
   g38 -> g38s0 [color=gray];
   g38s0 -> g38s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g38s0 -> g38s0 [label="else/  0
 self.words[-1] += x"];
-  g38s0 -> g38s1 [label="./ 0
+  g38s0 -> g38s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g38s1 -> g38s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4049,59 +1888,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g38s2 -> g38s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g38 [color=lightgray,label="-9",style=dashed];
+ g36 -> g38 [color=lightgray,label="-10",style=dashed];
  subgraph {
   g39 [color=gray,fillcolor=lightgray,label="G39
-0 -> 8
-01435 -> 9
-02350 -> 6
-0835763979 -> 5
-08389 -> 9
+0 -> 9
 1 -> 3
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 8
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
+2 -> 6
 3 -> 7
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 5
-401 -> 0
-45186 -> 5
-5 -> 5
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 8
-613 -> 7
-6358 -> 7
-695 -> 2
+4 -> 4
+5 -> 2
+6 -> 7
 7 -> 5
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 1
-84992 -> 1
-8698879 -> 2
-9 -> 9
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+8 -> 3
+9 -> 4",shape=box];
   g39 -> g39s0 [color=gray];
   g39s0 -> g39s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g39s0 -> g39s0 [label="else/  0
 self.words[-1] += x"];
-  g39s0 -> g39s1 [label="./ 0
+  g39s0 -> g39s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g39s1 -> g39s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4120,68 +1925,24 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g39s2 -> g39s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g39 [color=lightgray,label="-6",style=dashed];
+ g36 -> g39 [color=lightgray,label="-10",style=dashed];
  subgraph {
   g40 [color=gray,fillcolor=lightgray,label="G40
-0 -> 6
-01435 -> 9
-02350 -> 6
-08 -> 0
-0835763979 -> 5
-08389 -> 9
-1 -> 9
-10 -> 5
-13849 -> 5
-1679 -> 2
-17 -> 2
-1956 -> 3
-2 -> 6
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-2981 -> 7
-3 -> 9
-338 -> 3
-347134726 -> 7
-37 -> 8
-37015 -> 4
-389 -> 0
+0 -> 7
+1 -> 3
+2 -> 9
 4 -> 8
-401 -> 0
-45186 -> 5
-4805 -> 0
-49704 -> 3
-5 -> 1
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 2
-613 -> 7
-6358 -> 7
-6845 -> 2
-695 -> 2
-7 -> 3
-72111 -> 6
-7412 -> 2
-7677 -> 6
-768 -> 8
-8 -> 4
-84992 -> 1
-8698879 -> 2
-9 -> 1
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+5 -> 9
+6 -> 0
+7 -> 4
+8 -> 7
+9 -> 0",shape=box];
   g40 -> g40s0 [color=gray];
   g40s0 -> g40s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g40s0 -> g40s0 [label="else/  0
 self.words[-1] += x"];
-  g40s0 -> g40s1 [label="./ 0
+  g40s0 -> g40s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g40s1 -> g40s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4200,60 +1961,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g40s2 -> g40s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g40 [color=lightgray,label="5",style=dashed];
+ g36 -> g40 [color=lightgray,label="-9",style=dashed];
  subgraph {
   g41 [color=gray,fillcolor=lightgray,label="G41
-0 -> 0
-01435 -> 9
-02350 -> 6
-0835763979 -> 5
-08389 -> 9
-1 -> 6
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 5
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
+0 -> 6
+1 -> 5
+2 -> 2
 3 -> 7
-32944 -> 4
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 1
-401 -> 0
-45186 -> 5
-5 -> 1
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 6
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 6
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 9
-84992 -> 1
-8698879 -> 2
-9 -> 7
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+4 -> 5
+5 -> 2
+6 -> 4
+7 -> 0
+8 -> 5
+9 -> 4",shape=box];
   g41 -> g41s0 [color=gray];
   g41s0 -> g41s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g41s0 -> g41s0 [label="else/  0
 self.words[-1] += x"];
-  g41s0 -> g41s1 [label="./ 0
+  g41s0 -> g41s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g41s1 -> g41s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4275,56 +2001,21 @@ self.words[-1] += x"];
  g36 -> g41 [color=lightgray,label="-8",style=dashed];
  subgraph {
   g42 [color=gray,fillcolor=lightgray,label="G42
-0 -> 8
-01435 -> 9
-02350 -> 6
-0835763979 -> 5
-08389 -> 9
-1 -> 3
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 8
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 1
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 3
-401 -> 0
-45186 -> 5
-5 -> 7
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 9
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 5
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 1
-84992 -> 1
-8698879 -> 2
-9 -> 2
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+0 -> 3
+1 -> 4
+2 -> 4
+3 -> 4
+4 -> 2
+5 -> 5
+6 -> 8
+7 -> 7
+8 -> 0",shape=box];
   g42 -> g42s0 [color=gray];
   g42s0 -> g42s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g42s0 -> g42s0 [label="else/  0
 self.words[-1] += x"];
-  g42s0 -> g42s1 [label="./ 0
+  g42s0 -> g42s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g42s1 -> g42s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4343,61 +2034,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g42s2 -> g42s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g42 [color=lightgray,label="-8",style=dashed];
+ g36 -> g42 [color=lightgray,label="-6",style=dashed];
  subgraph {
   g43 [color=gray,fillcolor=lightgray,label="G43
-0 -> 9
-01435 -> 9
-02350 -> 6
-0494 -> 7
-0835763979 -> 5
-08389 -> 9
-1 -> 5
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 9
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 9
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 0
-401 -> 0
-45186 -> 5
-5 -> 6
-5304 -> 3
-5389 -> 6
-585 -> 4
-59065 -> 5
-6 -> 4
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 5
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 6
-84992 -> 1
-8698879 -> 2
-9 -> 6
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+0 -> 7
+1 -> 0
+2 -> 7
+3 -> 2
+4 -> 2
+5 -> 9
+6 -> 6
+7 -> 4
+8 -> 0
+9 -> 8",shape=box];
   g43 -> g43s0 [color=gray];
   g43s0 -> g43s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g43s0 -> g43s0 [label="else/  0
 self.words[-1] += x"];
-  g43s0 -> g43s1 [label="./ 0
+  g43s0 -> g43s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g43s1 -> g43s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4416,64 +2071,25 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g43s2 -> g43s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g43 [color=lightgray,label="-4",style=dashed];
+ g36 -> g43 [color=lightgray,label="-6",style=dashed];
  subgraph {
   g44 [color=gray,fillcolor=lightgray,label="G44
-0 -> 7
-01435 -> 9
-0207 -> 6
-02350 -> 6
-070 -> 0
-0835763979 -> 5
-08389 -> 9
-1 -> 9
-10 -> 5
-1679 -> 2
-1956 -> 3
-2 -> 4
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-3 -> 7
-338 -> 3
-347134726 -> 7
-37015 -> 4
-389 -> 0
-4 -> 1
-401 -> 0
-45186 -> 5
-5 -> 7
-5304 -> 3
-5389 -> 6
-59065 -> 5
-6 -> 2
-60991 -> 5
-613 -> 7
-6358 -> 7
-695 -> 2
-7 -> 5
-719 -> 2
-72111 -> 6
-7677 -> 6
-768 -> 8
-8 -> 3
-84992 -> 1
-8698879 -> 2
-9 -> 4
-912 -> 4
-9214 -> 3
-9512 -> 2
-9600 -> 7
-9812 -> 8
-random_map: -> l",shape=box];
+0 -> 8
+1 -> 6
+2 -> 2
+3 -> 8
+4 -> 4
+5 -> 6
+6 -> 1
+7 -> 0
+8 -> 6
+9 -> 7",shape=box];
   g44 -> g44s0 [color=gray];
   g44s0 -> g44s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g44s0 -> g44s0 [label="else/  0
 self.words[-1] += x"];
-  g44s0 -> g44s1 [label="./ 0
+  g44s0 -> g44s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g44s1 -> g44s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4492,68 +2108,23 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g44s2 -> g44s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g44 [color=lightgray,label="-4",style=dashed];
+ g36 -> g44 [color=lightgray,label="-5",style=dashed];
  subgraph {
   g45 [color=gray,fillcolor=lightgray,label="G45
-0 -> 3
-01435 -> 9
-02350 -> 6
-08 -> 0
-0835763979 -> 5
-08389 -> 9
-1 -> 5
-10 -> 5
-13849 -> 5
-1679 -> 2
-17 -> 2
-1956 -> 3
-2 -> 7
-2040 -> 1
-260 -> 7
-2786 -> 1
-28189 -> 5
-28413 -> 7
-2981 -> 7
-3 -> 3
-338 -> 3
-347134726 -> 7
-37 -> 8
-37015 -> 4
-389 -> 0
-4 -> 8
-401 -> 0
-45186 -> 5
-4805 -> 0
-49704 -> 3
-5 -> 5
-5304 -> 3
-5389 -> 6
-59065 -> 5
+0 -> 0
+1 -> 6
+3 -> 8
+4 -> 7
+5 -> 0
 6 -> 0
-613 -> 7
-6358 -> 7
-6845 -> 2
-695 -> 2
-7 -> 5
-72111 -> 6
-7412 -> 2
-7677 -> 6
-768 -> 8
-8 -> 6
-84992 -> 1
-8698879 -> 2
-9 -> 6
-912 -> 4
-9214 -> 3
-9512 -> 2
-9812 -> 8
-random_map: -> l",shape=box];
+8 -> 8
+9 -> 9",shape=box];
   g45 -> g45s0 [color=gray];
   g45s0 -> g45s0 [label=" /  3
 self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g45s0 -> g45s0 [label="else/  0
 self.words[-1] += x"];
-  g45s0 -> g45s1 [label="./ 0
+  g45s0 -> g45s1 [label="./ 0 (len(self.words) >= 1) and (' '.join(self.words[:1]) in self.mapping)
 self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g45s1 -> g45s1 [label=" / 3 self.output
 self.y = self.output.pop(0)"];
@@ -4572,394 +2143,8 @@ self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
   g45s2 -> g45s2 [label="else/  0 x not in ';'
 self.words[-1] += x"];
  }
- g36 -> g45 [color=lightgray,label="9",style=dashed];
- subgraph {
-  g51 [color=gray,fillcolor=lightgray,label="G51
-0 -> 0
-0835763979 -> 5
-1 -> 7
-10 -> 5
-2 -> 8
-3 -> 6
-347134726 -> 7
-389 -> 0
-4 -> 3
-5 -> 4
-6 -> 8
-7 -> 3
-8 -> 3
-8698879 -> 2
-9 -> 2
-9214 -> 3
-random_map: -> l",shape=box];
-  g51 -> g51s0 [color=gray];
-  g51s0 -> g51s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g51s0 -> g51s0 [label="else/  0
-self.words[-1] += x"];
-  g51s0 -> g51s1 [label="./ 0
-self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g51s1 -> g51s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g51s1 -> g51s2 [label=" /. 3 not self.output"];
-  g51s1 -> g51s2 [label="else/  0
-self.words[-1] += x"];
-  g51s3 -> g51s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g51s3 -> g51s3 [label="else/  3
-self.words[-1] += x"];
-  g51s3 -> g51s0 [label=";/  0 (len(self.words[1]) >= 1) and (' '.join(self.words[:1]) not in self.mapping or self.mapping[' '.join(self.words[:1])] == self.words[1][-1:])
-self.mapping[' '.join(self.words[:1])] = self.words[1][-1:]; self.words = ['']"];
-  g51s2 -> g51s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g51s2 -> g51s3 [label="./  0"];
-  g51s2 -> g51s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
- }
- g36 -> g51 [color=lightgray,label="-24",style=dashed];
- subgraph {
-  g52 [color=gray,fillcolor=lightgray,label="G52
-0 -> 4
-0835763979 -> 5
-1 -> 2
-10 -> 5
-2 -> 4
-3 -> 4
-347134726 -> 7
-389 -> 0
-4 -> 7
-5 -> 7
-6 -> 8
-7 -> 8
-8 -> 6
-8698879 -> 2
-9 -> 7
-9214 -> 3
-random_map: -> l",shape=box];
-  g52 -> g52s0 [color=gray];
-  g52s0 -> g52s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g52s0 -> g52s0 [label="else/  0
-self.words[-1] += x"];
-  g52s0 -> g52s1 [label="./ 0
-self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g52s1 -> g52s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g52s1 -> g52s2 [label=" /. 3 not self.output"];
-  g52s1 -> g52s2 [label="else/  0
-self.words[-1] += x"];
-  g52s3 -> g52s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g52s3 -> g52s3 [label="else/  3
-self.words[-1] += x"];
-  g52s3 -> g52s0 [label=";/  0 (len(self.words[1]) >= 1) and (' '.join(self.words[:1]) not in self.mapping or self.mapping[' '.join(self.words[:1])] == self.words[1][-1:])
-self.mapping[' '.join(self.words[:1])] = self.words[1][-1:]; self.words = ['']"];
-  g52s2 -> g52s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g52s2 -> g52s3 [label="./  0"];
-  g52s2 -> g52s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
- }
- g36 -> g52 [color=lightgray,label="-21",style=dashed];
- subgraph {
-  g53 [color=gray,fillcolor=lightgray,label="G53
-0 -> 8
-0835763979 -> 5
-1 -> 3
-10 -> 5
-2 -> 0
-3 -> 6
-347134726 -> 7
-389 -> 0
-4 -> 3
-5 -> 3
-6 -> 0
-7 -> 4
-8 -> 3
-8698879 -> 2
-9 -> 5
-9214 -> 3
-random_map: -> l",shape=box];
-  g53 -> g53s0 [color=gray];
-  g53s0 -> g53s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g53s0 -> g53s0 [label="else/  0
-self.words[-1] += x"];
-  g53s0 -> g53s1 [label="./ 0
-self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g53s1 -> g53s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g53s1 -> g53s2 [label=" /. 3 not self.output"];
-  g53s1 -> g53s2 [label="else/  0
-self.words[-1] += x"];
-  g53s3 -> g53s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g53s3 -> g53s3 [label="else/  3
-self.words[-1] += x"];
-  g53s3 -> g53s0 [label=";/  0 (len(self.words[1]) >= 1) and (' '.join(self.words[:1]) not in self.mapping or self.mapping[' '.join(self.words[:1])] == self.words[1][-1:])
-self.mapping[' '.join(self.words[:1])] = self.words[1][-1:]; self.words = ['']"];
-  g53s2 -> g53s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g53s2 -> g53s3 [label="./  0"];
-  g53s2 -> g53s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
- }
- g36 -> g53 [color=lightgray,label="-19",style=dashed];
- subgraph {
-  g54 [color=gray,fillcolor=lightgray,label="G54
-0 -> 9
-0494 -> 7
-08 -> 0
-0835763979 -> 5
-1 -> 7
-10 -> 5
-13849 -> 5
-17 -> 2
-2 -> 9
-2981 -> 7
-3 -> 4
-347134726 -> 7
-37 -> 8
-389 -> 0
-4 -> 8
-4805 -> 0
-49704 -> 3
-5 -> 4
-585 -> 4
-6 -> 0
-6845 -> 2
-7 -> 1
-7412 -> 2
-8 -> 7
-8698879 -> 2
-9 -> 0
-9214 -> 3
-random_map: -> l",shape=box];
-  g54 -> g54s0 [color=gray];
-  g54s0 -> g54s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g54s0 -> g54s0 [label="else/  0
-self.words[-1] += x"];
-  g54s0 -> g54s1 [label="./ 0
-self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g54s1 -> g54s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g54s1 -> g54s2 [label=" /. 3 not self.output"];
-  g54s1 -> g54s2 [label="else/  0
-self.words[-1] += x"];
-  g54s3 -> g54s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g54s3 -> g54s3 [label="else/  3
-self.words[-1] += x"];
-  g54s3 -> g54s0 [label=";/  0 (len(self.words[1]) >= 1) and (' '.join(self.words[:1]) not in self.mapping or self.mapping[' '.join(self.words[:1])] == self.words[1][-1:])
-self.mapping[' '.join(self.words[:1])] = self.words[1][-1:]; self.words = ['']"];
-  g54s2 -> g54s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g54s2 -> g54s3 [label="./  0"];
-  g54s2 -> g54s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
- }
- g36 -> g54 [color=lightgray,label="-7",style=dashed];
- subgraph {
-  g55 [color=gray,fillcolor=lightgray,label="G55
-0 -> 6
-0835763979 -> 5
-1 -> 5
-10 -> 5
-2 -> 8
-3 -> 9
-347134726 -> 7
-389 -> 0
-4 -> 6
-5 -> 6
-6 -> 0
-7 -> 3
-8 -> 0
-8698879 -> 2
-9 -> 2
-9214 -> 3
-random_map: -> l",shape=box];
-  g55 -> g55s0 [color=gray];
-  g55s0 -> g55s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g55s0 -> g55s0 [label="else/  0
-self.words[-1] += x"];
-  g55s0 -> g55s1 [label="./ 0
-self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g55s1 -> g55s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g55s1 -> g55s2 [label=" /. 3 not self.output"];
-  g55s1 -> g55s2 [label="else/  0
-self.words[-1] += x"];
-  g55s3 -> g55s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g55s3 -> g55s3 [label="else/  3
-self.words[-1] += x"];
-  g55s3 -> g55s0 [label=";/  0 (len(self.words[1]) >= 1) and (' '.join(self.words[:1]) not in self.mapping or self.mapping[' '.join(self.words[:1])] == self.words[1][-1:])
-self.mapping[' '.join(self.words[:1])] = self.words[1][-1:]; self.words = ['']"];
-  g55s2 -> g55s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g55s2 -> g55s3 [label="./  0"];
-  g55s2 -> g55s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
- }
- g36 -> g55 [color=lightgray,label="-17",style=dashed];
- subgraph {
-  g62 [color=gray,fillcolor=lightgray,label="G62
-023 -> 2
-03 -> 1
-0835763979 -> 5
-1 -> 0
-10 -> 5
-14522 -> 7
-1923 -> 9
-2 -> 7
-21 -> 2
-23 -> 8
-347134726 -> 7
-389 -> 0
-39 -> 0
-39099 -> 1
-392 -> 7
-5 -> 2
-56 -> 9
-70 -> 6
-73751 -> 3
-8 -> 0
-8698879 -> 2
-89 -> 0
-898 -> 6
-9214 -> 3
-99315 -> 3
-random_map: -> l",shape=box];
-  g62 -> g62s0 [color=gray];
-  g62s0 -> g62s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g62s0 -> g62s0 [label="else/  0
-self.words[-1] += x"];
-  g62s0 -> g62s1 [label="./ 0
-self.output = list(self.mapping.get(' '.join(self.words[:1]), '§')); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g62s1 -> g62s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g62s1 -> g62s2 [label=" /. 3 not self.output"];
-  g62s1 -> g62s2 [label="else/  0
-self.words[-1] += x"];
-  g62s3 -> g62s3 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g62s3 -> g62s3 [label="else/  3
-self.words[-1] += x"];
-  g62s3 -> g62s0 [label=";/  0 (len(self.words[1]) >= 1) and (' '.join(self.words[:1]) not in self.mapping or self.mapping[' '.join(self.words[:1])] == self.words[1][-1:])
-self.mapping[' '.join(self.words[:1])] = self.words[1][-1:]; self.words = ['']"];
-  g62s2 -> g62s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g62s2 -> g62s3 [label="./  0"];
-  g62s2 -> g62s2 [label="else/  0 x not in ';'
-self.words[-1] += x"];
- }
- g36 -> g62 [color=lightgray,label="-7",style=dashed];
-{ rank=same; g35 g37 g38 g39 g40 g41 g42 g43 g44 g45 g51 g52 g53 g54 g55 g62}
- g0 -> g36 [color=lightgray,label="169",style=dashed];
- subgraph {
-  node [color=green,fillcolor=lightgreen];
-  g66 [color=gray,fillcolor=lightgray,label="G66",shape=box];
-  g66 -> g66s0 [color=gray];
-  g66s0 -> g66s0 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g66s0 -> g66s1 [label="./ 3
-self.output = list('§'); self.y = self.output.pop(0); self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g66s0 -> g66s0 [label="else/  3
-self.words[-1] += x"];
-  g66s1 -> g66s1 [label=" / 3 self.output
-self.y = self.output.pop(0)"];
-  g66s1 -> g66s2 [label=" /. 3 not self.output"];
-  g66s1 -> g66s2 [label="else/  3
-self.words[-1] += x"];
-  g66s2 -> g66s2 [label=" /  3
-self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"];
-  g66s2 -> g66s0 [label=";/  3
-self.words = ['']"];
-  g66s2 -> g66s2 [label="else/  3
-self.words[-1] += x"];
- }
- subgraph {
-  node [color=green,fillcolor=lightgreen];
-  g67 [color=gray,fillcolor=lightgray,label="G67",shape=box];
-  g67 -> g67s0 [color=gray];
-  g67s0 -> g67s1 [label="r/  0"];
-  g67s1 -> g67s2 [label="a/  0"];
-  g67s2 -> g67s3 [label="n/  0"];
-  g67s3 -> g67s4 [label="d/  0"];
-  g67s4 -> g67s5 [label="o/  0"];
-  g67s5 -> g67s6 [label="m/  0"];
-  g67s6 -> g67s7 [label="_/  0"];
-  g67s7 -> g67s8 [label="m/  0"];
-  g67s8 -> g67s9 [label="a/  0"];
-  g67s9 -> g67s10 [label="p/  0"];
-  g67s10 -> g67s11 [label=":/  0"];
-  g67s11 -> g67s12 [label=" /  0"];
-  g67s12 -> g67s13 [label="s/  0"];
-  g67s12 -> g67s36 [label="c/  0"];
-  g67s13 -> g67s14 [label="t/  0"];
-  g67s14 -> g67s15 [label="i/  0"];
-  g67s15 -> g67s16 [label="l/  0"];
-  g67s16 -> g67s17 [label="l/  0"];
-  g67s17 -> g67s18 [label="./s 0"];
-  g67s17 -> g67s56 [label="./k 0"];
-  g67s18 -> g67s19 [label=" /t 0"];
-  g67s19 -> g67s20 [label=" /i 0"];
-  g67s20 -> g67s21 [label=" /l 0"];
-  g67s21 -> g67s22 [label=" /l 0"];
-  g67s22 -> g67s23 [label=" /. -1"];
-  g67s23 -> g67s24 [label="w/  0"];
-  g67s24 -> g67s25 [label="r/  0"];
-  g67s25 -> g67s26 [label="o/  0"];
-  g67s26 -> g67s27 [label="n/  0"];
-  g67s27 -> g67s28 [label="g/  0"];
-  g67s28 -> g67s29 [label="!/  0"];
-  g67s29 -> g67s30 [label=" /  0"];
-  g67s30 -> g67s31 [label="m/  0"];
-  g67s31 -> g67s32 [label="u/  0"];
-  g67s32 -> g67s33 [label="s/  0"];
-  g67s33 -> g67s34 [label="t/  0"];
-  g67s34 -> g67s35 [label="./  0"];
-  g67s35 -> g67s0 [label=";/  0"];
-  g67s36 -> g67s37 [label="h/  0"];
-  g67s37 -> g67s38 [label="a/  0"];
-  g67s38 -> g67s39 [label="n/  0"];
-  g67s39 -> g67s40 [label="g/  0"];
-  g67s40 -> g67s41 [label="e/  0"];
-  g67s41 -> g67s42 [label="./l 0"];
-  g67s42 -> g67s43 [label=" /. -1"];
-  g67s43 -> g67s44 [label="w/  0"];
-  g67s44 -> g67s45 [label="r/  0"];
-  g67s45 -> g67s46 [label="o/  0"];
-  g67s46 -> g67s47 [label="n/  0"];
-  g67s47 -> g67s48 [label="g/  0"];
-  g67s48 -> g67s49 [label="!/  0"];
-  g67s49 -> g67s50 [label=" /  0"];
-  g67s50 -> g67s51 [label="l/  0"];
-  g67s51 -> g67s52 [label="a/  0"];
-  g67s52 -> g67s53 [label="s/  0"];
-  g67s53 -> g67s54 [label="t/  0"];
-  g67s54 -> g67s55 [label="./  0"];
-  g67s55 -> g67s0 [label=";/  0"];
-  g67s56 -> g67s57 [label=" /. -1"];
-  g67s57 -> g67s58 [label="w/  0"];
-  g67s58 -> g67s59 [label="r/  0"];
-  g67s59 -> g67s60 [label="o/  0"];
-  g67s60 -> g67s61 [label="n/  0"];
-  g67s61 -> g67s62 [label="g/  0"];
-  g67s62 -> g67s63 [label="!/  0"];
-  g67s63 -> g67s64 [label=" /  0"];
-  g67s64 -> g67s65 [label="m/  0"];
-  g67s65 -> g67s66 [label="u/  0"];
-  g67s66 -> g67s67 [label="s/  0"];
-  g67s67 -> g67s68 [label="t/  0"];
-  g67s68 -> g67s69 [label="./  0"];
-  g67s69 -> g67s0 [label=";/  0"];
- }
- g66 -> g67 [color=lightgray,label="0",style=dashed];
-{ rank=same; g67}
- g0 -> g66 [color=lightgray,label="0",style=dashed];
-{ rank=same; g2 g13 g19 g36 g66}
+ g36 -> g45 [color=lightgray,label="-3",style=dashed];
+{ rank=same; g35 g37 g38 g39 g40 g41 g42 g43 g44 g45}
+ g0 -> g36 [color=lightgray,label="139",style=dashed];
+{ rank=same; g2 g13 g19 g36}
 }
