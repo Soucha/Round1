@@ -12,15 +12,19 @@ import string
 import itertools
 import pickle
 from collections import Counter
-from core.serializer import StandardSerializer, IdentitySerializer
-from learners.base import BaseLearner
+#from core.serializer import StandardSerializer, IdentitySerializer
+#from learners.base import BaseLearner
 from learners.efsm_hierarchy import *
+#from efsm_hierarchy import *
 
-debFile = open("gEfsm.txt", 'w')
+DEBUG = True
+if DEBUG:
+    debFile = open("gEfsm.txt", 'w')
 def glog(msg, o=None):
-    if o:
-        print(msg)
-    print(msg, file=debFile)
+    if DEBUG:
+        if o:
+            print(msg)
+        print(msg, file=debFile)
 
 MIN_CONSECUTIVE_REWARDS = 5
 
@@ -41,9 +45,10 @@ def getBasicCommunicationEFSM():
 
 BRAIN_FN = "brainTmp.pkl"
 BRAIN_FNo = ""
+BRAIN_PRELEARNED = "brainPrelearned.pkl"
 
-class GrammarLearner(BaseLearner):
-    def __init__(self, brainFileName=BRAIN_FNo, dotFileName="kb.gv"):
+class GrammarLearner:
+    def __init__(self, brainFileName=BRAIN_FNo, dotFileName="brain.gv"):
         alphabet = string.ascii_letters + string.digits + ' ,.!;?-'
         self.X = set(alphabet)
         self.dotFN = dotFileName
@@ -54,6 +59,10 @@ class GrammarLearner(BaseLearner):
         self.startLearning(self.possibleNodes[0])
         self.writeDOT()
         
+    def try_reward(self, reward):
+        if reward is not None:
+            self.reward(reward)
+
     def writeDOT(self):
         try:
             if self.dotFN:
@@ -76,8 +85,8 @@ class GrammarLearner(BaseLearner):
         try:
             self.possibleNodes = []
             if brainFileName:
-                self.brainFN = brainFileName
-                with open(self.brainFN, 'rb') as f:
+                self.brainFN = BRAIN_FN # brainFileName
+                with open(brainFileName, 'rb') as f:
                     (self.maxId, self.G, lastH) = pickle.load(f)
                     self.possibleNodes = [lastH]
         except:
@@ -114,6 +123,10 @@ class GrammarLearner(BaseLearner):
         self.H.parent.estimated = False
         if checkParent and self.H.parent.isSpecializationOfParent():
             self.maxId = self.H.parent.parent.updateNodePosition(self.H.parent, self.X)
+            if self.H.parent.efsm.useOfMapping == MAPPING_FIXED:
+                guard = getGuardOnPresenceInMapping(self.H.parent.efsm.mappingKey)
+                self.H.parent.updateTransitionsToState(1, '.', None, None, \
+                    lambda currGuard: connectGuards([currGuard, guard]))
             self.storeBrain(self.H.parent)
         else:
             self.maxId -= 2 #self.H.parent.makePermanent()
@@ -179,8 +192,7 @@ class GrammarLearner(BaseLearner):
         output = self.getOutput(x) 
         if not output:
             cnt = Counter()
-            if cnt:# self.H.getEstimatedOutputs(x, self.maxId, self.trace, cnt) \
-                #and cnt.most_common(1)[0][1] > 0:
+            if cnt:# self.H.getEstimatedOutputs(x, self.maxId, self.trace, cnt) and cnt.most_common(1)[0][1] > 0:
                 output = cnt.most_common(1)[0][0]
             else:
                 cntMP = Counter()
@@ -208,6 +220,7 @@ class GrammarLearner(BaseLearner):
     def updateHypothesis(self, tran, initialStateReached):
         if initialStateReached: # or (self.H.currState != 0 and self.H.parent.currState == 0):
             ns = 0
+            self.expectedReward = REWARD_ANY
             self.trace.append([]) # new communication cycle
         else:
             ns = self.H.efsm.numberOfStates
@@ -217,10 +230,25 @@ class GrammarLearner(BaseLearner):
         self.H.currState = ns    
 
     def testEstimatedAction(self, pos, neg, action, guard="", \
-            mappingAction="", mappingGuard="", mappingActionNeg="", mappingGuardNeg=""):
+            mappingAction=None, mappingGuard=None, key="", mappingActionNeg=None, mappingGuardNeg=None):
         efsm = EFSM()
         tran = Transition('','',0, action, guard)
         mappingTran = Transition('','',0, mappingAction, mappingGuard) if mappingAction else None
+        mappingTranNeg = Transition('','',0, mappingActionNeg, mappingGuardNeg) if mappingActionNeg else mappingTran
+        for input, outs in neg.items():
+            if mappingTranNeg:
+                for (output, feedback) in outs:
+                    efsm.words = list(input) + list(feedback)
+                    y, processed = efsm.processAction(mappingTranNeg, '.')
+                    if not processed:
+                        return False
+            efsm.words = list(input)
+            y, processed = efsm.processAction(tran, '.')
+            if not y or not processed:
+                return False
+            expOut = y + ''.join(efsm.output)
+            if any([expOut == output for (output, feedback) in outs]):
+                return False
         for input, outs in pos.items():
             if mappingTran:
                 for (output, feedback) in outs:
@@ -235,28 +263,96 @@ class GrammarLearner(BaseLearner):
             expOut = y + ''.join(efsm.output)
             if any([expOut != output for (output, feedback) in outs]):
                 return False
-        for input, outs in neg.items():
-            if mappingTran:
-                for (output, feedback) in outs:
-                    efsm.words = list(input) + list(feedback)
-                    y, processed = efsm.processAction(mappingTran, '.')
-                    if not processed:
-                        return False
-            efsm.words = list(input)
-            y, processed = efsm.processAction(tran, '.')
-            if not y or not processed:
-                return False
-            expOut = y + ''.join(efsm.output)
-            if any([expOut == output for (output, feedback) in outs]):
-                return False
         
         self.H.parent.updateTransitionsToState(1, '.', action, guard)
-        if mappingTran:
-            self.H.parent.updateTransitionsToState(0, ';', mappingAction, mappingGuard)
+        if mappingTranNeg:
+            self.H.parent.updateTransitionsToState(0, ';', mappingAction, mappingGuard, None, mappingActionNeg, mappingGuardNeg)
             self.H.parent.efsm.initMappingBySimulation(self.trace)
             self.H.parent.efsm.useOfMapping = MAPPING_FIXED 
+            self.H.parent.efsm.mappingKey = key
         self.learning = False
         return True
+
+    def compareWords(self, input, refFeedback, j, pos, neg):
+        for i in range(len(input)):
+            if input[i][0] == refFeedback[j][0]:
+                step = refFeedback[j].find(input[i][1], 1) if len(input[i]) > 1 else 1
+                if step != -1 and step * (len(input[i])-1) < len(refFeedback[j]) and \
+                    all([refFeedback[j][k*step] == input[i][k] for k in range(len(input[i]))]):
+                    if step == 1: # copy of input
+                        if i + 1 == len(input):
+                            action = getActionSetOutput(getWord(i))
+                            guard = getGuardOnWordCount(i + 1)
+                            if self.testEstimatedAction(pos, neg, action, guard):
+                                return True
+                            action = getActionSetOutput(getWord(i) + " + ' '")
+                            guard = getGuardOnWordCount(i + 1)
+                            if self.testEstimatedAction(pos, neg, action, guard):
+                                return True
+                        endIdx = -1
+                        for k in range(i + 1, min(len(input), len(refFeedback))):
+                            if input[k] != refFeedback[k]:
+                                endIdx = k
+                                break
+                        if endIdx == -1 or endIdx > i + 1:
+                            if endIdx == -1 and len(input) > len(refFeedback):
+                                endIdx = len(refFeedback)
+                            action = getActionSetOutput(getFunJoin(getWords(i))) if endIdx == -1 else \
+                                getActionSetOutput(getFunJoin(getWords(i, endIdx)))
+                            guard = getGuardOnWordCount(max(i+1,endIdx))
+                            if self.testEstimatedAction(pos, neg, action, guard):
+                                return True
+                        endIdx = -1
+                        for k in range(i + 1, min(len(input), i + j + 1)):
+                            if input[k] != refFeedback[j-(k-i)]:
+                                endIdx = k
+                                break
+                        if endIdx == -1 or endIdx > i + 1:
+                            if endIdx == -1 and len(input) > i + j + 1:
+                                endIdx = i + j + 1
+                            action = getActionSetOutput(getFunJoin(getFunReversed(getWords(i)))) if endIdx == -1 else \
+                                getActionSetOutput(getFunJoin(getFunReversed(getWords(i, endIdx))))
+                            guard = getGuardOnWordCount(max(i+1,endIdx))
+                            if self.testEstimatedAction(pos, neg, action, guard):
+                                return True
+                    else: # interleaving
+                        interleavingStr = refFeedback[j][1:step]
+                        if all([refFeedback[j][(k-1)*step+1:k*step] == interleavingStr for k in range(1,len(input[i]))]):
+                            if interleavingStr in input:
+                                idx = input.index(interleavingStr)
+                                action = getActionSetOutput(getFunJoin(getWords(i, i, 0), getWord(idx)))
+                                guard = getGuardOnWordCount(max(i,idx)+1)
+                                if self.testEstimatedAction(pos, neg, action, guard):
+                                    return True
+                            else:
+                                action = getActionSetOutput(getFunJoin(getWords(i, i, 0), getStringCode(interleavingStr)))
+                                guard = getGuardOnWordCount(i+1)
+                                if self.testEstimatedAction(pos, neg, action, guard):
+                                    return True
+
+                if len(refFeedback[j]) == 1 != len(input[i]): # check interleaving by a space
+                    endIdx = -1
+                    for k in range(1, min(len(input[i]), len(refFeedback)-j)):
+                        if len(refFeedback[j+k]) != 1 or input[i][k] != refFeedback[j+k]:
+                            endIdx = k
+                            break
+                    if endIdx == -1 or endIdx > 1:
+                        action = getActionSetOutput(getFunJoin(getWords(i, i, 0))) if endIdx == -1 else \
+                            getActionSetOutput(getFunJoin(getWords(i, i, 0, endIdx)))
+                        guard = getGuardOnWordCount(i+1) if endIdx == -1 else \
+                            connectGuards([getGuardOnWordCount(i+1), getGuardOnWordLength(i, endIdx)])
+                        if self.testEstimatedAction(pos, neg, action, guard):
+                            return True
+                        if (endIdx == -1):# and len(input[i]) < len(refFeedback) - j):
+                            action = getActionSetOutput(getFunJoin(getWords(i, i, 0)) + " + ' '")
+                            guard = getGuardOnWordCount(i + 1)
+                            if self.testEstimatedAction(pos, neg, action, guard):
+                                return True
+                                
+            if input[i][-1] == refFeedback[j][-1]: # check for reversed
+                pass
+            # check for substrings
+        return False
 
     def learnActions(self):
         parent = self.H.parent
@@ -292,159 +388,228 @@ class GrammarLearner(BaseLearner):
                         else:
                             storage[input] = {(output, tuple(feedback))}
                 parent.moveAlong(tran)
-        action = ""
-        guard = ""
+        
         if pos:
-            for input, outs in pos.items():
-                negOuts = neg.get(input, set())
-                for (output, feedback) in outs:
-                    for i in range(len(input)):
-                        if input[i] == output:
-                            action = getActionSetOutput(getWord(i))
-                            guard = getGuardOnWordCount(i + 1)
-                            if self.testEstimatedAction(pos, neg, action, guard):
-                                return
-                    for i in range(len(feedback)):
-                        if feedback[i] == output:
-                            action = getActionOutputMapping(getWord(0))
-                            guard = getGuardOnWordCount(1)
-                            mappingAction = getActionUpdateMapping(getWord(0), getWord(1))
-                            mappingGuard = connectGuards([getGuardOnWordCount(2), getGuardOnMapping(getWord(0), getWord(1))])
-                            if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard):
-                                return
+            (input, outs) = pos.popitem()
+            el = outs.pop()
+            output = el[0].split(' ')
+            outs.add(el)
+            pos[input] = outs
+            if self.compareWords(input, output, 0, pos, neg):
+                return
+            # no clue -> try mapping
+            # check output against feedbacks
+            feedbacks = set([feedback for (_, feedback) in outs])
+            refFeedback = min(feedbacks, key=len)
+            isSingleWord = False
+            if len(refFeedback) == 1 == len(output) and all([len(feedback) == 1 for feedback in feedbacks]): # check letter-wise
+                feedbacks = [feedback[0] for feedback in feedbacks]
+                refFeedback = min(feedbacks, key=len)
+                output = output[0]
+                isSingleWord = True
+            mapKey = getFunJoin(getWords(None, len(input)))
+            action = getActionOutputMapping(mapKey)
+            guard = getGuardOnWordCount(len(input))
+            mappingAction = None
+            mappingGuard = None
+            for i in range(len(refFeedback)-len(output)+1):
+                if all([refFeedback[i+k] == output[k] for k in range(len(output))]):
+                    endIdx = i+len(output) if i + len(output) < len(refFeedback) else i+1
+                    if isSingleWord:
+                        mapVal = getWord(len(input), i, i+len(output)) if i + len(output) < len(refFeedback) \
+                            else getWord(len(input), i)
+                        mappingGuard = connectGuards([getGuardOnWordCount(len(input)+1), getGuardOnWordLength(len(input), endIdx)])
+                    else:
+                        mapVal = getFunJoin(getWords(len(input)+i, len(input)+i+len(output))) if i + len(output) < len(refFeedback) \
+                            else getFunJoin(getWords(len(input)+i))
+                        mappingGuard = getGuardOnWordCount(len(input)+endIdx)
+                    mappingAction = getActionUpdateMapping(mapKey, mapVal)
+                    mappingGuard = connectGuards([mappingGuard, getGuardOnMapping(mapKey, mapVal)])
+                    if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, mapKey):
+                        return
+                    # indexing from the end of feedback
+                    if i + len(output) < len(refFeedback):
+                        if isSingleWord:
+                            mapVal = getWord(len(input), i-len(refFeedback), i+len(output)-len(refFeedback))
+                            mappingGuard = connectGuards([getGuardOnWordCount(len(input)+1), \
+                                getGuardOnWordLength(len(input), len(refFeedback)-i)])
+                        else:
+                            mapVal = getFunJoin(getWords(i-len(refFeedback), i+len(output)-len(refFeedback)))
+                            mappingGuard = getGuardOnWordCount(len(input)+len(refFeedback)-i)
+                    else:
+                        if isSingleWord:
+                            mapVal = getWord(len(input), -len(output))
+                            mappingGuard = connectGuards([getGuardOnWordCount(len(input)+1), getGuardOnWordLength(len(input), len(output))])
+                        else:
+                            mapVal = getFunJoin(getWords(-len(output)))
+                            mappingGuard = getGuardOnWordCount(len(input)+len(output))
+                    mappingAction = getActionUpdateMapping(mapKey, mapVal)
+                    mappingGuard = connectGuards([mappingGuard, getGuardOnMapping(mapKey, mapVal)])
+                    if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, mapKey):
+                        return
+                    break 
+            # get mapping on negative paths
+            if input not in neg:
+                for i, o in pos.items():
+                    if i in neg:
+                        input = i
+                        outs = o
+                        el = outs.pop()
+                        output = el[0].split(' ')
+                        outs.add(el)
+                        break
+            if input in neg:
+                feedbacks = set([feedback for (_, feedback) in neg[input]])
+                refFeedback = min(feedbacks, key=len)
+                if isSingleWord:
+                    output = [output]
+                if len(refFeedback) == 1 == len(output) and all([len(feedback) == 1 for feedback in feedbacks]): # check letter-wise
+                    feedbacks = [feedback[0] for feedback in feedbacks]
+                    refFeedback = min(feedbacks, key=len)
+                    output = output[0]
+                    isSingleWord = True
+                else:
+                    isSingleWord = False
+                for i in range(len(refFeedback)-len(output)+1):
+                    if all([refFeedback[i+k] == output[k] for k in range(len(output))]):
+                        endIdx = i+len(output) if i + len(output) < len(refFeedback) else i+1
+                        if isSingleWord:
+                            mapVal = getWord(len(input), i, i+len(output)) if i + len(output) < len(refFeedback) \
+                                else getWord(len(input), i)
+                            mappingGuardNeg = connectGuards([getGuardOnWordCount(len(input)+1), getGuardOnWordLength(len(input), endIdx)])
+                        else:
+                            mapVal = getFunJoin(getWords(len(input)+i, len(input)+i+len(output))) if i + len(output) < len(refFeedback) \
+                                else getFunJoin(getWords(len(input)+i))
+                            mappingGuardNeg = getGuardOnWordCount(len(input)+endIdx)
+                        mappingActionNeg = getActionUpdateMapping(mapKey, mapVal)
+                        mappingGuardNeg = connectGuards([mappingGuardNeg, getGuardOnMapping(mapKey, mapVal)])
+                        if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, \
+                            mapKey, mappingActionNeg, mappingGuardNeg):
+                            return
+                        break 
 
-        else:
+        if neg:
             # find the shortest feedback
             (input, outs) = min(neg.items(), key=lambda el: len(min(el[1], key=lambda elOutFeed: len(elOutFeed[1]))))
             (refOutput, refFeedback) = min(outs, key=lambda el: len(el[1]))
-            for i in range(len(input)):
-                for j in range(len(refFeedback)):
-                    if input[i][0] == refFeedback[j][0]:
-                        step = refFeedback[j].find(input[i][1], 1) if len(input[i]) > 1 else -1
-                        if step != -1 and step * len(input[i]) <= len(refFeedback[j]) and \
-                            all([refFeedback[j][k*step] == input[i][k] for k in range(len(input[i]))]):
-                            if step == 1: # copy of input
-                                if i + 1 == len(input):
-                                    action = getActionSetOutput(getWord(i))
-                                    guard = getGuardOnWordCount(i + 1)
-                                    if self.testEstimatedAction(pos, neg, action, guard):
-                                        return
-                                endIdx = -1
-                                for k in range(i + 1, min(len(input), len(refFeedback))):
-                                    if input[k] != refFeedback[k]:
-                                        endIdx = k
-                                        break
-                                if endIdx == -1 or endIdx > i + 1:
-                                    action = getActionSetOutput(getFunJoin(getWords(i), ' ')) if endIdx == -1 else \
-                                        getActionSetOutput(getFunJoin(getWords(i, endIdx), ' '))
-                                    guard = "" if endIdx == -1 else getGuardOnWordCount(endIdx)
-                                    if self.testEstimatedAction(pos, neg, action, guard):
-                                        return
-                                endIdx = -1
-                                for k in range(i + 1, min(len(input), i + j + 1)):
-                                    if input[k] != refFeedback[j-(k-i)]:
-                                        endIdx = k
-                                        break
-                                if endIdx == -1 or endIdx > i + 1:
-                                    action = getActionSetOutput(getFunJoin(getFunReversed(getWords(i)), ' ')) if endIdx == -1 else \
-                                        getActionSetOutput(getFunJoin(getFunReversed(getWords(i, endIdx)), ' '))
-                                    guard = "" if endIdx == -1 else getGuardOnWordCount(endIdx)
-                                    if self.testEstimatedAction(pos, neg, action, guard):
-                                        return
-                            else: # interleaving
-                                pass
-                    if input[i][-1] == refFeedback[j][-1]: # check for reversed
-                        pass
-                    # check for substrings
+            for j in range(len(refFeedback)):
+                if self.compareWords(input, refFeedback, j, pos, neg):
+                    return
 
-            # no clue -> try mapping
-            (input, outs) = max(neg.items(), key=lambda el: len(el[1]))
-            if len(outs) > 1: # several outputs and feedbacks to the same input
-                # find common part of feedbacks
-                (refOutput, refFeedback) = min(outs, key=lambda el: len(el[1]))
-                outputs = set([output for (output, _) in outs])
-                feedbacks = set([feedback for (_, feedback) in outs])
-                isSingleWord = False
-                if len(refFeedback) == 1 and all([len(feedback) == 1 for feedback in feedbacks]): # check letter-wise
-                    feedbacks = [feedback[0] for feedback in feedbacks]
-                    refFeedback = min(feedbacks, key=len)
-                    isSingleWord = True
-                for j in range(len(refFeedback)):
-                    if all([refFeedback[j] == feedback[j] for feedback in feedbacks]):
-                        endIdx = -1
-                        for k in range(j + 1, len(refFeedback)):
-                            if any([refFeedback[k] != feedback[k] for feedback in feedbacks]):
-                                endIdx = k
-                                break
-                        if endIdx == -1:
-                            #if any([len(refFeedback) < len(feedback) for feedback in feedbacks]):
-                            # could be set to variable end like [j:] instead of [j:endIdx]    
-                            endIdx = len(refFeedback)
+        # no clue -> try mapping
+        (input, outs) = max(neg.items(), key=lambda el: len(el[1]))
+        (refOutput, refFeedback) = min(outs, key=lambda el: len(el[1]))
+        if len(outs) > 1: # several outputs and feedbacks to the same input
+            # find common part of feedbacks
+            outputs = set([output for (output, _) in outs])
+            feedbacks = set([feedback for (_, feedback) in outs])
+            if len(feedbacks) == 1 and ' '.join(refFeedback) not in outputs:
+                mapKey = getFunJoin(getWords(None, len(input)))
+                mapVal = getFunJoin(getWords(len(input)))
+                action = getActionOutputMapping(mapKey)
+                guard = getGuardOnWordCount(len(input))
+                mappingActionNeg = getActionUpdateMapping(mapKey, mapVal)
+                mappingGuardNeg = getGuardOnWordCount(len(input)+1)
+                mappingGuardNeg = connectGuards([mappingGuardNeg, getGuardOnMapping(mapKey, mapVal)])
+                if not pos:
+                    mappingAction = mappingActionNeg
+                    mappingActionNeg = None
+                    mappingGuard = mappingGuardNeg
+                    mappingGuardNeg = None
+                if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, mapKey,\
+                    mappingActionNeg, mappingGuardNeg):
+                    return
+            isSingleWord = False
+            if len(refFeedback) == 1 and all([len(feedback) == 1 for feedback in feedbacks]): # check letter-wise
+                feedbacks = [feedback[0] for feedback in feedbacks]
+                refFeedback = min(feedbacks, key=len)
+                isSingleWord = True
+            for j in range(len(refFeedback)):
+                if all([refFeedback[j] == feedback[j] for feedback in feedbacks]):
+                    endIdx = -1
+                    for k in range(j + 1, len(refFeedback)):
+                        if any([refFeedback[k] != feedback[k] for feedback in feedbacks]):
+                            endIdx = k
+                            break
+                    if endIdx == -1:
+                        #if any([len(refFeedback) < len(feedback) for feedback in feedbacks]):
+                        # could be set to variable end like [j:] instead of [j:endIdx]    
+                        endIdx = len(refFeedback)
+                    out = refFeedback[j:endIdx] if isSingleWord else ' '.join(refFeedback[j:endIdx])
+                    while j < endIdx and out in outputs:
+                        endIdx -= 1
                         out = refFeedback[j:endIdx] if isSingleWord else ' '.join(refFeedback[j:endIdx])
-                        while j < endIdx and out in outputs:
-                            endIdx -= 1
-                            out = refFeedback[j:endIdx] if isSingleWord else ' '.join(refFeedback[j:endIdx])
-                        if j < endIdx:
-                            mapKey = getFunJoin(getWords(None, len(input)), ' ')
-                            mapVal = getWord(len(input), j, endIdx) if isSingleWord else \
-                                getFunJoin(getWords(len(input)+j, len(input)+endIdx), ' ')
-                            action = getActionOutputMapping(mapKey)
-                            guard = ""
-                            mappingAction = getActionUpdateMapping(mapKey, mapVal)
-                            mappingGuard = getGuardOnWordLength(len(input), endIdx) if isSingleWord else \
-                                getGuardOnWordCount(len(input)+endIdx)
-                            mappingGuard = connectGuards([mappingGuard, getGuardOnMapping(mapKey, mapVal)])
-                            if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard):
-                                return
-                    if all([refFeedback[-j-1] == feedback[-j-1] for feedback in feedbacks]):
-                        endIdx = -1
-                        for k in range(j + 1, len(refFeedback)):
-                            if any([refFeedback[-k-1] != feedback[-k-1] for feedback in feedbacks]):
-                                endIdx = k
-                                break
-                        if endIdx == -1:
-                            #if any([len(refFeedback) < len(feedback) for feedback in feedbacks]):
-                            # could be set to variable end like [j:] instead of [j:endIdx]    
-                            endIdx = len(refFeedback)
-                        out = refFeedback[-endIdx:len(refFeedback)-j] if isSingleWord else ' '.join(refFeedback[-endIdx:len(refFeedback)-j])
-                        while j < endIdx and out in outputs:
-                            endIdx -= 1
-                            out = refFeedback[-endIdx:len(refFeedback)-j] if isSingleWord \
-                                else ' '.join(refFeedback[-endIdx:len(refFeedback)-j])
-                        if j < endIdx:
-                            mapKey = getFunJoin(getWords(None, len(input)), ' ')
-                            if j == 0:
-                                mapVal = getWord(len(input), -endIdx) if isSingleWord else \
-                                    getFunJoin(getWords(-endIdx), ' ')
-                            else:
-                                mapVal = getWord(len(input), -endIdx, -j) if isSingleWord else \
-                                    getFunJoin(getWords(-endIdx, -j), ' ')
-                            action = getActionOutputMapping(mapKey)
-                            guard = ""
-                            mappingAction = getActionUpdateMapping(mapKey, mapVal)
-                            mappingGuard = getGuardOnWordLength(len(input), endIdx) if isSingleWord else \
-                                getGuardOnWordCount(len(input)+endIdx)
-                            mappingGuard = connectGuards([mappingGuard, getGuardOnMapping(mapKey, mapVal)])
-                            if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard):
-                                return                     
-            for i in range(len(input)):
-                action = getActionOutputMapping(getWord(i))
-                guard = getGuardOnWordCount(i + 1)
-                for j in range(len(refFeedback)):
-                    k = len(input) + j
-                    mappingAction = getActionUpdateMapping(getWord(i), getWord(k))
-                    mappingGuard = connectGuards([getGuardOnWordCount(k + 1), getGuardOnMapping(getWord(i), getWord(k))])
-                    if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard):
-                        return
-                
-                
-        
-        #self.H.parent.updateTransitionsToState(1, '.', getActionOutputMapping(getWord(0)))
-        #self.H.parent.updateTransitionsToState(0, ';', getActionUpdateMapping(getWord(0), getWord(1)), \
-        #    connectGuards([getGuardOnWordCount(2), getGuardOnMapping(getWord(0), getWord(1))]))
-        #self.H.parent.efsm.initMappingBySimulation(self.trace)
-        #self.H.parent.efsm.useOfMapping = MAPPING_FIXED
-        
+                    if j < endIdx:
+                        mapKey = getFunJoin(getWords(None, len(input)))
+                        mapVal = getWord(len(input), j, endIdx) if isSingleWord else \
+                            getFunJoin(getWords(len(input)+j, len(input)+endIdx))
+                        action = getActionOutputMapping(mapKey)
+                        guard = getGuardOnWordCount(len(input))
+                        mappingActionNeg = getActionUpdateMapping(mapKey, mapVal)
+                        mappingGuardNeg = connectGuards([getGuardOnWordCount(len(input)+1), getGuardOnWordLength(len(input), endIdx)])\
+                            if isSingleWord else getGuardOnWordCount(len(input)+endIdx)
+                        mappingGuardNeg = connectGuards([mappingGuardNeg, getGuardOnMapping(mapKey, mapVal)])
+                        if not pos:
+                            mappingAction = mappingActionNeg
+                            mappingActionNeg = None
+                            mappingGuard = mappingGuardNeg
+                            mappingGuardNeg = None
+                        if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, mapKey,\
+                            mappingActionNeg, mappingGuardNeg):
+                            return
+                if all([refFeedback[-j-1] == feedback[-j-1] for feedback in feedbacks]):
+                    endIdx = -1
+                    for k in range(j + 1, len(refFeedback)):
+                        if any([refFeedback[-k-1] != feedback[-k-1] for feedback in feedbacks]):
+                            endIdx = k
+                            break
+                    if endIdx == -1:
+                        #if any([len(refFeedback) < len(feedback) for feedback in feedbacks]):
+                        # could be set to variable end like [j:] instead of [j:endIdx]    
+                        endIdx = len(refFeedback)
+                    out = refFeedback[-endIdx:len(refFeedback)-j] if isSingleWord else ' '.join(refFeedback[-endIdx:len(refFeedback)-j])
+                    while j < endIdx and out in outputs:
+                        endIdx -= 1
+                        out = refFeedback[-endIdx:len(refFeedback)-j] if isSingleWord \
+                            else ' '.join(refFeedback[-endIdx:len(refFeedback)-j])
+                    if j < endIdx:
+                        mapKey = getFunJoin(getWords(None, len(input)))
+                        if j == 0:
+                            mapVal = getWord(len(input), -endIdx) if isSingleWord else \
+                                getFunJoin(getWords(-endIdx))
+                        else:
+                            mapVal = getWord(len(input), -endIdx, -j) if isSingleWord else \
+                                getFunJoin(getWords(-endIdx, -j))
+                        action = getActionOutputMapping(mapKey)
+                        guard = getGuardOnWordCount(len(input))
+                        mappingActionNeg = getActionUpdateMapping(mapKey, mapVal)
+                        mappingGuardNeg = connectGuards([getGuardOnWordCount(len(input)+1), getGuardOnWordLength(len(input), endIdx)])\
+                            if isSingleWord else getGuardOnWordCount(len(input)+endIdx)
+                        mappingGuardNeg = connectGuards([mappingGuardNeg, getGuardOnMapping(mapKey, mapVal)])
+                        if not pos:
+                            mappingAction = mappingActionNeg
+                            mappingActionNeg = None
+                            mappingGuard = mappingGuardNeg
+                            mappingGuardNeg = None
+                        if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, mapKey,\
+                            mappingActionNeg, mappingGuardNeg):
+                            return                   
+        for i in range(len(input)):
+            mapKey = getWord(i)
+            action = getActionOutputMapping(mapKey)
+            guard = getGuardOnWordCount(i + 1)
+            for j in range(len(refFeedback)):
+                k = len(input) + j
+                mappingActionNeg = getActionUpdateMapping(mapKey, getWord(k))
+                mappingGuardNeg = connectGuards([getGuardOnWordCount(k + 1), getGuardOnMapping(mapKey, getWord(k))])
+                if not pos:
+                    mappingAction = mappingActionNeg
+                    mappingActionNeg = None
+                    mappingGuard = mappingGuardNeg
+                    mappingGuardNeg = None
+                if self.testEstimatedAction(pos, neg, action, guard, mappingAction, mappingGuard, mapKey,\
+                    mappingActionNeg, mappingGuardNeg):
+                    return
 
     def createPlaceForH(self, id, parentBase=None, updateH=False):
         if parentBase and parentBase not in self.possibleNodes:
@@ -469,10 +634,10 @@ class GrammarLearner(BaseLearner):
         self.createPlaceForH(self.maxId-1, parentBase, True)
         
     def checkH(self):
-        if self.H.currState == 0 and self.learning and len(self.H.efsm.transitions[0]) > 2:
+        if self.H.currState == 0 and self.learning:
             if self.H.parent.efsm.useOfMapping or self.expectedReward == REWARD_NONNEGATIVE:
                 self.learning = False
-            else:
+            elif len(self.trace) > 3:
                 self.H.parent.efsm.trySpecializeWith(self.H.efsm, self.trace)
                 self.learnActions()            
 
@@ -508,8 +673,8 @@ class GrammarLearner(BaseLearner):
                 self.H.parent.currState = NULL_STATE
             self.updateHypothesis(self.trace[-1][-1], globalState != 0 and self.G.currState == 0) # last tran added in startLearning
             
-        if self.H.parent.currState != NULL_STATE and self.H.isSpecializationOfParent(self.X) and \
-            self.H.parent.parent in self.possibleNodes:
+        if self.H.parent.currState != NULL_STATE and \
+            self.H.parent.parent in self.possibleNodes:#self.H.isSpecializationOfParent(self.X) and \
             #self.H.updateCurrentState(self.trace[-1])
             #self.maxId = self.H.tryGeneralize(self.maxId)
             pass

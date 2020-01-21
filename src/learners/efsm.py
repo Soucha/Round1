@@ -63,6 +63,9 @@ def compareRewards(r1, r2):
             return 0
     return 0 # r1, r2 are different REWARD_NEGATIVE, REWARD_NEUTRAL, or REWARD_POSITIVE
 
+def getStringCode(stringValue):
+    return "'" + stringValue + "'"
+
 def getActionBeginNewWord():
     return "self.words[len(self.words):len(self.words)] = [''] if self.words[-1] else []"
 
@@ -81,8 +84,8 @@ def getActionSetOutput(output):
 def getActionUpdateMapping(k, v):
     return "self.mapping[" + k + "] = " + v + "; " + getActionClearWords()
 
-def getActionOutputMapping(k):
-    return getActionSetOutput("self.mapping.get(" + k + ", " + SYMBOL_UNKNOWN_STR + ")")
+def getActionOutputMapping(k, defaultValue=SYMBOL_UNKNOWN_STR): 
+    return getActionSetOutput("self.mapping.get(" + k + ", " + defaultValue + ")")
 
 def getGuardOnOutput(requireOutput):
     if requireOutput:
@@ -94,6 +97,9 @@ def getGuardOnWordCount(minCount):
 
 def getGuardOnWordLength(wordIdx, minLen):
     return "len(" + getWord(wordIdx) + ") >= " + str(minLen)
+
+def getGuardOnPresenceInMapping(key):
+    return key + " in self.mapping"
 
 def getGuardOnMapping(key, value):
     return key + " not in self.mapping or self.mapping[" + key + "] == " + value
@@ -114,8 +120,8 @@ def connectGuards(guards, conjunction="and"):
         s += " " + conjunction + " (" + g + ")"
     return s
 
-def getFunJoin(words, separator=""):
-    return "'" + separator + "'.join(" + words + ")"
+def getFunJoin(words, separator="' '"):
+    return separator + ".join(" + words + ")"
 
 def getFunReversed(words):
     return "reversed(" + words + ")"
@@ -168,6 +174,11 @@ class Transition:
     def copy(self):
         return Transition(str(self.input), str(self.output), int(self.reward), str(self.action), str(self.guard))
 
+    def isLike(self, other):
+        if self.input == other.input and self.output == other.output and self.reward == other.reward:
+            return True
+        return False
+        
     def isSpecializationOf(self, other):
         if self.input == other.input and self.output == other.output and self.reward == other.reward:
             return False
@@ -215,6 +226,7 @@ class EFSM:
         self.isFSM = isFSM
         self.mapping = {}
         self.useOfMapping = MAPPING_NO
+        self.mappingKey = ""
         self.reset()
 
     def __str__(self):
@@ -251,8 +263,9 @@ class EFSM:
        
     def reset(self):
         self.words = ['']
-        self.output = ""
+        self.output = []
         self.y = ''
+        
         if self.useOfMapping != MAPPING_FIXED:
             self.mapping = {}
               
@@ -263,6 +276,7 @@ class EFSM:
             efsm.mapping = self.mapping.copy()
         if self.useOfMapping != MAPPING_NO:
             efsm.useOfMapping = MAPPING_FIXED
+            efsm.mappingKey = self.mappingKey
         for state in self.transitions:
             efsm.transitions[state] = {}
             for tran, ns in self.transitions[state].items():
@@ -311,12 +325,12 @@ class EFSM:
                     and compareRewards(reward, tran.reward):
                     if x == tran.input:
                         if y == tran.output:
-                            if not checkGuards or not tran.guard or eval(tran.guard):
+                            if not checkGuards or not tran.guard or eval(tran.guard): # or (x == ' ' and y == '.'):
                                 return tran
                             else:
                                 return None
                         if not checkGuards or not tran.guard or eval(tran.guard) or \
-                            (x == ' ' and  not tran.output and (not tmpTran or tmpTran.input != ' ')):
+                            (x == ' ' and  not tran.output and y != '.' and (not tmpTran or tmpTran.input != ' ')):
                             tmpTran = tran
                             inputNotFound = True
                         elif not tmpTran or (tmpTran.input != x):
@@ -334,6 +348,16 @@ class EFSM:
                 if ns == targetState and tran.input == x:
                     trans.append((state, tran))
         return trans
+
+    def isOnNegativeRewardPath(self, targetState):
+        if targetState == 0:
+            return False
+        for state in self.transitions:
+            for tran, ns in self.transitions[state].items():
+                if ns == targetState and (tran.reward == REWARD_NEGATIVE or \
+                    (state != ns and self.isOnNegativeRewardPath(state))):
+                    return True
+        return False
 
     def findTransition(self, estimatedStartState, input):
         statesToCheck = [estimatedStartState]
@@ -394,44 +418,6 @@ class EFSM:
             if t:
                 return self.transitions.get(state).get(t)
         return NULL_STATE
-
-    def getEndPathState(self, state, path):
-        for input in path:
-            tran = self.getTransition(state, input)
-            if not tran:
-                return NULL_STATE
-            nextState = self.getNextState(state, tran)
-            if nextState == NULL_STATE:
-                return NULL_STATE
-            state = nextState
-        return state
-
-    def getAccessSequence(self, state):
-        if state == 0:
-            return ""
-        #TODO
-        return ""
-
-    def hasNonnegativeRewardTransition(self):
-        return len(self.transitions) > 0
-
-    def hasConflictingTransition(self, other):
-        # TODO bfs comparison
-        for state in self.transitions:
-            if state in other.transitions:
-                for tran in self.transitions[state]:
-                    for oTran in other.transitions[state]:
-                        if tran.input == oTran.input and \
-                            ((tran.output == oTran.output and tran.reward != oTran.reward) or \
-                            (tran.output != oTran.output and tran.reward != -1 and oTran.reward != -1)):
-                                return True
-        return False
-
-    def join(self, other):
-        for state in other.transitions:
-            if state not in self.transitions:
-                self.transitions[state] = {}
-            self.transitions[state].update(other.transitions[state])
 
     def hasTransitionWithDifferentReward(self, state, output, reward):
         for tran in self.transitions[state]:
@@ -569,6 +555,7 @@ class EFSM:
 
     def initMappingBySimulation(self, trace):
         self.reset()
+        self.mapping = {}
         for sim in trace:
             #if all(tran.reward != REWARD_NEGATIVE for tran in sim):
             state = 0
@@ -579,6 +566,8 @@ class EFSM:
                     t = self.getTransition(state, tran.input, tran.output, tran.reward, False)
                 if t.action:
                     output, processed = self.processAction(t, tran.input)
+                    if output and output != tran.output:
+                        self.output = []
                 state = self.getNextState(state, t)
 
     def long_substr(data):
@@ -598,8 +587,9 @@ class EFSM:
                 self.addTransition(toState, tran, ns)
             del self.transitions[fromState]
 
-    def separateState(self, state):
+    def separateState(self, state, input):
         newState = NULL_STATE
+        relTran = None
         if state in self.transitions:
             newState = self.numberOfStates
             prohibitedInputs = ""
@@ -607,7 +597,10 @@ class EFSM:
             for tran, ns in self.transitions[state].items():
                 if ns == state:
                     ns = newState
-                    selfloops.append(tran.copy())
+                    if tran.input != input:
+                        selfloops.append(tran.copy())
+                    else:
+                        relTran = tran
                 elif tran.input not in LABELS:
                     prohibitedInputs += tran.input
                 self.addTransition(newState, tran, ns)
@@ -616,7 +609,7 @@ class EFSM:
                 if tran.input == LABEL_OTHERS and prohibitedInputs:
                     tran.guard = getGuardOnProhibitedInputs(getProhibitedInputsFromGuard(tran.guard) + prohibitedInputs)
                 self.addTransition(state, tran, state)
-        return newState
+        return newState, relTran
 
     def getCommonPrefix(self, transitions):
         prefix = []
@@ -646,45 +639,50 @@ class EFSM:
         # all start with the same prefix
         prefix = self.getCommonPrefix(transitions)
         if prefix:
-            lastState = self.separateState(state)
+            lastState, selfloopTran = self.separateState(state, prefix[0].input)
+            if selfloopTran:
+                prefix[0] = selfloopTran
             for tran in prefix[:-1]:
                 newState = self.numberOfStates
                 self.addTransition(state, tran.copy(), newState)
                 state = newState
             self.addTransition(state, prefix[-1].copy(), lastState)
             state = lastState
-            for i in range(len(transitions)):
-                del transitions[i][:len(prefix)]
+            transitions = [seq[len(prefix):] for seq in transitions]
+            #for i in range(len(transitions)):
+                #del transitions[i][:len(prefix)]
             #refSeq = min(transitions, key=len)
         
         # all end with the same suffix
         suffix = self.getCommonSuffix(transitions)
         if suffix:
-            targetState = lastState = self.separateState(state)
+            lastState, selfloopTran = self.separateState(state, suffix[-1].input)
+            targetState = lastState
+            if selfloopTran:
+                suffix[-1] = selfloopTran
             for tran in suffix[:-1]: #note that suffix is reversed, i.e. the last tran is the first
                 newState = self.numberOfStates
                 self.addTransition(newState, tran.copy(), targetState)
                 targetState = newState
             self.addTransition(state, suffix[-1].copy(), targetState)
-            for i in range(len(transitions)):
-                del transitions[i][-len(suffix):]
+            transitions = [seq[:-len(suffix)] for seq in transitions]
+            #for i in range(len(transitions)):
+             #   del transitions[i][-len(suffix):]
             #refSeq = min(transitions, key=len)
             
         # all contain the same subsequence
 
+        return lastState, self.getRewards(relTran, transitions)
+    
+    def getRewards(self, relTran, transitions):
         rewards = set()
         if REWARD_NEGATIVE <= relTran.reward <= REWARD_POSITIVE:
             rewards.add(relTran.reward)
         else:
             for seq in transitions:
                 rewards.update([tran.reward for tran in seq])               
-        return lastState, rewards
+        return rewards
     
-    def checkRewards(self, state, tran, nextState, transitions):
-        expReward = transitions[0][0].reward
-        if all(all(tran.reward == expReward for tran in seq) for seq in transitions) and expReward != tran.reward:
-            self.updateTransition(state, tran, expReward)
-
     def duplicateTransitions(self, stateFrom, stateTo):
         stateMap = {stateFrom : self.numberOfStates, stateTo : stateTo}
         stack = [stateFrom]
@@ -798,6 +796,217 @@ class EFSM:
                     break
         return stateOrder
 
+    def trySpecializeWith(self, fsm, traces):
+        mappedTraces, conditions = self.mapTracesToTransitions(traces)
+        stateOrder = self.getStateOrder(conditions)
+        duplicatedStates = {}
+        i = 0
+        while i < len(stateOrder):
+            nextState = state = stateOrder[i]
+            movedState = NULL_STATE
+            for k in [2, 3]:    # 2: selfloops state->state, 3: progress transitions
+                for relTran in conditions[state][k]:
+                    transitions = [trace[trace[-1]+1] for trace in mappedTraces \
+                        if trace[trace[-1]] == state and trace[trace[-1]+2] == relTran]
+                    tranCount = len([trace for trace in mappedTraces if trace[trace[-1]] == state])
+                    if movedState != NULL_STATE:
+                        nextState = state = movedState
+                        tmpRelTran = relTran
+                        relTran = self.getTransition(state, relTran.input, relTran.output, relTran.reward, False)
+                    if k == 3:
+                        nextState = self.getNextState(state, relTran)
+                        rewards = set([seq[-1].reward for seq in transitions])
+                    elif len(transitions) == tranCount: #if relTran.input == LABEL_OTHERS and any(len(seq) > 1 for seq in transitions):
+                        if len(transitions) > 2:
+                            newState, rewards = self.analyseTransitions(state, relTran, transitions)
+                            if newState != state:
+                                movedState = newState
+                                tmpRelTran = relTran
+                                if rewards:
+                                    relTran = self.getTransition(state, relTran.input, relTran.output, relTran.reward, False)
+
+                                #checkothers
+                        else:
+                            rewards = self.getRewards(relTran, transitions)
+                            if state in duplicatedStates:
+                                dupTransitions = {}
+                                for dupState in duplicatedStates[state]:
+                                    dupTransitions[dupState] = []
+                                for trace in mappedTraces:
+                                    for idx in range(0, len(trace)-3, 3):
+                                        if trace[idx] in duplicatedStates[state] and trace[idx+2].isLike(relTran):
+                                            dupTransitions[trace[idx]].append(trace[idx+1])
+                                for _, dupTrans in dupTransitions.items():
+                                    if len(transitions) + len(dupTrans) > 2:
+                                        newState, _ = self.analyseTransitions(state, relTran, transitions + dupTrans)
+                                        if newState != state:
+                                            movedState = newState
+                                            tmpRelTran = relTran
+                                            if rewards:
+                                                relTran = self.getTransition(state, relTran.input, relTran.output, relTran.reward, False)
+                                            break                   
+                    else: # self loops and single transitions
+                        rewards = self.getRewards(relTran, transitions) #set([seq[-1].reward for seq in transitions])
+                    
+                    if len(rewards) > 1:
+                        if REWARD_NEGATIVE in rewards:
+                            stateMap = self.duplicateTransitions(nextState, 0)
+                            for a, b in stateMap.items():
+                                if a in duplicatedStates:
+                                    duplicatedStates[a].add(b)
+                                else:
+                                    duplicatedStates[a] = {b}
+                                if b in duplicatedStates:
+                                    duplicatedStates[b].add(a)
+                                else:
+                                    duplicatedStates[b] = {a}
+                            newTran = relTran.copy()
+                            newTran.reward = REWARD_NEGATIVE
+                            self.addTransition(state, newTran, stateMap[nextState])
+                            if state != nextState:
+                                transitionsToUpdate = []
+                                for t, ns in self.transitions[state].items():
+                                    if ns == nextState and t != relTran:
+                                        transitionsToUpdate.append(t)
+                                for t in transitionsToUpdate:
+                                    newt = t.copy()
+                                    newt.reward = REWARD_NEGATIVE
+                                    self.addTransition(state, newt, stateMap[nextState])
+                                    if compareRewards(t.reward, REWARD_NEGATIVE):
+                                        r = REWARD_NEUTRAL if t.reward == REWARD_NONPOSITIVE else REWARD_NONNEGATIVE
+                                        self.updateTransition(state, t, r) # TODO update mappedTraces
+                            self.updateMappedTraces(mappedTraces, stateMap)
+                            self.updateStateOrder(stateOrder, conditions, stateMap, i)
+                            rewards.discard(REWARD_NEGATIVE)
+                            if len(rewards) > 1:
+                                self.updateTransition(state, relTran, REWARD_NONNEGATIVE)
+                            else:
+                                self.updateTransition(state, relTran, rewards.pop())
+                        else:
+                            self.updateTransition(state, relTran, REWARD_NONNEGATIVE)
+                    elif rewards:
+                        reward = rewards.pop()
+                        if reward != REWARD_NEGATIVE and reward != relTran.reward:
+                            self.updateTransition(state, relTran, reward)
+
+                    if movedState != NULL_STATE:
+                        nextState = state = stateOrder[i]
+                        relTran = tmpRelTran
+                    for j in range(len(mappedTraces)):
+                        if mappedTraces[j][mappedTraces[j][-1]] == state and mappedTraces[j][mappedTraces[j][-1]+2] == relTran:
+                            mappedTraces[j][-1] += 3
+                            #del mappedTraces[j][:3]
+                            #if len(mappedTraces[j]) <= 2:
+                                #mappedTraces.pop(j)
+            i += 1
+        # merge back where possible
+
+    def isSpecializationOf(self, other, X=set(), estimated=False):
+        if not estimated and self.useOfMapping == MAPPING_FIXED == other.useOfMapping and \
+            not set(self.mapping.items()).issubset(set(other.mapping.items())):
+            return False
+        # simulation
+        hasSpecializedTransition = False
+        stateMap = {0 : 0}
+        statesToCheck = [0]
+        while statesToCheck:
+            state = statesToCheck.pop(0)
+            oState = stateMap[state]
+            if state in self.transitions:
+                if oState not in other.transitions:
+                    return False
+                uniqueOutput = None
+                uniqueOutputForEach = set()
+                outputs = set()
+                inputs = Counter()
+                for tran, nextState in self.transitions[state].items():
+                    t = other.getTransition(oState, tran.input, tran.output, tran.reward, False)
+                    if t:
+                        if uniqueOutput and uniqueOutput != tran.output:
+                            return False
+                        if tran.input != t.input or tran.output != t.output or tran.reward != t.reward:
+                            if not tran.isSpecializationOf(t):
+                                return False
+                            hasSpecializedTransition = True
+                        if t.input == LABEL_FORALL:
+                            if tran.reward == REWARD_NEGATIVE:
+                                if t.output == LABEL_EXISTS:
+                                    outputs.add(tran.output)
+                            elif not uniqueOutput and (t.output == LABEL_EXISTS or len(t.output) == 1) and tran.output != LABEL_EXISTS:
+                                uniqueOutput = tran.output 
+                        elif t.input == LABEL_EXISTS == t.output:
+                            if tran.reward == REWARD_NEGATIVE:
+                                inputs[tran.output] += 1
+                            else:
+                                for o in tran.output:
+                                    if o in uniqueOutputForEach:
+                                        return False
+                                    uniqueOutputForEach.add(o)    
+                        ns = other.getNextState(oState, t)
+                        if nextState not in stateMap:
+                            stateMap[nextState] = ns
+                            statesToCheck.append(nextState)
+                        elif stateMap[nextState] != ns:
+                            return False
+                    else:
+                        return False # not covered
+                if uniqueOutput and self.getTransition(state, None, uniqueOutput, REWARD_NEGATIVE):
+                    # there is transition x/uniqueOutput with reward -1 that contradicts other's LABEL_FORALL/LABEL_EXISTS
+                    return False
+                if X:
+                    if (outputs and X == outputs) or (inputs and inputs.most_common(1)[0][1] == len(X)):
+                        return False
+        return len(self.transitions) == 0 or hasSpecializedTransition or \
+            (self.useOfMapping == MAPPING_FIXED and other.useOfMapping != MAPPING_FIXED)
+
+
+
+
+### not in use
+
+    def getEndPathState(self, state, path):
+        for input in path:
+            tran = self.getTransition(state, input)
+            if not tran:
+                return NULL_STATE
+            nextState = self.getNextState(state, tran)
+            if nextState == NULL_STATE:
+                return NULL_STATE
+            state = nextState
+        return state
+
+    def getAccessSequence(self, state):
+        if state == 0:
+            return ""
+        #TODO
+        return ""
+
+    def hasNonnegativeRewardTransition(self):
+        return len(self.transitions) > 0
+
+    def hasConflictingTransition(self, other):
+        # TODO bfs comparison
+        for state in self.transitions:
+            if state in other.transitions:
+                for tran in self.transitions[state]:
+                    for oTran in other.transitions[state]:
+                        if tran.input == oTran.input and \
+                            ((tran.output == oTran.output and tran.reward != oTran.reward) or \
+                            (tran.output != oTran.output and tran.reward != -1 and oTran.reward != -1)):
+                                return True
+        return False
+
+    def join(self, other):
+        for state in other.transitions:
+            if state not in self.transitions:
+                self.transitions[state] = {}
+            self.transitions[state].update(other.transitions[state])
+
+    def checkRewards(self, state, tran, nextState, transitions):
+        expReward = transitions[0][0].reward
+        if all(all(tran.reward == expReward for tran in seq) for seq in transitions) and expReward != tran.reward:
+            self.updateTransition(state, tran, expReward)
+
     def trySpecializeWithNew(self, fsm, traces):
         mappedTraces, conditions = self.mapTracesToTransitions(traces)
         stateOrder = self.getStateOrder(conditions)
@@ -892,79 +1101,6 @@ class EFSM:
                                 #mappedTraces.pop(j)
             i += 1
 
-    def trySpecializeWith(self, fsm, traces):
-        mappedTraces, conditions = self.mapTracesToTransitions(traces)
-        stateOrder = self.getStateOrder(conditions)
-        i = 0
-        while i < len(stateOrder):
-            nextState = state = stateOrder[i]
-            movedState = NULL_STATE
-            for k in [2, 3]:    # 2: selfloops state->state, 3: progress transitions
-                for relTran in conditions[state][k]:
-                    transitions = [trace[trace[-1]+1] for trace in mappedTraces \
-                        if trace[trace[-1]] == state and trace[trace[-1]+2] == relTran]
-                    if movedState != NULL_STATE:
-                        nextState = state = movedState
-                        tmpRelTran = relTran
-                        relTran = self.getTransition(state, relTran.input, relTran.output, relTran.reward, False)
-                    if k == 3:
-                        nextState = self.getNextState(state, relTran)
-                        rewards = set([seq[-1].reward for seq in transitions])
-                    elif relTran.input == LABEL_OTHERS and len(transitions) > 2 and any(len(seq) > 1 for seq in transitions):
-                        newState, rewards = self.analyseTransitions(state, relTran, transitions)
-                        if newState != state:
-                            movedState = newState
-                            tmpRelTran = relTran
-                            if rewards:
-                                relTran = self.getTransition(state, relTran.input, relTran.output, relTran.reward, False)
-                    else: # self loops and single transitions
-                        rewards = set([seq[-1].reward for seq in transitions])
-                    
-                    if len(rewards) > 1:
-                        if REWARD_NEGATIVE in rewards:
-                            stateMap = self.duplicateTransitions(nextState, 0)
-                            newTran = relTran.copy()
-                            newTran.reward = REWARD_NEGATIVE
-                            self.addTransition(state, newTran, stateMap[nextState])
-                            if state != nextState:
-                                transitionsToUpdate = []
-                                for t, ns in self.transitions[state].items():
-                                    if ns == nextState and t != relTran:
-                                        transitionsToUpdate.append(t)
-                                for t in transitionsToUpdate:
-                                    newt = t.copy()
-                                    newt.reward = REWARD_NEGATIVE
-                                    self.addTransition(state, newt, stateMap[nextState])
-                                    if compareRewards(t.reward, REWARD_NEGATIVE):
-                                        r = REWARD_NEUTRAL if t.reward == REWARD_NONPOSITIVE else REWARD_NONNEGATIVE
-                                        self.updateTransition(state, t, r)
-                            self.updateMappedTraces(mappedTraces, stateMap)
-                            self.updateStateOrder(stateOrder, conditions, stateMap, i)
-                            rewards.discard(REWARD_NEGATIVE)
-                            if len(rewards) > 1:
-                                self.updateTransition(state, relTran, REWARD_NONNEGATIVE)
-                            else:
-                                self.updateTransition(state, relTran, rewards.pop())
-                        else:
-                            self.updateTransition(state, relTran, REWARD_NONNEGATIVE)
-                    elif rewards:
-                        reward = rewards.pop()
-                        if reward != REWARD_NEGATIVE and reward != relTran.reward:
-                            self.updateTransition(state, relTran, reward)
-
-                    if movedState != NULL_STATE:
-                        nextState = state = stateOrder[i]
-                        relTran = tmpRelTran
-                    for j in range(len(mappedTraces)):
-                        if mappedTraces[j][mappedTraces[j][-1]] == state and mappedTraces[j][mappedTraces[j][-1]+2] == relTran:
-                            mappedTraces[j][-1] += 3
-                            #del mappedTraces[j][:3]
-                            #if len(mappedTraces[j]) <= 2:
-                                #mappedTraces.pop(j)
-            i += 1
-        # merge back where possible
-
-    
     def bla(self):      
         stage = 1
         splitted = False
@@ -1064,7 +1200,6 @@ class EFSM:
                     del mappedTraces[i][:3]
                     if len(mappedTraces[i]) <= 2:
                         mappedTraces.pop(i)
-
 
     def trySpecializeWithOld(self, fsm, traces):
         # mapping of traces to own transitions
@@ -1213,62 +1348,4 @@ class EFSM:
         #    self.analyseTransitions(state, tran, nextState, transitions)
         #    if nextState != 0:
         #        statesToCheck.append(fsmNextStates)
-           
           
-    def isSpecializationOf(self, other, X=set(), estimated=False):
-        if not estimated and self.useOfMapping == MAPPING_FIXED == other.useOfMapping and \
-            not set(self.mapping.items()).issubset(set(other.mapping.items())):
-            return False
-        # simulation
-        hasSpecializedTransition = False
-        stateMap = {0 : 0}
-        statesToCheck = [0]
-        while statesToCheck:
-            state = statesToCheck.pop(0)
-            oState = stateMap[state]
-            if state in self.transitions:
-                if oState not in other.transitions:
-                    return False
-                uniqueOutput = None
-                uniqueOutputForEach = set()
-                outputs = set()
-                inputs = Counter()
-                for tran, nextState in self.transitions[state].items():
-                    t = other.getTransition(oState, tran.input, tran.output, tran.reward, False)
-                    if t:
-                        if uniqueOutput and uniqueOutput != tran.output:
-                            return False
-                        if tran.input != t.input or tran.output != t.output or tran.reward != t.reward:
-                            if not tran.isSpecializationOf(t):
-                                return False
-                            hasSpecializedTransition = True
-                        if t.input == LABEL_FORALL:
-                            if tran.reward == REWARD_NEGATIVE:
-                                if t.output == LABEL_EXISTS:
-                                    outputs.add(tran.output)
-                            elif not uniqueOutput and (t.output == LABEL_EXISTS or len(t.output) == 1) and tran.output != LABEL_EXISTS:
-                                uniqueOutput = tran.output 
-                        elif t.input == LABEL_EXISTS == t.output:
-                            if tran.reward == REWARD_NEGATIVE:
-                                inputs[tran.output] += 1
-                            else:
-                                for o in tran.output:
-                                    if o in uniqueOutputForEach:
-                                        return False
-                                    uniqueOutputForEach.add(o)    
-                        ns = other.getNextState(oState, t)
-                        if nextState not in stateMap:
-                            stateMap[nextState] = ns
-                            statesToCheck.append(nextState)
-                        elif stateMap[nextState] != ns:
-                            return False
-                    else:
-                        return False # not covered
-                if uniqueOutput and self.getTransition(state, None, uniqueOutput, REWARD_NEGATIVE):
-                    # there is transition x/uniqueOutput with reward -1 that contradicts other's LABEL_FORALL/LABEL_EXISTS
-                    return False
-                if X:
-                    if (outputs and X == outputs) or (inputs and inputs.most_common(1)[0][1] == len(X)):
-                        return False
-        return len(self.transitions) == 0 or hasSpecializedTransition or \
-            (self.useOfMapping == MAPPING_FIXED and other.useOfMapping != MAPPING_FIXED)
